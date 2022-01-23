@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../../../../firebase/firebase-config";
 import Box from "@mui/material/Box";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -11,13 +11,13 @@ import UnderlineLink from "../../../../components/mui/UnderlineLink.component";
 import "./signup.styles.scss";
 import "./signup.styles.mobile.scss";
 import { useDispatch } from "react-redux";
-import { isAuthAction, loggedInUserAction } from "../../../../store/actions/actions";
+import { loggedInUserAction } from "../../../../store/actions/actions";
 import Spinner from "../../../../components/spinner/Spinner.component";
 
 export default function Signup() {
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const statesObject = useSelector((state) => {
     return {
@@ -41,9 +41,8 @@ export default function Signup() {
         statesObject.email,
         statesObject.password
       );
-      dispatch(isAuthAction(true));
-      dispatch(loggedInUserAction({ uid: user.uid, email: user.email }));
-      history.push("/home");
+      dispatch(loggedInUserAction({ uid: user.uid, email: user.email, isAuth: true }));
+      navigate.push("/home");
     } catch (err) {
       setComment(err.message);
       setIsLoading(false);

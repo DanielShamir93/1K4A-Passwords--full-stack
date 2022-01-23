@@ -1,4 +1,3 @@
-import { withRouter } from "react-router-dom";
 import { FcPlus, FcSearch } from "react-icons/fc";
 import { HiMinusCircle } from "react-icons/hi";
 import { useEffect, useState } from "react";
@@ -114,4 +113,4 @@ const Home = () => {
   );
 };
 
-export default withRouter(Home);
+export default Home;

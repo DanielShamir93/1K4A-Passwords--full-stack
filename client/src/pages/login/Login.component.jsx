@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebase-config";
 import Box from "@mui/material/Box";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -8,14 +8,14 @@ import TextFieldInput from "../../components/mui/TextFieldInput.component";
 import { useSelector } from "react-redux";
 import BasicButton from "../../components/mui/BasicButton.component";
 import { useDispatch } from "react-redux";
-import { isAuthAction, loggedInUserAction } from "../../store/actions/actions";
+import { loggedInUserAction } from "../../store/actions/actions";
 import Spinner from "../../components/spinner/Spinner.component";
 import "./login.styles.scss";
 
 export default function Login() {
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const statesObject = useSelector((state) => {
     return {
@@ -33,9 +33,8 @@ export default function Login() {
         statesObject.email,
         statesObject.password
       );
-      dispatch(isAuthAction(true));
-      dispatch(loggedInUserAction({ uid: user.uid, email: user.email }));
-      history.push("/home");
+      dispatch(loggedInUserAction({ uid: user.uid, email: user.email, isAuth: true }));
+      navigate("/");
     } catch (err) {
       setComment(err.message);
       setIsLoading(false);

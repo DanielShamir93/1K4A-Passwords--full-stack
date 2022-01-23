@@ -7,13 +7,12 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
-import { isAuthAction } from "../../store/actions/actions";
+import { loggedInUserAction } from "../../store/actions/actions";
 
 export default function Navbar() {
   const dispatch = useDispatch();
   const statesObject = useSelector((state) => {
     return { 
-      isAuth: state.isAuth,
       loggedInUser: state.loggedInUser
     };
   });
@@ -21,7 +20,7 @@ export default function Navbar() {
   const logout = async () => {
     try {
       await signOut(auth);
-      dispatch(isAuthAction(false));
+      dispatch(loggedInUserAction({ isAuth: false }));
     } catch (err) {
       console.log(err.message);
     }
@@ -31,7 +30,7 @@ export default function Navbar() {
     <div className="Navbar">
       <div className="leftside">
         <figure className="logo"></figure>
-        <Link to="/home">
+        <Link to="/">
           <IconedButton
             reactIconComponent={<AiOutlineHome className="react-home-icon" />}
           />
@@ -58,10 +57,10 @@ export default function Navbar() {
             reactIconComponent={<FiInfo className="react-icon" />}
           />
         </Link>
-        <Link to={statesObject.isAuth ? "/home" : "login"}>
+        <Link to={statesObject.loggedInUser.isAuth ? "/" : "/login"}>
           <IconedButton
             onClick={logout}
-            term={statesObject.isAuth ? "Logout" : "Login"}
+            term={statesObject.loggedInUser.isAuth ? "Logout" : "Login"}
             reactIconComponent={<FiLogIn className="react-icon" />}
           />
         </Link>     

@@ -2,7 +2,6 @@ import {
   SET_EMAIL,
   SET_PASSWORD,
   SET_CONFIRM,
-  IS_AUTH,
   ACCOUNT_CHANGED_RENDER,
   EDIT_ACCOUNT,
   LOGGED_IN_USER,
@@ -31,15 +30,6 @@ export const setConfirmAction = (confirm = "") => {
     dispatch({
       type: SET_CONFIRM,
       payload: confirm,
-    });
-  };
-};
-
-export const isAuthAction = (isAuth = false) => {
-  return (dispatch, getState) => {
-    dispatch({
-      type: IS_AUTH,
-      payload: isAuth,
     });
   };
 };
