@@ -1,5 +1,5 @@
-// require("../db/mongoose");
-// const usersRoutes = require("./routes/users/users-routes");
+require("../db/mongoose");
+// const usersRoutes = require("./routes/user/user.routes");
 const express = require("express");
 const cors = require("cors");
 const path = require('path');
@@ -15,9 +15,9 @@ app.use(cors());
 
 // app.use("/users", usersRoutes);
 
-app.all('*', (req, res) => {
-  res.sendFile(path.resolve(publicPath, 'index.html'));
-});
+// app.all('*', (req, res) => {
+//   res.sendFile(path.resolve(publicPath, 'index.html'));
+// });
 
 app.listen(PORT, () => {
   console.log(`Server is running at ${PORT}`);
