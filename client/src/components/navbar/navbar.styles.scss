@@ -1,0 +1,47 @@
+.Navbar {
+  width: 100vw;
+  height: 10vh;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #b94444;
+  box-shadow: 0 0.2vmin 0.5vmin black;
+
+  .leftside {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      background: rgba(0, 0, 0, 0.1);
+      margin: 0;
+      background-image: url(../../assets/images/1K4A_key_logo.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 15vh;
+      height: 10vh;
+    }
+
+    .react-home-icon {
+      font-size: 4vmin;
+    }
+
+    .user-email {
+      font-size: 2vmin;
+      position: absolute;
+      right: 0;
+      top: 10vmin;
+      background: #b94444;
+      padding: 0.2vmin 1.5vmin;
+      border-radius: 0 0 0 2vmin;
+      box-shadow: 0 0.2vmin 0.5vmin black;
+      color: rgb(212, 212, 212);
+    }
+  }
+
+  .rightside {
+    position: relative;
+    margin-right: 1vmin;
+  }
+}

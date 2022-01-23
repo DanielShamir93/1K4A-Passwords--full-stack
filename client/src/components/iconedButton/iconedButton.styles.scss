@@ -1,0 +1,17 @@
+.iconed-button {
+  color: rgb(212, 212, 212);
+  font-size: 2.5vmin;
+  background: none;
+  border: none;
+  margin: 0 2vmin;
+  padding: 2vmin;
+  cursor: pointer;
+}
+
+.iconed-button:hover {
+  box-shadow: 0 0 0.2vmin rgb(212, 212, 212);
+}
+
+.iconed-button:active {
+  color: rgba(212, 212, 212, 0.5);
+}

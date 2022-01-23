@@ -1,0 +1,51 @@
+.About {
+  margin-top: 10vh;
+  background: rgb(246, 242, 242);
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .about-app {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 20vh;
+    align-items: center;
+    font-size: 6vmin;
+    margin-bottom: 15vmin;
+  }
+
+  .follow-me {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+
+    .follow-me-title {
+      font-size: 5vmin;
+      padding-bottom: 2vmin;
+    }
+
+    .follow-me-icons {
+      display: flex;
+      justify-content: space-around;
+
+      .linkedin-icon {
+        background-image: url(../../assets/images/icons/linkedin.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 10vmin;
+        width: 10vmin;
+      }
+
+      .github-icon {
+        background-image: url(../../assets/images/icons/github2.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 10vmin;
+        width: 10vmin;
+      }
+    }
+  }
+}

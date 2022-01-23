@@ -1,0 +1,40 @@
+.Landing-page {
+  display: flex;
+  margin-top: 10vh;
+  background: rgba(0, 0, 0, 0.9);
+
+  .landing-page-right {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 60vw;
+
+    .text {
+      width: 50vw;
+
+      &-title {
+        text-align: center;
+        font-size: 6vmin;
+        color: white;
+      }
+
+      &-content {
+        text-align: center;
+        padding-top: 2vmin;
+        font-size: 4vmin;
+        color: white;
+      }
+    }
+
+    .image-wrapper {
+      justify-content: center;
+      background-image: url(../../assets/images/1K4A_key_logo.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      height: 50vmin;
+      width: 60vmin;
+    }
+  }
+}

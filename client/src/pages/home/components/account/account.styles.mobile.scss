@@ -1,0 +1,20 @@
+@media (max-width: 768px) {
+  .account {
+    .account-names {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      height: 10vh;
+
+      .account-name {
+        font-size: 7vmin;
+      }
+
+      .account-subname {
+        font-size: 3vmin;
+      }
+    }
+  }
+}

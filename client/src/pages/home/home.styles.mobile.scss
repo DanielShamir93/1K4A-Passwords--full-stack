@@ -1,0 +1,37 @@
+@media (max-width: 768px) {
+
+    .Home { 
+        margin-top: 0;
+
+        .home-layout {
+            
+            display: flex;
+            flex-direction: column-reverse;
+            
+            .toolbar {
+                align-items: center;
+                width: 100vw;
+                height: 20vh;
+                justify-content: flex-start;
+                border-top: 0.5vmin rgba(0, 0, 0, 0.1) solid;
+                z-index: 100;
+
+                .create-account-icon {
+                    margin-top: 12vmin;
+                    margin-left: 5vmin;
+                    padding-top: 0;
+                    font-size: 20vmin;
+                }
+
+                .create-account-icon:active {
+                    font-size: 20vmin;
+                }
+            }
+            
+            .accounts-gallery {
+                height: 70vh;
+                width: 100vw;
+            }
+        }
+    }
+}

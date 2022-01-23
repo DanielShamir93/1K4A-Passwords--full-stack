@@ -1,0 +1,28 @@
+@media (max-width: 768px) {
+  .Landing-page {
+    flex-direction: column;
+    flex-direction: column-reverse;
+
+    .landing-page-right {
+      width: 100vw;
+
+      .text {
+        width: 80vw;
+
+        &-title {
+          font-size: 10vmin;
+        }
+
+        &-content {
+          margin-top: 10vmin;
+          font-size: 6vmin;
+        }
+      }
+
+      .image-wrapper {
+        height: 50vmin;
+        width: 80vmin;
+      }
+    }
+  }
+}

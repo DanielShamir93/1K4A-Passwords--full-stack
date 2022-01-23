@@ -1,0 +1,41 @@
+@media (max-width: 768px) {
+  .Signup {
+    flex-direction: column;
+    width: 100vw;
+  }
+
+  .signup-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .signup-title {
+      font-size: 4rem;
+    }
+
+    .signup-box {
+      .signup-comment {
+        font-size: 0.5rem;
+      }
+
+      &-inputs {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 90vw;
+      }
+
+      .submit-button {
+        margin-top: 20px;
+      }
+    }
+
+    .to-login {
+      margin-top: 30px;
+
+      &-text {
+        padding-right: 5px;
+      }
+    }
+  }
+}

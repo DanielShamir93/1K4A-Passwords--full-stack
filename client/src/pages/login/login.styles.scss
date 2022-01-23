@@ -1,0 +1,39 @@
+.Login {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10vh;
+  height: 90vh;
+  background: rgb(246, 242, 242);
+
+  .login-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .login-title {
+      font-size: 4rem;
+    }
+
+    .login-comment {
+      font-size: 3vmin;
+      height: 3vmin;
+    }
+
+    .login-box {
+      height: 30vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+
+      &-inputs {
+        height: 40vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+    }
+  }
+}

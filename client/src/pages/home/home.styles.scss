@@ -1,0 +1,77 @@
+.Home {
+
+    .home-layout {
+        margin-top: 10vh;
+        display: flex;
+        
+        .toolbar {
+            width: 5vw;
+            display: flex;
+            justify-content: center;
+            background: rgb(246, 242, 242);
+            border-right: 0.5vmin rgba(0, 0, 0, 0.1) solid;
+
+            .create-account-icon {
+                margin-top: 10vmin;
+                color: #9e2c2c;
+                font-size: 6vmin;
+                cursor: pointer;
+                transform: translateY(-50%);
+            }
+
+            .create-account-icon:hover {
+                font-size: 7vmin;
+            }
+
+            .create-account-icon:active {
+                font-size: 6vmin;
+            }
+        }
+
+        .accounts-area {
+            width: 95vw;
+            background: rgb(246, 242, 242);
+
+            .accounts-top-toolbar {
+                border-bottom: 0.5vmin rgba(0, 0, 0, 0.1) solid;
+                display: flex;
+                justify-content: center;
+                
+                .search-account {
+                    position: relative;
+                    width: fit-content;
+                    height: 8vh;
+                    padding: 1.5vmin 0;
+                    display: flex;
+                    align-items: center;
+                    
+                    &-input {
+                        text-align: center;
+                        width: 30vmin;
+                        font-size: 3vmin;
+                        border-right: none;
+                        padding-right: 4vmin;
+                        border-radius: 1vmin;
+                    }
+    
+                    &-react-icon {
+                        font-size: 3vmin;
+                        position: absolute;
+                        right: 0.5vmin;
+                    }
+                }
+            }
+    
+            .accounts-gallery {
+                padding: 5vmin;
+                display: flex;
+                align-items: flex-start;
+                align-content: flex-start;
+                flex-wrap: wrap;
+                gap: 2vmin;
+                height: 82vh;
+            }
+            
+        }
+    }
+}

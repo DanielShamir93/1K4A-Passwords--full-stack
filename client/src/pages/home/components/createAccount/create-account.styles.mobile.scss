@@ -1,0 +1,106 @@
+@media (max-width: 768px) {
+  .CreateAccount {
+    left: 0;
+    width: 100vw;
+    height: 70vh;
+    margin-bottom: 20vh;
+
+    .create-account-background {
+      margin-top: 10vh;
+      transform: translateY(100%);
+      animation: create-account-animation 1s forwards ease;
+
+      @keyframes create-account-animation {
+        to {
+          transform: translateY(0vh);
+        }
+      }
+
+      .create-account-form {
+        height: 60vh;
+        width: 80vmin;
+
+        .account-details {
+          legend {
+            font-size: 5vmin;
+          }
+
+          input {
+            font-size: 3vmin;
+          }
+        }
+
+        .password-details {
+          legend {
+            font-size: 5vmin;
+          }
+
+          input {
+            font-size: 3vmin;
+          }
+
+          .password-length-container {
+            width: 57vmin;
+
+            label {
+              font-size: 3vmin;
+            }
+
+            input {
+              width: 18vmin;
+            }
+          }
+
+          .password-edges {
+            width: 57vmin;
+
+            input {
+              width: 27.5vmin;
+            }
+          }
+
+          .private-key {
+            display: flex;
+            align-items: center;
+
+            input {
+              width: 51.4vmin;
+            }
+
+            .private-key-icon {
+              font-size: 6vmin;
+            }
+          }
+
+          .generate-button {
+            margin-top: 0;
+
+            font-size: 4vmin;
+          }
+        }
+
+        .output {
+          font-size: 4vmin;
+        }
+
+        .submit-container {
+          width: 40vmin;
+
+          .submit-button {
+            font-size: 5vmin;
+          }
+
+          .submit-button:active {
+            opacity: 0.5;
+          }
+
+          .lock-icon {
+            position: absolute;
+            right: 0;
+            font-size: 8vmin;
+          }
+        }
+      }
+    }
+  }
+}
