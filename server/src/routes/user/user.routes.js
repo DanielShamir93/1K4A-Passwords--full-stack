@@ -1,19 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const { getAllUsers, getUser, addUser, deleteAllUsers, deleteUser } = require("../controllers/user.controllers");
+const auth = require("../../middleware/auth");
+const { addUser, userLogin, getUser } = require("../controllers/user.controllers");
 
-// Add user
-// { cash, credit } = req.body:
+
+
 router.route("/add").post(addUser);
 
-router.route("/all")
-  .get(getAllUsers)
-  .delete(deleteAllUsers);
+router.route("/login").post(userLogin);
 
-// Show details of user
-router.route("/:id").get(getUser);
+router.route(auth, "/getUser").post(getUser);
 
-// Delete user
-router.route("/:id/delete").delete(deleteUser);
 
 module.exports = router;

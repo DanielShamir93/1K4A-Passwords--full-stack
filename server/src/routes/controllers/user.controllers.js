@@ -1,56 +1,52 @@
-const User = require("../../../db/models/userModel");
+const User = require("../../../db/models/user.model");
+const bcrypt = require("bcryptjs");
 
-const getAllUsers = async (req, res) => {
-  try {
-    const users = await User.find({}).select(["_id", "firstName", "lastName"]).sort({firstName: 1, lastName: 1});
-    res.json(users);
-  } catch (err) {
-    res.send(err.message);
-  }
-};
 
 const getUser = (req, res) => {
+  res.send(req.user);
+};
+
+const userLogin = async (req, res) => {
   try {
-    const { id } = req.params;
-    User.findById(id, (err, doc) => {
-      if (err) {
-        console.log(err);
-      }
-      res.json(doc);
-    });
+    const { email, password } = req.body
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      throw new Error("Unable to login");
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      throw new Error("Unable to login");
+    }
+
+    const token = await user.generateAuthToken();
+
+    res.send({ user, token });
   } catch (err) {
-    res.send(err.message);
+    res.status(400).send(err.message);
   }
 };
+
 
 const addUser = async (req, res) => {
   try {
-    const { firstName, lastName, cash, credit } = req.body;
-    const newUser = { firstName, lastName, cash, credit };
-    const user = await User.create(newUser);
-    res.status(200).json(user);
+    const { email, password } = req.body;
+    const createdDate = new Date().toLocaleString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "numeric",
+    });
+    const signedInDate = createdDate;
+    const user = new User({ email, password, createdDate, signedInDate });
+    user.save();
+    const token = await user.generateAuthToken();
+    res.status(200).send({user, token});
   } catch (err) {
     res.status(404).send(err.message);
   }
 };
 
-const deleteAllUsers = async (req, res) => {
-  try {
-    await User.deleteMany({})
-    res.status(200).send("All users have been deleted.");
-  } catch (err) {
-    res.status(404).send(err.message);
-  }
-};
 
-const deleteUser = async (req, res) => {
-  try {
-    const { id } = req.params;
-    await User.deleteOne({ _id: id });
-    res.send(`User ${id} has been deleted from database.`);
-  } catch (err) {
-    res.send(err.message);
-  }
-};
-
-module.exports = { getAllUsers, getUser, addUser, deleteAllUsers, deleteUser };
+module.exports = { addUser, userLogin, getUser };
