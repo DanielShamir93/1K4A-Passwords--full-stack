@@ -3,7 +3,7 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const { createAccount, getAllAccounts, updateAccount, deleteAccount } = require('../controllers/account.controllers');
 
-router.use(["/create", "/getAll", "/update", "/delete"], auth);
+router.use(auth);
 
 router.route("/create").post(createAccount);
 

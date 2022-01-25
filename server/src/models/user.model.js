@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const validator = require("validator");
 const { Schema, model } = require("mongoose");
 const jwt = require("jsonwebtoken");
+const Account = require("../models/account.model");
 
 const userSchema = new Schema({
   email: {
@@ -80,5 +81,14 @@ userSchema.pre("save", async function (next) {
   }
   next();
 });
+
+// Delete user accounts when user is removed
+userSchema.pre("remove", async function (next) {
+  const user = this;
+
+  await Account.deleteMany({ owner: user._id })
+
+  next();
+})
 
 module.exports = model("User", userSchema);
