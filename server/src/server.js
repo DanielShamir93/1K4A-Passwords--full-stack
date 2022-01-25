@@ -1,10 +1,9 @@
-require("../db/mongoose");
-const usersRoutes = require("./routes/user/user.routes");
+require("./db/mongoose");
+const usersRoutes = require("./routes/users/users.router");
 const express = require("express");
 const cors = require("cors");
 const path = require('path');
 const app = express();
-const auth = require("./middleware/auth");
 
 const PORT = process.env.PORT || 8080;
 

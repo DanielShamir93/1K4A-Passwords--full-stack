@@ -1,6 +1,6 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 
-const accountSchema = new Schema({
+const accountSchema = new mongoose.Schema({
   accountName: {
     type: String,
     required: true
@@ -47,7 +47,10 @@ const accountSchema = new Schema({
     type: String,
     required: true
   },
-  user: { type: Schema.Types.ObjectId, ref: "User" }
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
+  }
 });
 
-module.exports = model("Account", accountSchema);
+module.exports = mongoose.model("Account", accountSchema);

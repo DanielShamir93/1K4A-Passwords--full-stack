@@ -34,7 +34,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  accounts: [{ type: Schema.Types.ObjectId, ref: "Account" }],
   tokens: [
     {
       token: {
@@ -45,9 +44,21 @@ const userSchema = new Schema({
   ],
 });
 
+userSchema.methods.toJSON = function () {
+    const user = this;
+    const userObject = user.toObject();
+
+    delete userObject.password;
+    delete userObject.tokens;
+    delete userObject.createdDate;
+    delete userObject.signedInDate;
+
+    return userObject;
+}
+
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id.toString() }, "thisismynewcourse");
+  const token = jwt.sign({ _id: user._id.toString() }, "thisismynewcourse", {expiresIn: "1d"});
 
   user.tokens = user.tokens.concat({ token });
   await user.save();
