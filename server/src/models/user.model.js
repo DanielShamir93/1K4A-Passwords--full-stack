@@ -44,8 +44,14 @@ const userSchema = new Schema({
   ],
 });
 
+userSchema.virtual("accounts", {
+  ref: "Account",
+  localField: "_id",
+  foreignField: "owner"
+})
+
 userSchema.methods.toJSON = function () {
-    const user = this;
+    const user = this;s
     const userObject = user.toObject();
 
     delete userObject.password;
@@ -58,7 +64,7 @@ userSchema.methods.toJSON = function () {
 
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id.toString() }, "thisismynewcourse", {expiresIn: "1d"});
+  const token = jwt.sign({ _id: user._id.toString() }, "private-key", {expiresIn: "1d"});
 
   user.tokens = user.tokens.concat({ token });
   await user.save();
