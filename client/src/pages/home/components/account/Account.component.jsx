@@ -86,7 +86,6 @@ export default function Account({
   };
 
   const editAccount = () => {
-    console.log(account)
     dispatch(editAccountAction(account));
     toggleCreateAccountComponent(true);
   };

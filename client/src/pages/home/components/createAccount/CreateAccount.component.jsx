@@ -48,13 +48,13 @@ export default function CreateAccount({
     if (Object.keys(statesObject.editAccount).length > 0) {
       // In edit account mode
       setAccountName(statesObject.editAccount.accountName);
-      setAccountSubname(statesObject.editAccount.accountSubname);
+      setAccountSubname(statesObject.editAccount.accountSubname || "");
       setPassLength(statesObject.editAccount.passLength);
-      setPassStartsWith(statesObject.editAccount.passStartsWith);
-      setPassEndsWith(statesObject.editAccount.passEndsWith);
-      setPassMustContain(statesObject.editAccount.passMustContain);
-      setPassAvoidChars(statesObject.editAccount.passAvoidChars);
-      setPassPattern(statesObject.editAccount.passPattern);
+      setPassStartsWith(statesObject.editAccount.passStartsWith || "");
+      setPassEndsWith(statesObject.editAccount.passEndsWith || "");
+      setPassMustContain(statesObject.editAccount.passMustContain || "");
+      setPassAvoidChars(statesObject.editAccount.passAvoidChars || "");
+      setPassPattern(statesObject.editAccount.passPattern || "");
       setPublicKey(statesObject.editAccount.publicKey);
       setIsChecked({
         isDigitsChecked: statesObject.editAccount.isPassHasDigit,
