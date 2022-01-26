@@ -5,7 +5,7 @@ const accountSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  accountSubName: {
+  accountSubname: {
     type: String
   },
   isPassHasDigit: {

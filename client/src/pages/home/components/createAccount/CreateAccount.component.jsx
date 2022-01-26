@@ -5,13 +5,8 @@ import { useState, useEffect } from "react";
 import hash from "object-hash";
 import ToggleButtonsMultiple from "../../../../components/toggleButtonsMultiple/ToggleButtonsMultiple.component";
 import Password from "../../../../modules/Password";
-import { collection, addDoc, doc, setDoc } from "firebase/firestore";
-import { db } from "../../../../firebase/firebase-config";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  accountChangedRenderAction,
-  editAccountAction,
-} from "../../../../store/actions/actions";
+import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
 import { accountsApi } from "../../../../api/Apis";
 
 export default function CreateAccount({
@@ -92,35 +87,53 @@ export default function CreateAccount({
         for (let prop in currAccount) {
           // Delete unused properties of account
           if (currAccount[prop] === "") {
-            delete currAccount[prop]
+            delete currAccount[prop];
           }
         }
-
+        
         if (Object.keys(statesObject.editAccount).length > 0) {
           // In edit account mode
-          await setDoc(
-            doc(
-              db,
-              "users",
-              statesObject.loggedInUser.uid,
-              "accounts",
-              statesObject.editAccount.id
-            ),
-            currAccount
-          );
+          const updates = Object.keys(currAccount);
+          const allowedUpdates = [
+            "accountName",
+            "accountSubname",
+            "isPassHasDigit",
+            "isPassHasLowercase",
+            "isPassHasSymbol",
+            "isPassHasUppercase",
+            "passAvoidChars",
+            "passEndsWith",
+            "passLength",
+            "keyboardMustContain",
+            "passPattern",
+            "passStartsWith",
+          ];
+
+          updates.forEach((update) => {
+            if (!allowedUpdates.includes(update)) {
+              delete currAccount[update]
+            }
+          });
+
+          const config = {
+            method: "put",
+            headers: {
+              Authorization: `Bearer ${statesObject.loggedInUser.token}`,
+            },
+            data: currAccount
+          };
+          
+          await accountsApi(`/update/${statesObject.editAccount._id}`, config);
         } else {
           const config = {
             method: "post",
-            headers: { 
-              Authorization: `Bearer ${statesObject.loggedInUser.token}` 
+            headers: {
+              Authorization: `Bearer ${statesObject.loggedInUser.token}`,
             },
-            data: currAccount
-          }
-          
-          await accountsApi(
-            "/create",
-            config
-          );
+            data: currAccount,
+          };
+
+          await accountsApi("/create", config);
         }
         dispatch(accountChangedRenderAction());
         resetCreateAccountForm();
@@ -202,7 +215,7 @@ export default function CreateAccount({
     }
   };
 
-  const setCheckbox = (checkboxElement, statePropertyName) => {
+  const toggleCheckboxes = (checkboxElement, statePropertyName) => {
     const cloneIsChecked = { ...isChecked };
     cloneIsChecked[statePropertyName] = checkboxElement.checked;
     setIsChecked(cloneIsChecked);
@@ -253,7 +266,7 @@ export default function CreateAccount({
               <legend>Password Settings</legend>
               <div>
                 <ToggleButtonsMultiple
-                  setCheckbox={setCheckbox}
+                  toggleCheckboxes={toggleCheckboxes}
                   isChecked={isChecked}
                 />
               </div>

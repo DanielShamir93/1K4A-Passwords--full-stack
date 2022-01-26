@@ -2,7 +2,7 @@ import { useRef } from "react";
 import "./toggle-buttons-multiple.styles.scss";
 import "./toggle-buttons-multiple.styles.mobile.scss";
 
-export default function ToggleButtonsMultiple({ isChecked, setCheckbox }) {
+export default function ToggleButtonsMultiple({ isChecked, toggleCheckboxes }) {
   const digitsCheckboxRef = useRef();
   const uppercaseCheckboxRef = useRef();
   const lowercaseCheckboxRef = useRef();
@@ -28,12 +28,12 @@ export default function ToggleButtonsMultiple({ isChecked, setCheckbox }) {
           className="digits-checkbox"
           checked={isChecked.isDigitsChecked}
           onChange={(e) => {
-            setCheckbox(e.target, "isDigitsChecked");
+            toggleCheckboxes(e.target, "isDigitsChecked");
           }}
         />
         <button
           type="button"
-          className="digits-button checked"
+          className={`digits-button ${isChecked.isDigitsChecked ? "checked" : "unchecked"}`}
           onClick={(e) => {
             clickCheckbox(digitsCheckboxRef, e);
           }}
@@ -48,12 +48,12 @@ export default function ToggleButtonsMultiple({ isChecked, setCheckbox }) {
           className="uppercase-checkbox"
           checked={isChecked.isUppercaseChecked}
           onChange={(e) => {
-            setCheckbox(e.target, "isUppercaseChecked");
+            toggleCheckboxes(e.target, "isUppercaseChecked");
           }}
         />
         <button
           type="button"
-          className="uppercase-button checked"
+          className={`uppercase-button ${isChecked.isUppercaseChecked ? "checked" : "unchecked"}`}
           onClick={(e) => {
             clickCheckbox(uppercaseCheckboxRef, e);
           }}
@@ -68,12 +68,12 @@ export default function ToggleButtonsMultiple({ isChecked, setCheckbox }) {
           className="lowercase-checkbox"
           checked={isChecked.isLowercaseChecked}
           onChange={(e) => {
-            setCheckbox(e.target, "isLowercaseChecked");
+            toggleCheckboxes(e.target, "isLowercaseChecked");
           }}
         />
         <button
           type="button"
-          className="lowercase-button checked"
+          className={`lowercase-button ${isChecked.isLowercaseChecked ? "checked" : "unchecked"}`}
           onClick={(e) => {
             clickCheckbox(lowercaseCheckboxRef, e);
           }}
@@ -88,12 +88,12 @@ export default function ToggleButtonsMultiple({ isChecked, setCheckbox }) {
           className="symbols-checkbox"
           checked={isChecked.isSymbolsChecked}
           onChange={(e) => {
-            setCheckbox(e.target, "isSymbolsChecked");
+            toggleCheckboxes(e.target, "isSymbolsChecked");
           }}
         />
         <button
           type="button"
-          className="symbols-button checked"
+          className={`symbols-button ${isChecked.isSymbolsChecked ? "checked" : "unchecked"}`}
           onClick={(e) => {
             clickCheckbox(symbolsCheckboxRef, e);
           }}

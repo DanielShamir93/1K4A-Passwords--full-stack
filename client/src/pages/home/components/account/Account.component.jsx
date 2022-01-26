@@ -77,8 +77,6 @@ export default function Account({
         `/delete/${account._id}`,
         config
       );
-
-
       dispatch(accountChangedRenderAction());
     } catch (err) {
       console.log(err.message);

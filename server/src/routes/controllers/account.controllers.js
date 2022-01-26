@@ -3,8 +3,8 @@ const Account = require("../../models/account.model");
 const createAccount = async (req, res) => {
   try {
     const account = new Account({
-      ...req.body, 
-      owner: req.user._id
+      ...req.body,
+      owner: req.user._id,
     });
     await account.save();
     res.status(201).send(account);
@@ -15,7 +15,10 @@ const createAccount = async (req, res) => {
 
 const deleteAccount = async (req, res) => {
   try {
-    const account = await Account.findOneAndDelete({ _id: req.params.id, owner: req.user._id });
+    const account = await Account.findOneAndDelete({
+      _id: req.params.id,
+      owner: req.user._id,
+    });
 
     if (!account) {
       res.status(404).send(err.message);
@@ -25,7 +28,7 @@ const deleteAccount = async (req, res) => {
   } catch (err) {
     res.status(500).send();
   }
-}
+};
 
 const getAllAccounts = async (req, res) => {
   try {
@@ -34,27 +37,46 @@ const getAllAccounts = async (req, res) => {
   } catch (err) {
     res.status(500).send();
   }
-}
+};
 
 const updateAccount = async (req, res) => {
   try {
     const updates = Object.keys(req.body);
-    const allowedUpdates = ["accountName", "accountSubName","isPassHasDigit", "isPassHasLowercase", "isPassHasSymbol", "isPassHasUppercase", "passAvoidChars", "passEndsWith", "passLength", "keyboardMustContain", "passPattern", "passStartsWith"];
+    const allowedUpdates = [
+      "accountName",
+      "accountSubname",
+      "isPassHasDigit",
+      "isPassHasLowercase",
+      "isPassHasSymbol",
+      "isPassHasUppercase",
+      "passAvoidChars",
+      "passEndsWith",
+      "passLength",
+      "keyboardMustContain",
+      "passPattern",
+      "passStartsWith",
+    ];
+
     const isValidOperation = updates.every((update) =>
       allowedUpdates.includes(update)
     );
-deleteAccount
+
     if (!isValidOperation) {
       return res.status(400).send({ error: "invalid updates!" });
     }
-    
-    const account = await Account.findOne({ _id: req.params.id, owner: req.user._id });
+
+    const account = await Account.findOne({
+      _id: req.params.id,
+      owner: req.user._id
+    });
 
     if (!account) {
       res.status(400).send();
     }
 
-    updates.forEach((update) => account[update] = req.body[update]);
+    console.log(account)
+
+    updates.forEach((update) => (account[update] = req.body[update]));
     await account.save();
     res.send(account);
   } catch (err) {
@@ -62,4 +84,9 @@ deleteAccount
   }
 };
 
-module.exports = { createAccount, getAllAccounts, updateAccount, deleteAccount };
+module.exports = {
+  createAccount,
+  getAllAccounts,
+  updateAccount,
+  deleteAccount,
+};
