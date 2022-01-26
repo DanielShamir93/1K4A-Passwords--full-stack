@@ -5,9 +5,8 @@ import { FiInfo, FiLogIn } from "react-icons/fi";
 import { AiOutlineQuestionCircle, AiOutlineHome } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase/firebase-config";
 import { loggedInUserAction } from "../../store/actions/actions";
+import { usersApi } from "../../api/Apis";
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -19,7 +18,17 @@ export default function Navbar() {
 
   const logout = async () => {
     try {
-      await signOut(auth);
+      const config = {
+        method: "post",
+        headers: { 
+          Authorization: `Bearer ${statesObject.loggedInUser.token}` 
+        },
+      }
+      await usersApi(
+        "/logout",
+        config
+      );
+
       dispatch(loggedInUserAction({ isAuth: false }));
     } catch (err) {
       console.log(err.message);

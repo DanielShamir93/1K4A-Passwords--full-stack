@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { loggedInUserAction } from "../../store/actions/actions";
 import Spinner from "../../components/spinner/Spinner.component";
 import "./login.styles.scss";
+import { usersApi } from "../../api/Apis";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -28,12 +29,15 @@ export default function Login() {
     try {
       setIsLoading(true);
       isValidInput();
-      const { user } = await signInWithEmailAndPassword(
-        auth,
-        statesObject.email,
-        statesObject.password
-      );
-      dispatch(loggedInUserAction({ uid: user.uid, email: user.email, isAuth: true }));
+      
+      const { data } = await usersApi.post("/login", {
+        email: statesObject.email,
+        password: statesObject.password
+      });
+      const user = data.user;
+      const token = data.token;
+      
+      dispatch(loggedInUserAction({ uid: user._id, email: user.email, token, isAuth: true }));
       navigate("/");
     } catch (err) {
       setComment(err.message);

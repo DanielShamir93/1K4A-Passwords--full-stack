@@ -36,6 +36,7 @@ export default function Signup() {
     try {
       setIsLoading(true);
       isValidInput();
+
       const { data } = await usersApi.post("/signup", {
         email: statesObject.email,
         password: statesObject.password
