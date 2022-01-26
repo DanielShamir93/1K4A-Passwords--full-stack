@@ -79,6 +79,10 @@ export default function Account({
       );
       dispatch(accountChangedRenderAction());
     } catch (err) {
+      if (err.response.status === 401) {
+        // Authentication passed
+        navigate('/');
+      }
       console.log(err.message);
     }
   };

@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../../../firebase/firebase-config";
 import Box from "@mui/material/Box";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import PasswordInput from "../../../../components/mui/PasswordInput.components";
 import TextFieldInput from "../../../../components/mui/TextFieldInput.component";
 import BasicButton from "../../../../components/mui/BasicButton.component";

@@ -20,7 +20,6 @@ Over the years we have all signed up for many sites and a large percentage of th
 
 ## :package: Dependencies
 
-- firebase: 9.6.1
 - node-sass: 7.0.1
 - object-hash: 2.2.0
 - react-icons: 4.3.1

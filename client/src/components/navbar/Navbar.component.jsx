@@ -17,21 +17,23 @@ export default function Navbar() {
   });
 
   const logout = async () => {
-    try {
-      const config = {
-        method: "post",
-        headers: { 
-          Authorization: `Bearer ${statesObject.loggedInUser.token}` 
-        },
+    if (statesObject.loggedInUser.isAuth) {
+      try {
+        const config = {
+          method: "post",
+          headers: { 
+            Authorization: `Bearer ${statesObject.loggedInUser.token}` 
+          },
+        }
+        await usersApi(
+          "/logout",
+          config
+        );
+  
+        dispatch(loggedInUserAction({ isAuth: false }));
+      } catch (err) {
+        console.log(err.message);
       }
-      await usersApi(
-        "/logout",
-        config
-      );
-
-      dispatch(loggedInUserAction({ isAuth: false }));
-    } catch (err) {
-      console.log(err.message);
     }
   };
 

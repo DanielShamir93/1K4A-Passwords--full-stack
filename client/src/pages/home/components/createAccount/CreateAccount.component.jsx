@@ -6,6 +6,7 @@ import hash from "object-hash";
 import ToggleButtonsMultiple from "../../../../components/toggleButtonsMultiple/ToggleButtonsMultiple.component";
 import Password from "../../../../modules/Password";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
 import { accountsApi } from "../../../../api/Apis";
 
@@ -38,6 +39,7 @@ export default function CreateAccount({
       loggedInUser: state.loggedInUser,
     };
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (Object.keys(statesObject.editAccount).length > 0) {
@@ -142,6 +144,10 @@ export default function CreateAccount({
         setOutput("Must Generate Password");
       }
     } catch (err) {
+      if (err.response.status === 401) {
+        // Authentication passed
+        navigate('/');
+      }
       console.log(err.massage);
     }
   };

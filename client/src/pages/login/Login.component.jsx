@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../firebase/firebase-config";
 import Box from "@mui/material/Box";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import PasswordInput from "../../components/mui/PasswordInput.components";
 import TextFieldInput from "../../components/mui/TextFieldInput.component";
 import { useSelector } from "react-redux";
@@ -29,7 +27,7 @@ export default function Login() {
     try {
       setIsLoading(true);
       isValidInput();
-      
+
       const { data } = await usersApi.post("/login", {
         email: statesObject.email,
         password: statesObject.password

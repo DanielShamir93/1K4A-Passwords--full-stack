@@ -40,6 +40,10 @@ const Home = () => {
         setAccounts(data.map((account) => ({ ...account })));
 
       } catch (err) {
+        if (err.response.status === 401) {
+          // Authentication passed
+          navigate('/');
+        }
         console.log(err.message);
       }
       setIsLoading(false);
