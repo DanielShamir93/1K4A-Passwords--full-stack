@@ -89,6 +89,13 @@ export default function CreateAccount({
           isPassHasSymbol: isChecked.isSymbolsChecked,
         };
 
+        for (let prop in currAccount) {
+          // Delete unused properties of account
+          if (currAccount[prop] === "") {
+            delete currAccount[prop]
+          }
+        }
+
         if (Object.keys(statesObject.editAccount).length > 0) {
           // In edit account mode
           await setDoc(

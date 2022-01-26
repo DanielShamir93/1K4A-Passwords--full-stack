@@ -5,11 +5,8 @@ import { useRef, useState } from "react";
 import "./account.styles.scss";
 import "./account.styles.mobile.scss";
 import Password from "../../../../modules/Password";
-import { doc, deleteDoc } from "firebase/firestore";
-import { db } from "../../../../firebase/firebase-config";
 import { useDispatch, useSelector } from "react-redux";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
-import { collection } from "firebase/firestore";
 import { accountsApi } from "../../../../api/Apis";
 
 export default function Account({
@@ -49,14 +46,14 @@ export default function Account({
         isIncludeSymbols: account.isPassHasSymbol,
         mustIncludeChars: account.passMustContain || "",
       });
-      if (account.passPattern.length > 0) {
+      if (account.hasOwnProperty('passPattern')) {
         password.generateFromPattern(account.passPattern);
         setOutput(password.getPassword);
       } else {
         password.generate(
           account.passLength,
-          account.passStartsWith,
-          account.passEndsWith
+          account.passStartsWith || "",
+          account.passEndsWith || ""
         );
         setOutput(password.getPassword);
       }
@@ -89,6 +86,7 @@ export default function Account({
   };
 
   const editAccount = () => {
+    console.log(account)
     dispatch(editAccountAction(account));
     toggleCreateAccountComponent(true);
   };

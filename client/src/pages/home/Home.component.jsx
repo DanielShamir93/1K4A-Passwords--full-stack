@@ -2,8 +2,6 @@ import { FcPlus, FcSearch } from "react-icons/fc";
 import { HiMinusCircle } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import CreateAccount from "./components/createAccount/CreateAccount.component";
-import { db } from "../../firebase/firebase-config";
-import { collection, getDocs } from "firebase/firestore";
 import Account from "./components/account/Account.component";
 import "./home.styles.scss";
 import "./home.styles.mobile.scss";
@@ -27,14 +25,13 @@ const Home = () => {
     const getAccounts = async () => {
       try {
         setIsLoading(true);
-        
+
         const config = {
           method: "get",
           headers: { 
             Authorization: `Bearer ${statesObject.loggedInUser.token}` 
           },
         }
-
         const { data } = await accountsApi(
           "/getAll",
           config
