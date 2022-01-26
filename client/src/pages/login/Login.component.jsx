@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
+import Box from "@material-ui/core/Box";
 import PasswordInput from "../../components/mui/PasswordInput.components";
 import TextFieldInput from "../../components/mui/TextFieldInput.component";
 import { useSelector } from "react-redux";

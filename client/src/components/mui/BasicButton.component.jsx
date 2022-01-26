@@ -1,4 +1,4 @@
-import Button from "@mui/material/Button";
+import Button from "@material-ui/core/Button";
 
 // Buttons variants: text, contained, outline
 export default function BasicButton({ label, variant, cb }) {

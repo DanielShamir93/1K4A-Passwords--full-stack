@@ -1,6 +1,6 @@
 import * as React from "react";
-import FormControl from "@mui/material/FormControl";
-import TextField from "@mui/material/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import TextField from "@material-ui/core/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import { setEmailAction } from "../../store/actions/actions";
 
