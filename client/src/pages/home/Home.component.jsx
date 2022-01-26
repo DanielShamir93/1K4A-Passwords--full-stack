@@ -9,6 +9,7 @@ import "./home.styles.scss";
 import "./home.styles.mobile.scss";
 import { useSelector } from "react-redux";
 import Spinner from "../../components/spinner/Spinner.component";
+import { accountsApi } from "../../api/Apis";
 
 const Home = () => {
   const [accounts, setAccounts] = useState([]);
@@ -26,10 +27,25 @@ const Home = () => {
     const getAccounts = async () => {
       try {
         setIsLoading(true);
-        const { docs } = await getDocs(
-          collection(db, "users", statesObject.loggedInUser.uid, "accounts")
+        // const { docs } = await getDocs(
+        //   collection(db, "users", statesObject.loggedInUser.uid, "accounts")
+        // );
+        // setAccounts(docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+
+        const config = {
+          method: "get",
+          headers: { 
+            Authorization: `Bearer ${statesObject.loggedInUser.token}` 
+          },
+        }
+
+        const { data } = await accountsApi(
+          "/getAll",
+          config
         );
-        setAccounts(docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+
+        setAccounts(data.map((account) => ({ ...account })));
+
       } catch (err) {
         console.log(err.message);
       }
@@ -50,7 +66,7 @@ const Home = () => {
       .map((account) => {
         return (
           <Account
-            key={account.id}
+            key={account._id}
             account={account}
             setIsLoading={setIsLoading}
             toggleCreateAccountComponent={toggleCreateAccountComponent}

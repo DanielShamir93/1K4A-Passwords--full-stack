@@ -109,7 +109,7 @@ export default function CreateAccount({
             },
             data: currAccount
           }
-
+          
           await accountsApi(
             "/create",
             config
