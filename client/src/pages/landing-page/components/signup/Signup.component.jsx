@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { loggedInUserAction } from "../../../../store/actions/actions";
 import Spinner from "../../../../components/spinner/Spinner.component";
+import { usersApi } from "../../../../api/Apis";
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -24,7 +25,6 @@ export default function Signup() {
       email: state.email,
       password: state.password,
       confirm: state.confirm,
-      loggedInUser: state.loggedInUser,
     };
   });
 
@@ -36,13 +36,15 @@ export default function Signup() {
     try {
       setIsLoading(true);
       isValidInput();
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        statesObject.email,
-        statesObject.password
-      );
-      dispatch(loggedInUserAction({ uid: user.uid, email: user.email, isAuth: true }));
-      navigate.push("/home");
+      const { data } = await usersApi.post("/signup", {
+        email: statesObject.email,
+        password: statesObject.password
+      });
+      const user = data.user;
+      const token = data.token;
+      
+      dispatch(loggedInUserAction({ uid: user._id, email: user.email, token, isAuth: true }));
+      navigate.push("/");
     } catch (err) {
       setComment(err.message);
       setIsLoading(false);

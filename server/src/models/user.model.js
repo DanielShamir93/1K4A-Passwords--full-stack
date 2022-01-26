@@ -52,7 +52,7 @@ userSchema.virtual("accounts", {
 })
 
 userSchema.methods.toJSON = function () {
-    const user = this;s
+    const user = this;
     const userObject = user.toObject();
 
     delete userObject.password;

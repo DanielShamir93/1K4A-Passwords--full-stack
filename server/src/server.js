@@ -14,8 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
+// Routers
 app.use("/users", usersRouter);
-
 app.use("/accounts", accountsRouter);
 
 // app.all('*', (req, res) => {

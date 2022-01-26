@@ -12,6 +12,7 @@ import {
   accountChangedRenderAction,
   editAccountAction,
 } from "../../../../store/actions/actions";
+import { accountsApi } from "../../../../api/Apis";
 
 export default function CreateAccount({
   toggleCreateAccountComponent,
@@ -101,9 +102,17 @@ export default function CreateAccount({
             currAccount
           );
         } else {
-          await addDoc(
-            collection(db, "users", statesObject.loggedInUser.uid, "accounts"),
-            currAccount
+          const config = {
+            method: "post",
+            headers: { 
+              Authorization: `Bearer ${statesObject.loggedInUser.token}` 
+            },
+            data: currAccount
+          }
+
+          await accountsApi(
+            "/create",
+            config
           );
         }
         dispatch(accountChangedRenderAction());
