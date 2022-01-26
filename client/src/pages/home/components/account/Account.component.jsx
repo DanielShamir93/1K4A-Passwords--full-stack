@@ -10,6 +10,7 @@ import { db } from "../../../../firebase/firebase-config";
 import { useDispatch, useSelector } from "react-redux";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
 import { collection } from "firebase/firestore";
+import { accountsApi } from "../../../../api/Apis";
 
 export default function Account({
   account,
@@ -41,12 +42,12 @@ export default function Account({
     if (privateKey.length > 0) {
       const password = new Password(privateKey, account.publicKey);
       password.setKeyboard({
-        avoidChars: account.passAvoidChars,
+        avoidChars: account.passAvoidChars || "",
         isIncludeDigits: account.isPassHasDigit,
         isIncludeUpperCase: account.isPassHasUppercase,
         isIncludeLowerCase: account.isPassHasLowercase,
         isIncludeSymbols: account.isPassHasSymbol,
-        mustIncludeChars: account.passMustContain,
+        mustIncludeChars: account.passMustContain || "",
       });
       if (account.passPattern.length > 0) {
         password.generateFromPattern(account.passPattern);
@@ -67,12 +68,20 @@ export default function Account({
   const deleteAccount = async () => {
     try {
       setIsLoading(true);
-      await deleteDoc(
-        doc(
-          collection(db, "users", statesObject.loggedInUser.uid, "accounts"),
-          account.id
-        )
+
+      const config = {
+        method: "delete",
+        headers: { 
+          Authorization: `Bearer ${statesObject.loggedInUser.token}` 
+        },
+      }
+
+      await accountsApi(
+        `/delete/${account._id}`,
+        config
       );
+
+
       dispatch(accountChangedRenderAction());
     } catch (err) {
       console.log(err.message);

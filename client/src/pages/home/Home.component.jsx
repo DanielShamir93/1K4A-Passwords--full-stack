@@ -27,11 +27,7 @@ const Home = () => {
     const getAccounts = async () => {
       try {
         setIsLoading(true);
-        // const { docs } = await getDocs(
-        //   collection(db, "users", statesObject.loggedInUser.uid, "accounts")
-        // );
-        // setAccounts(docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-
+        
         const config = {
           method: "get",
           headers: { 
