@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 const publicPath = path.join(__dirname, '../..', 'client/build');
+
 app.use(express.static(publicPath));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -18,9 +19,9 @@ app.use(cors());
 app.use("/users", usersRouter);
 app.use("/accounts", accountsRouter);
 
-app.all('*', (req, res) => {
-  res.sendFile(path.resolve(publicPath, 'index.html'));
-});
+// app.all('*', (req, res) => {
+//   res.sendFile(path.resolve(publicPath, 'index.html'));
+// });
 
 app.listen(PORT, () => {
   console.log(`Server is running at ${PORT}`);
