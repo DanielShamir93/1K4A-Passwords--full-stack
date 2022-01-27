@@ -1,16 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
-import LandingPage from "./pages/landing-page/LandingPage.component";
-import Login from "./pages/login/Login.component";
-import Home from "./pages/home/Home.component";
+import LandingPage from "./components/landing-page/LandingPage.component";
+import Login from "./components/login/Login.component";
+import Home from "./components/home/Home.component";
 import Navbar from "./components/navbar/Navbar.component";
-import About from "./pages/about/About.component";
-import Tutorial from "./pages/tutorial/Tutorial.component";
+import About from "./components/about/About.component";
+import Tutorial from "./components/tutorial/Tutorial.component";
 
 function App() {
+  
   const statesObject = useSelector((state) => {
     return { loggedInUser: state.loggedInUser };
   });
+
+  const isAuth = statesObject.loggedInUser.hasOwnProperty("isAuth") ? statesObject.loggedInUser.isAuth : false;
 
   return (
     <Router>
@@ -20,7 +23,7 @@ function App() {
           element={
             <>
               <Navbar />
-              {statesObject.loggedInUser.isAuth ? <Home /> : <LandingPage />}
+              {isAuth ? <Home /> : <LandingPage />}
             </>
           }
         />
@@ -29,7 +32,7 @@ function App() {
           element={
             <>
               <Navbar />
-              {statesObject.loggedInUser.isAuth ? <Home /> : <Login />}
+              {isAuth ? <Home /> : <Login />}
             </>
           }
         />

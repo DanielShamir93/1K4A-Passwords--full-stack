@@ -7,6 +7,7 @@ import "./account.styles.mobile.scss";
 import Password from "../../../../modules/Password";
 import { useDispatch, useSelector } from "react-redux";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
+import { useNavigate } from "react-router-dom";
 import { accountsApi } from "../../../../api/Apis";
 
 export default function Account({
@@ -14,6 +15,7 @@ export default function Account({
   setIsLoading,
   toggleCreateAccountComponent,
 }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const toggleRef = useRef();
   const [privateKey, setPrivateKey] = useState("");

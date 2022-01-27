@@ -42,6 +42,8 @@ export default function CreateAccount({
   const navigate = useNavigate();
 
   useEffect(() => {
+    
+
     if (Object.keys(statesObject.editAccount).length > 0) {
       // In edit account mode
       setAccountName(statesObject.editAccount.accountName);

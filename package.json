@@ -1,5 +1,5 @@
 {
-  "name": "1k4a-passwords(full-stack)",
+  "name": "test",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,17 +12,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DanielShamir93/1K4A-Passwords--full-stack.git"
+    "url": "git+https://github.com/DanielShamir93/test.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DanielShamir93/1K4A-Passwords--full-stack/issues"
+    "url": "https://github.com/DanielShamir93/test/issues"
   },
-  "homepage": "https://github.com/DanielShamir93/1K4A-Passwords--full-stack#readme",
+  "homepage": "https://github.com/DanielShamir93/test#readme",
   "dependencies": {
-    "axios": "^0.25.0",
     "bcryptjs": "^2.4.3",
     "concurrently": "^7.0.0",
     "cors": "^2.8.5",

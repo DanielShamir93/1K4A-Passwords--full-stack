@@ -7,9 +7,12 @@ import "./home.styles.scss";
 import "./home.styles.mobile.scss";
 import { useSelector } from "react-redux";
 import Spinner from "../../components/spinner/Spinner.component";
+import { useNavigate } from "react-router-dom";
 import { accountsApi } from "../../api/Apis";
 
+
 const Home = () => {
+  const navigate = useNavigate();
   const [accounts, setAccounts] = useState([]);
   const [isCreateAccountOpen, setIsCreateAccountOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +52,7 @@ const Home = () => {
       setIsLoading(false);
     };
     getAccounts();
-  }, [statesObject.accountChangedRender, statesObject.loggedInUser.uid]);
+  }, [statesObject.accountChangedRender, statesObject.loggedInUser.uid, statesObject.loggedInUser.token, navigate]);
 
   const toggleCreateAccountComponent = (boolean) => {
     setIsCreateAccountOpen(boolean);
