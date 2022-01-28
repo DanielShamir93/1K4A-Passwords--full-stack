@@ -2,20 +2,16 @@ import axios from "axios";
 
 const PORT = process.env.PORT || 8080;
 
-const myUrl = {
-  users: `http://localhost:${PORT}/users`,
-  accounts: `http://localhost:${PORT}/accounts`,
-};
+let myUrl = `http://localhost:${PORT}/`;
 
 if (process.env.NODE_ENV === "production") {
-  myUrl.users = "users";
-  myUrl.users = "accounts";
+  myUrl = "/";
 }
 
-export const usersApi = axios.create({
-  baseURL: myUrl.users,
+export const myApi = axios.create({
+  baseURL: myUrl,
 });
 
-export const accountsApi = axios.create({
-  baseURL: myUrl.accounts,
-});
+// export const myApi = axios.create({
+//   baseURL: myUrl.accounts,
+// });

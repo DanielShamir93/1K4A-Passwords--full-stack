@@ -8,7 +8,7 @@ import "./home.styles.mobile.scss";
 import { useSelector } from "react-redux";
 import Spinner from "../../components/spinner/Spinner.component";
 import { useNavigate } from "react-router-dom";
-import { accountsApi } from "../../api/Apis";
+import { myApi } from "../../api/Apis";
 
 
 const Home = () => {
@@ -34,8 +34,8 @@ const Home = () => {
             Authorization: `Bearer ${statesObject.loggedInUser.token}` 
           },
         }
-        const { data } = await accountsApi(
-          "/getAll",
+        const { data } = await myApi(
+          "accounts/getAll",
           config
         );
 

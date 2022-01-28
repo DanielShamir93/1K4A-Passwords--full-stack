@@ -8,7 +8,7 @@ import Password from "../../../../modules/Password";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
-import { accountsApi } from "../../../../api/Apis";
+import { myApi } from "../../../../api/Apis";
 
 export default function CreateAccount({
   toggleCreateAccountComponent,
@@ -127,7 +127,7 @@ export default function CreateAccount({
             data: currAccount
           };
           
-          await accountsApi(`/update/${statesObject.editAccount._id}`, config);
+          await myApi(`accounts/update/${statesObject.editAccount._id}`, config);
         } else {
           const config = {
             method: "post",
@@ -137,7 +137,7 @@ export default function CreateAccount({
             data: currAccount,
           };
 
-          await accountsApi("/create", config);
+          await myApi("accounts/create", config);
         }
         dispatch(accountChangedRenderAction());
         resetCreateAccountForm();

@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { loggedInUserAction } from "../../../../store/actions/actions";
 import Spinner from "../../../../components/spinner/Spinner.component";
-import { usersApi } from "../../../../api/Apis";
+import { myApi } from "../../../../api/Apis";
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ export default function Signup() {
       setIsLoading(true);
       isValidInput();
 
-      const { data } = await usersApi.post("/signup", {
+      const { data } = await myApi.post("users/signup", {
         email: statesObject.email,
         password: statesObject.password
       });

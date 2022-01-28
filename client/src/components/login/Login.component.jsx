@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { loggedInUserAction } from "../../store/actions/actions";
 import Spinner from "../../components/spinner/Spinner.component";
 import "./login.styles.scss";
-import { usersApi } from "../../api/Apis";
+import { myApi } from "../../api/Apis";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export default function Login() {
       setIsLoading(true);
       isValidInput();
 
-      const { data } = await usersApi.post("/login", {
+      const { data } = await myApi.post("users/login", {
         email: statesObject.email,
         password: statesObject.password
       });

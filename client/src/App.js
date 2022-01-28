@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { usersApi } from "./api/Apis";
+import { myApi } from "./api/Apis";
 import AuthRouter from "./components/authRouter/AuthRoute.component";
 import UnauthRouter from "./components/unauthRouter/UnauthRouter.component";
 
@@ -21,8 +21,8 @@ function App() {
       };
 
       try {
-        await usersApi(
-          "/me",
+        await myApi(
+          "users/me",
           config
         );
         setIsAuth(true);

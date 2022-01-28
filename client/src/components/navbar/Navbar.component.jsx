@@ -6,7 +6,7 @@ import { AiOutlineQuestionCircle, AiOutlineHome } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loggedInUserAction } from "../../store/actions/actions";
-import { usersApi } from "../../api/Apis";
+import { myApi } from "../../api/Apis";
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -25,8 +25,8 @@ export default function Navbar() {
             Authorization: `Bearer ${statesObject.loggedInUser.token}` 
           },
         }
-        await usersApi(
-          "/logout",
+        await myApi(
+          "users/logout",
           config
         );
         localStorage.removeItem("persist:root");

@@ -8,7 +8,7 @@ import Password from "../../../../modules/Password";
 import { useDispatch, useSelector } from "react-redux";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
 import { useNavigate } from "react-router-dom";
-import { accountsApi } from "../../../../api/Apis";
+import { myApi } from "../../../../api/Apis";
 
 export default function Account({
   account,
@@ -75,8 +75,8 @@ export default function Account({
         },
       }
 
-      await accountsApi(
-        `/delete/${account._id}`,
+      await myApi(
+        `accounts/delete/${account._id}`,
         config
       );
       dispatch(accountChangedRenderAction());
