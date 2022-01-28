@@ -26,8 +26,8 @@ const Home = () => {
 
   useEffect(() => {
     const getAccounts = async () => {
+      setIsLoading(true);
       try {
-        setIsLoading(true);
 
         const config = {
           method: "get",
@@ -43,7 +43,7 @@ const Home = () => {
         setAccounts(data.map((account) => ({ ...account })));
 
       } catch (err) {
-        if (err.response.status === 401) {
+        if (err.response?.status === 401) {
           // Authentication passed
           navigate('/');
         }
