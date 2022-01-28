@@ -2,9 +2,10 @@ import Signup from "./components/signup/Signup.component";
 import "./landing-page.styles.scss";
 import "./landing-page.styles.mobile.scss";
 import { TEXT_CONSTANTS } from "../../constants/landingPage.constants";
+import { useEffect } from "react";
 
 export default function LandingPage() {
-  const { TEXT_TITLE } = TEXT_CONSTANTS
+  const { TEXT_TITLE } = TEXT_CONSTANTS;
 
   return (
     <div className="Landing-page">

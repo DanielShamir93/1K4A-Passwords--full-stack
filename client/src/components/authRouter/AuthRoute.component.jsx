@@ -16,7 +16,7 @@ export default function AuthRouter() {
           path="*"
           element={
             <>
-              <Navbar />
+              <Navbar isAuth={true} />
               <Home />
             </>
           }
@@ -25,7 +25,7 @@ export default function AuthRouter() {
           path="/about"
           element={
             <>
-              <Navbar />
+              <Navbar isAuth={true} />
               <About />
             </>
           }
@@ -34,7 +34,7 @@ export default function AuthRouter() {
           path="/tutorial"
           element={
             <>
-              <Navbar />
+              <Navbar isAuth={true} />
               <Tutorial />
             </>
           }

@@ -15,7 +15,7 @@ export default function UnauthRouter() {
           path="*"
           element={
             <>
-              <Navbar />
+              <Navbar isAuth={false} />
               <LandingPage />
             </>
           }
@@ -24,7 +24,7 @@ export default function UnauthRouter() {
           path="/login"
           element={
             <>
-              <Navbar />
+              <Navbar isAuth={false} />
               <Login />
             </>
           }
@@ -33,7 +33,7 @@ export default function UnauthRouter() {
           path="/about"
           element={
             <>
-              <Navbar />
+              <Navbar isAuth={false} />
               <About />
             </>
           }
@@ -42,7 +42,7 @@ export default function UnauthRouter() {
           path="/tutorial"
           element={
             <>
-              <Navbar />
+              <Navbar isAuth={false} />
               <Tutorial />
             </>
           }

@@ -35,7 +35,7 @@ export default function Login() {
       const user = data.user;
       const token = data.token;
       
-      dispatch(loggedInUserAction({ uid: user._id, email: user.email, token, isAuth: true }));
+      dispatch(loggedInUserAction({ uid: user._id, email: user.email, token }));
       navigate("/");
     } catch (err) {
       setComment(err.message);

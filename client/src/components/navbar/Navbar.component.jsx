@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { loggedInUserAction } from "../../store/actions/actions";
 import { myApi } from "../../api/Apis";
 
-export default function Navbar() {
+export default function Navbar({ isAuth }) {
   const dispatch = useDispatch();
   const statesObject = useSelector((state) => {
     return { 
@@ -17,7 +17,7 @@ export default function Navbar() {
   });
 
   const logout = async () => {
-    if (statesObject.loggedInUser.isAuth) {
+    if (isAuth) {
       try {
         const config = {
           method: "post",
@@ -46,11 +46,9 @@ export default function Navbar() {
             reactIconComponent={<AiOutlineHome className="react-home-icon" />}
           />
         </Link>
-        { statesObject.loggedInUser.isAuth &&
-          <div className="user-email">
+        <div className="user-email">
           {statesObject.loggedInUser.email}  
-          </div> 
-        }
+        </div>
       </div>
       <div className="rightside">
         <Link to={"/tutorial"}>
@@ -68,10 +66,10 @@ export default function Navbar() {
             reactIconComponent={<FiInfo className="react-icon" />}
           />
         </Link>
-        <Link to={statesObject.loggedInUser.isAuth ? "/" : "/login"}>
+        <Link to={isAuth ? "/" : "/login"}>
           <IconedButton
             onClick={logout}
-            term={statesObject.loggedInUser.isAuth ? "Logout" : "Login"}
+            term={isAuth ? "Logout" : "Login"}
             reactIconComponent={<FiLogIn className="react-icon" />}
           />
         </Link>     

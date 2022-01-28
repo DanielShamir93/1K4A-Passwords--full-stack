@@ -7,8 +7,7 @@ import BasicButton from "../../../../components/mui/BasicButton.component";
 import UnderlineLink from "../../../../components/mui/UnderlineLink.component";
 import "./signup.styles.scss";
 import "./signup.styles.mobile.scss";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { loggedInUserAction } from "../../../../store/actions/actions";
 import Spinner from "../../../../components/spinner/Spinner.component";
 import { myApi } from "../../../../api/Apis";
@@ -38,7 +37,7 @@ export default function Signup() {
       const user = data.user;
       const token = data.token;
 
-      dispatch(loggedInUserAction({ uid: user._id, email: user.email, token, isAuth: true }));
+      dispatch(loggedInUserAction({ uid: user._id, email: user.email, token }));
       navigate("/");
     } catch (err) {
       setComment(err.message);
