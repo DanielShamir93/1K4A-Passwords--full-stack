@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import PasswordInput from "../../../../components/mui/PasswordInput.components";
@@ -37,6 +37,7 @@ export default function Signup() {
       });
       const user = data.user;
       const token = data.token;
+
       dispatch(loggedInUserAction({ uid: user._id, email: user.email, token, isAuth: true }));
       navigate("/");
     } catch (err) {

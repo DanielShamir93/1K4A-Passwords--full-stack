@@ -1,4 +1,3 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { usersApi } from "./api/Apis";
@@ -35,7 +34,7 @@ function App() {
     };
 
     getUser();
-  }, [statesObject.loggedInUser]);
+  });
 
   return (
     <div>

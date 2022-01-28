@@ -17,7 +17,7 @@ router.route("/logout").post(userLogout);
 router.route("/logoutAll").post(userLogoutAll);
 // Logged in user options
 router.route("/me")
-  // Get user
+  // User is authenticated
   .get(isUserAuth)
   // Delete user
   .delete(deleteUser)
