@@ -9,7 +9,7 @@ router.route("/signup").post(addUser);
 router.route("/login").post(userLogin);
 
 // Middleware for authentication via Bearer token
-router.use(["/logout", "/logoutAll", "/me" ], auth);
+// router.use(["/logout", "/logoutAll", "/me" ], auth);
 
 // Logout from user's device
 router.route("/logout").post(userLogout);
