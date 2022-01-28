@@ -5,36 +5,36 @@ import AuthRouter from "./components/authRouter/AuthRoute.component";
 import UnauthRouter from "./components/unauthRouter/UnauthRouter.component";
 
 function App() {
-  let [isAuth, setIsAuth] = useState(false);
+  let [isAuth, setIsAuth] = useState(true);
   const statesObject = useSelector((state) => {
     return { loggedInUser: state.loggedInUser };
   });
 
-  useEffect(() => {
+  // useEffect(() => {
     //Check authentication
-    const getUser = async () => {
-      const config = {
-        method: "get",
-        headers: {
-          Authorization: `Bearer ${statesObject.loggedInUser.token}`,
-        },
-      };
+    // const getUser = async () => {
+    //   const config = {
+    //     method: "get",
+    //     headers: {
+    //       Authorization: `Bearer ${statesObject.loggedInUser.token}`,
+    //     },
+    //   };
 
-      try {
-        await usersApi(
-          "/me",
-          config
-        );
-        setIsAuth(true);
+    //   try {
+    //     await usersApi(
+    //       "/me",
+    //       config
+    //     );
+    //     setIsAuth(true);
         
-      } catch (err) {
-        setIsAuth(false);
-        console.log(err.message);
-      }
-    };
+    //   } catch (err) {
+    //     setIsAuth(false);
+    //     console.log(err.message);
+    //   }
+    // };
 
-    getUser();
-  });
+  //   getUser();
+  // }, [statesObject.loggedInUser]);
 
   return (
     <div>
