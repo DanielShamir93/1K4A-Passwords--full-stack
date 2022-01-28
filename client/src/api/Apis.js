@@ -12,6 +12,3 @@ export const myApi = axios.create({
   baseURL: myUrl,
 });
 
-// export const myApi = axios.create({
-//   baseURL: myUrl.accounts,
-// });

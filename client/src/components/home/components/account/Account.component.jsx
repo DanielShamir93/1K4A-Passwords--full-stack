@@ -4,11 +4,11 @@ import { FcUnlock, FcLock, FcKey } from "react-icons/fc";
 import { useRef, useState } from "react";
 import "./account.styles.scss";
 import "./account.styles.mobile.scss";
-import Password from "../../../../modules/Password";
 import { useDispatch, useSelector } from "react-redux";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
 import { useNavigate } from "react-router-dom";
 import { myApi } from "../../../../api/Apis";
+import { Password } from "keys-to-password";
 
 export default function Account({
   account,
@@ -39,24 +39,29 @@ export default function Account({
 
   const getPassword = () => {
     if (privateKey.length > 0) {
+
       const password = new Password(privateKey, account.publicKey);
-      password.setKeyboard({
-        avoidChars: account.passAvoidChars || "",
-        isIncludeDigits: account.isPassHasDigit,
-        isIncludeUpperCase: account.isPassHasUppercase,
-        isIncludeLowerCase: account.isPassHasLowercase,
-        isIncludeSymbols: account.isPassHasSymbol,
-        mustIncludeChars: account.passMustContain || "",
-      });
+      const keyboardConfig = {
+          avoidChars: account.passAvoidChars,  
+          isContainDigits: account.isPassHasDigit,
+          isContainUpperCase: account.isPassHasUppercase, 
+          isContainLowerCase: account.isPassHasLowercase,
+          isContainSymbols: account.isPassHasSymbol,
+          mustContainChars: account.passMustContain,
+      }
+      
+      password.setKeyboard(keyboardConfig);
+      
       if (account.hasOwnProperty('passPattern')) {
         password.generateFromPattern(account.passPattern);
         setOutput(password.getPassword);
       } else {
-        password.generate(
-          account.passLength,
-          account.passStartsWith || "",
-          account.passEndsWith || ""
-        );
+        const generateConfig = {
+          passLength: +account.passLength,
+          passStartsWith: account.passStartsWith,
+          passEndsWidth: account.passEndsWith
+        }
+        password.generate(generateConfig);
         setOutput(password.getPassword);
       }
     } else {

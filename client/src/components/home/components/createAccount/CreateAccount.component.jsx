@@ -4,11 +4,11 @@ import { FcUnlock, FcLock, FcKey } from "react-icons/fc";
 import { useState, useEffect } from "react";
 import hash from "object-hash";
 import ToggleButtonsMultiple from "../../../../components/toggleButtonsMultiple/ToggleButtonsMultiple.component";
-import Password from "../../../../modules/Password";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
 import { myApi } from "../../../../api/Apis";
+import { Password } from "keys-to-password"
 
 export default function CreateAccount({
   toggleCreateAccountComponent,
@@ -186,24 +186,32 @@ export default function CreateAccount({
         ) {
           if (parseInt(passLength) > 0 && parseInt(passLength) < 41) {
             setIsValidAccount(true);
-            const hashedPublicKey = hash(Math.random());
-            setPublicKey(hashedPublicKey);
-            const password = new Password(privateKey, hashedPublicKey);
-            password.setKeyboard({
-              avoidChars: passAvoidChars,
-              isIncludeDigits: isChecked.isDigitsChecked,
-              isIncludeUpperCase: isChecked.isUppercaseChecked,
-              isIncludeLowerCase: isChecked.isLowercaseChecked,
-              isIncludeSymbols: isChecked.isSymbolsChecked,
-              mustIncludeChars: passMustContain,
-            });
+
+            const password = new Password(privateKey);
+            const keyboardConfig = {
+              avoidChars: passAvoidChars,  
+              isContainDigits: isChecked.isDigitsChecked,
+              isContainUpperCase: isChecked.isUppercaseChecked, 
+              isContainLowerCase: isChecked.isLowercaseChecked,
+              isContainSymbols: isChecked.isSymbolsChecked,
+              mustContainChars: passMustContain,
+            }
+
+            password.setKeyboard(keyboardConfig);
+            setPublicKey(password.getPublicKey());
 
             if (passPattern.length > 0) {
               password.generateFromPattern(passPattern);
               setOutput(password.getPassword);
             } else {
-              password.generate(passLength, passStartsWith, passEndsWith);
-              setOutput(password.getPassword);
+              const generateConfig = {
+                passLength: +passLength,
+                passStartsWith: passStartsWith,
+                passEndsWidth: passEndsWith
+              }
+
+              password.generate(generateConfig);
+              setOutput(password.getPassword());
             }
           } else {
             setOutput("Length: Between 1 To 40");
