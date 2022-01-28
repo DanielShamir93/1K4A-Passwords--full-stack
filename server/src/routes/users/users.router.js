@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../../middleware/auth");
-const { addUser, userLogin, userLogout, userLogoutAll, getUser, deleteUser, updateUser } = require("../controllers/user.controllers");
+const { addUser, userLogin, userLogout, userLogoutAll, deleteUser, updateUser, isUserAuth } = require("../controllers/user.controllers");
 
 // Signup via email & password
 router.route("/signup").post(addUser);
@@ -18,7 +18,7 @@ router.route("/logoutAll").post(userLogoutAll);
 // Logged in user options
 router.route("/me")
   // Get user
-  .get(getUser)
+  .get(isUserAuth)
   // Delete user
   .delete(deleteUser)
   // Update user 

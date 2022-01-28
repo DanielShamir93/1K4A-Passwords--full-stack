@@ -2,16 +2,14 @@ import axios from "axios";
 
 const PORT = process.env.PORT || 8080;
 
-let myUrl = {
+const myUrl = {
   users: `http://localhost:${PORT}/users`,
-  accounts: `http://localhost:${PORT}/accounts`
+  accounts: `http://localhost:${PORT}/accounts`,
 };
 
 if (process.env.NODE_ENV === "production") {
-  myUrl = {
-    users: "users",
-    accounts: "accounts"
-  };
+  myUrl.users = "users";
+  myUrl.users = "accounts";
 }
 
 export const usersApi = axios.create({

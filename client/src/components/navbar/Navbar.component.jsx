@@ -29,8 +29,8 @@ export default function Navbar() {
           "/logout",
           config
         );
-  
-        dispatch(loggedInUserAction({ isAuth: false }));
+        localStorage.removeItem("persist:root");
+        dispatch(loggedInUserAction());
       } catch (err) {
         console.log(err.message);
       }

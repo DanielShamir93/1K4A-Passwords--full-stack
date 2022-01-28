@@ -1,17 +1,10 @@
-import { useEffect } from "react";
 import Signup from "./components/signup/Signup.component";
 import "./landing-page.styles.scss";
 import "./landing-page.styles.mobile.scss";
-import { useDispatch } from "react-redux";
-import { loggedInUserAction } from "../../store/actions/actions";
 import { TEXT_CONSTANTS } from "../../constants/landingPage.constants";
 
 export default function LandingPage() {
-  const dispatch = useDispatch();
   const { TEXT_TITLE } = TEXT_CONSTANTS
-  useEffect(() => {
-    dispatch(loggedInUserAction({}));
-  }, [dispatch]);
 
   return (
     <div className="Landing-page">

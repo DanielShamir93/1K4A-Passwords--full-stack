@@ -1,9 +1,13 @@
 const User = require("../../models/user.model");
 const bcrypt = require("bcryptjs");
 
-const getUser = (req, res) => {
-  const user = req.user;
-  res.send(user);
+// const getUser = (req, res) => {
+//   const user = req.user;
+//   res.send(user);
+// };
+
+const isUserAuth = (req, res) => {
+  res.status(200).send();
 };
 
 const userLogin = async (req, res) => {
@@ -104,7 +108,7 @@ module.exports = {
   userLogin,
   userLogout,
   userLogoutAll,
-  getUser,
   deleteUser,
   updateUser,
+  isUserAuth
 };

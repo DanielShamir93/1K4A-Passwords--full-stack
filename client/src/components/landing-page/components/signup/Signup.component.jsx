@@ -26,10 +26,6 @@ export default function Signup() {
     };
   });
 
-  useEffect(() => {
-    localStorage.removeItem("persist:root");
-  }, []);
-
   const signup = async () => {
     try {
       setIsLoading(true);
@@ -41,9 +37,8 @@ export default function Signup() {
       });
       const user = data.user;
       const token = data.token;
-      
       dispatch(loggedInUserAction({ uid: user._id, email: user.email, token, isAuth: true }));
-      navigate.push("/");
+      navigate("/");
     } catch (err) {
       setComment(err.message);
       setIsLoading(false);

@@ -1,61 +1,46 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
-import LandingPage from "./components/landing-page/LandingPage.component";
-import Login from "./components/login/Login.component";
-import Home from "./components/home/Home.component";
-import Navbar from "./components/navbar/Navbar.component";
-import About from "./components/about/About.component";
-import Tutorial from "./components/tutorial/Tutorial.component";
+import { useEffect, useState } from "react";
+import { usersApi } from "./api/Apis";
+import AuthRouter from "./components/authRouter/AuthRoute.component";
+import UnauthRouter from "./components/unauthRouter/UnauthRouter.component";
 
 function App() {
-  
+  let [isAuth, setIsAuth] = useState(false);
   const statesObject = useSelector((state) => {
     return { loggedInUser: state.loggedInUser };
   });
 
-  const isAuth = statesObject.loggedInUser.hasOwnProperty("isAuth") ? statesObject.loggedInUser.isAuth : false;
+  useEffect(() => {
+    //Check authentication
+    const getUser = async () => {
+      const config = {
+        method: "get",
+        headers: {
+          Authorization: `Bearer ${statesObject.loggedInUser.token}`,
+        },
+      };
+
+      try {
+        await usersApi(
+          "/me",
+          config
+        );
+        setIsAuth(true);
+        
+      } catch (err) {
+        setIsAuth(false);
+        console.log(err.message);
+      }
+    };
+
+    getUser();
+  }, [statesObject.loggedInUser]);
 
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="*"
-          element={
-            <>
-              <Navbar />
-              {isAuth ? <Home /> : <LandingPage />}
-            </>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <>
-              <Navbar />
-              {isAuth ? <Home /> : <Login />}
-            </>
-          }
-        />
-        <Route
-          path="/about"
-          element={
-            <>
-              <Navbar />
-              <About />
-            </>
-          }
-        />
-        <Route
-          path="/tutorial"
-          element={
-            <>
-              <Navbar />
-              <Tutorial />
-            </>
-          }
-        />
-      </Routes>
-    </Router>
+    <div>
+     { isAuth ? <AuthRouter /> : <UnauthRouter /> }
+    </div>
   );
 }
 
