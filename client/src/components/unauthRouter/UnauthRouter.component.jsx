@@ -5,9 +5,7 @@ import Navbar from "../navbar/Navbar.component";
 import About from "../about/About.component";
 import Tutorial from "../tutorial/Tutorial.component";
 
-
 export default function UnauthRouter() {
-
   return (
     <Router>
       <Routes>

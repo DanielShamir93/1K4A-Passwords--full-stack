@@ -1,18 +1,18 @@
-import IconedButton from "../iconedButton/IconedButton.component";
-import "./navbar.styles.scss";
-import "./navbar.styles.mobile.scss";
-import { FiInfo, FiLogIn } from "react-icons/fi";
-import { AiOutlineQuestionCircle, AiOutlineHome } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { loggedInUserAction } from "../../store/actions/actions";
-import { myApi } from "../../api/Apis";
+import IconedButton from '../iconedButton/IconedButton.component';
+import { FiInfo, FiLogIn } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { AiOutlineQuestionCircle, AiOutlineHome } from 'react-icons/ai';
+import { loggedInUserAction } from '../../store/actions/actions';
+import myApi from '../../api/Apis';
+import './navbar.styles.scss';
+import './navbar.styles.mobile.scss';
 
 export default function Navbar({ isAuth }) {
   const dispatch = useDispatch();
-  const statesObject = useSelector((state) => {
-    return { 
-      loggedInUser: state.loggedInUser
+  const { loggedInUser } = useSelector((state) => {
+    return {
+      loggedInUser: state.loggedInUser,
     };
   });
 
@@ -21,15 +21,11 @@ export default function Navbar({ isAuth }) {
       try {
         const config = {
           method: "post",
-          headers: { 
-            Authorization: `Bearer ${statesObject.loggedInUser.token}` 
+          headers: {
+            Authorization: `Bearer ${loggedInUser.token}`,
           },
-        }
-        await myApi(
-          "users/logout",
-          config
-        );
-        localStorage.removeItem("persist:root");
+        };
+        await myApi("users/logout", config);
         dispatch(loggedInUserAction());
       } catch (err) {
         console.log(err.message);
@@ -46,9 +42,7 @@ export default function Navbar({ isAuth }) {
             reactIconComponent={<AiOutlineHome className="react-home-icon" />}
           />
         </Link>
-        <div className="user-email">
-          {statesObject.loggedInUser.email}  
-        </div>
+        <div className="user-email">{loggedInUser.email}</div>
       </div>
       <div className="rightside">
         <Link to={"/tutorial"}>
@@ -61,7 +55,6 @@ export default function Navbar({ isAuth }) {
         </Link>
         <Link to={"/about"}>
           <IconedButton
-            myStyle={{ fontSize: "2vmin" }}
             term="About"
             reactIconComponent={<FiInfo className="react-icon" />}
           />
@@ -72,7 +65,7 @@ export default function Navbar({ isAuth }) {
             term={isAuth ? "Logout" : "Login"}
             reactIconComponent={<FiLogIn className="react-icon" />}
           />
-        </Link>     
+        </Link>
       </div>
     </div>
   );

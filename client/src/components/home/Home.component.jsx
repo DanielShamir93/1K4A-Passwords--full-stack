@@ -1,23 +1,25 @@
-import { FcPlus, FcSearch } from "react-icons/fc";
-import { HiMinusCircle } from "react-icons/hi";
-import { useEffect, useState } from "react";
-import CreateAccount from "./components/createAccount/CreateAccount.component";
-import Account from "./components/account/Account.component";
-import "./home.styles.scss";
-import "./home.styles.mobile.scss";
-import { useSelector } from "react-redux";
-import Spinner from "../../components/spinner/Spinner.component";
-import { useNavigate } from "react-router-dom";
-import { myApi } from "../../api/Apis";
-
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { FcPlus, FcSearch } from 'react-icons/fc';
+import { HiMinusCircle } from 'react-icons/hi';
+import Account from './components/account/Account.component';
+import CreateAccount from './components/createAccount/CreateAccount.component';
+import Spinner from '../../components/spinner/Spinner.component';
+import { ACCOUNTS_END_POINTS, HTTP_METHODS } from '../../constants/httpRequests.constants';
+import myApi from '../../api/Apis';
+import './home.styles.scss';
+import './home.styles.mobile.scss';
 
 const Home = () => {
+  const { GET_ALL_END_POINT } = ACCOUNTS_END_POINTS;
+  const { GET_METHOD } = HTTP_METHODS;
   const navigate = useNavigate();
   const [accounts, setAccounts] = useState([]);
   const [isCreateAccountOpen, setIsCreateAccountOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [filterAccounts, setFilterAccounts] = useState("");
-  const statesObject = useSelector((state) => {
+  const { accountChangedRender, loggedInUser } = useSelector((state) => {
     return {
       accountChangedRender: state.accountChangedRender,
       loggedInUser: state.loggedInUser,
@@ -25,33 +27,26 @@ const Home = () => {
   });
 
   useEffect(() => {
-    const getAccounts = async () => {
-      setIsLoading(true);
-      try {
-        const config = {
-          method: "get",
-          headers: { 
-            Authorization: `Bearer ${statesObject.loggedInUser.token}` 
-          },
-        }
-        const { data } = await myApi(
-          "accounts/getAll",
-          config
-        );
+    getAllAccounts();
+  }, [accountChangedRender, loggedInUser.uid, loggedInUser.token, navigate]);
 
-        setAccounts(data.map((account) => ({ ...account })));
+  const getAllAccounts = async () => {
+    setIsLoading(true);
+    try {
+      const config = {
+        method: GET_METHOD,
+        headers: {
+          Authorization: `Bearer ${loggedInUser.token}`,
+        },
+      };
+      const { data } = await myApi(GET_ALL_END_POINT, config);
 
-      } catch (err) {
-        if (err.response?.status === 401) {
-          // Authentication passed
-          navigate('/');
-        }
-        console.log(err.message);
-      }
-      setIsLoading(false);
-    };
-    getAccounts();
-  }, [statesObject.accountChangedRender, statesObject.loggedInUser.uid, statesObject.loggedInUser.token, navigate]);
+      setAccounts(data.map((account) => ({ ...account })));
+    } catch (err) {
+      console.log(err.message);
+    }
+    setIsLoading(false);
+  };
 
   const toggleCreateAccountComponent = (boolean) => {
     setIsCreateAccountOpen(boolean);
@@ -110,7 +105,7 @@ const Home = () => {
                 }}
                 value={filterAccounts}
               />
-              <FcSearch className="search-account-react-icon"/>
+              <FcSearch className="search-account-react-icon" />
             </div>
           </div>
           <div className="accounts-gallery">{renderAccounts()}</div>

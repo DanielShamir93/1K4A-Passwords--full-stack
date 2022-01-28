@@ -1,11 +1,10 @@
 import Signup from "./components/signup/Signup.component";
+import { TEXT_CONSTANTS } from "../../constants/landingPage.constants";
 import "./landing-page.styles.scss";
 import "./landing-page.styles.mobile.scss";
-import { TEXT_CONSTANTS } from "../../constants/landingPage.constants";
-import { useEffect } from "react";
 
 export default function LandingPage() {
-  const { TEXT_TITLE } = TEXT_CONSTANTS;
+  const { TEXT_TITLE, TEXT_CONTENT } = TEXT_CONSTANTS;
 
   return (
     <div className="Landing-page">
@@ -15,10 +14,7 @@ export default function LandingPage() {
       <div className="landing-page-right">
         <div className="text">
           <p className="text-title">{TEXT_TITLE}</p>
-          <p className="text-content">
-            Creating and recovering passwords without keeping the passwords in
-            any database.
-          </p>
+          <p className="text-content">{TEXT_CONTENT}</p>
         </div>
         <figure className="image-wrapper"></figure>
       </div>

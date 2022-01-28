@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { loggedInUserAction } from "../../store/actions/actions";
 import Spinner from "../../components/spinner/Spinner.component";
 import "./login.styles.scss";
-import { myApi } from "../../api/Apis";
+import myApi from "../../api/Apis";
 
 export default function Login() {
   const dispatch = useDispatch();

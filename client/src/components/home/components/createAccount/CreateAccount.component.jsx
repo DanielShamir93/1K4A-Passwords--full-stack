@@ -7,7 +7,7 @@ import ToggleButtonsMultiple from "../../../../components/toggleButtonsMultiple/
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
-import { myApi } from "../../../../api/Apis";
+import myApi from "../../../../api/Apis";
 import { Password } from "keys-to-password"
 
 export default function CreateAccount({

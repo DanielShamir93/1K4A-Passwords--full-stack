@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const PORT = process.env.PORT || 8080;
 
@@ -8,7 +8,8 @@ if (process.env.NODE_ENV === "production") {
   myUrl = "/";
 }
 
-export const myApi = axios.create({
+const myApi = axios.create({
   baseURL: myUrl,
 });
 
+export default myApi;

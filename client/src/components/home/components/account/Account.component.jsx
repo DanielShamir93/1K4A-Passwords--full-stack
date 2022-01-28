@@ -1,20 +1,16 @@
-import { RiFileCopyLine } from "react-icons/ri";
-import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
-import { FcUnlock, FcLock, FcKey } from "react-icons/fc";
-import { useRef, useState } from "react";
-import "./account.styles.scss";
-import "./account.styles.mobile.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
-import { useNavigate } from "react-router-dom";
-import { myApi } from "../../../../api/Apis";
-import { Password } from "keys-to-password";
+import { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RiFileCopyLine } from 'react-icons/ri';
+import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
+import { FcUnlock, FcLock, FcKey } from 'react-icons/fc';
+import { useNavigate } from 'react-router-dom';
+import { accountChangedRenderAction, editAccountAction } from '../../../../store/actions/actions';
+import { Password } from 'keys-to-password';
+import myApi from '../../../../api/Apis';
+import './account.styles.scss';
+import './account.styles.mobile.scss';
 
-export default function Account({
-  account,
-  setIsLoading,
-  toggleCreateAccountComponent,
-}) {
+export default function Account({ account, setIsLoading, toggleCreateAccountComponent }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const toggleRef = useRef();
@@ -52,7 +48,7 @@ export default function Account({
       
       password.setKeyboard(keyboardConfig);
       
-      if (account.hasOwnProperty('passPattern')) {
+      if (account.hasOwnProperty("passPattern")) {
         password.generateFromPattern(account.passPattern);
         setOutput(password.getPassword);
       } else {
@@ -86,10 +82,6 @@ export default function Account({
       );
       dispatch(accountChangedRenderAction());
     } catch (err) {
-      if (err.response.status === 401) {
-        // Authentication passed
-        navigate('/');
-      }
       console.log(err.message);
     }
   };

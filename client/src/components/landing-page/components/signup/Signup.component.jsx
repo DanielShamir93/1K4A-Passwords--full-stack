@@ -10,7 +10,7 @@ import "./signup.styles.mobile.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { loggedInUserAction } from "../../../../store/actions/actions";
 import Spinner from "../../../../components/spinner/Spinner.component";
-import { myApi } from "../../../../api/Apis";
+import myApi from "../../../../api/Apis";
 
 export default function Signup() {
   const dispatch = useDispatch();
