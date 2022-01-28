@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const PORT = process.env.PORT || 8080;
-const myUrl = {
+
+let myUrl = {
   users: `http://localhost:${PORT}/users`,
   accounts: `http://localhost:${PORT}/accounts`
 };

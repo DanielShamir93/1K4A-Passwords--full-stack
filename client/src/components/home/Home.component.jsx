@@ -28,7 +28,6 @@ const Home = () => {
     const getAccounts = async () => {
       setIsLoading(true);
       try {
-
         const config = {
           method: "get",
           headers: { 
