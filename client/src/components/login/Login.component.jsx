@@ -26,10 +26,9 @@ export default function Login() {
   });
 
   const login = async () => {
+    setIsLoading(true);
+    isValidInput();
     try {
-      setIsLoading(true);
-      isValidInput();
-
       const { data } = await myApi.post(LOGIN_END_POINT, {
         email: statesObject.email,
         password: statesObject.password
@@ -65,6 +64,7 @@ export default function Login() {
                 flexDirection: "column",
                 justifyContent: "space-around",
                 height: 200,
+                alignItems: "center",
               }}
             >
               <div className="email">

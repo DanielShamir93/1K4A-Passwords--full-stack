@@ -36,17 +36,15 @@ export default function PasswordInput(props) {
   };
 
   return (
-    <FormControl
-      sx={{ m: 1, width: "60vw", maxWidth: "500px" }}
-      variant="outlined"
-    >
-      <InputLabel htmlFor="outlined-adornment-password">
+    <FormControl>
+      <InputLabel htmlFor="outlined-adornment-password" variant="outlined">
         {props.label}
       </InputLabel>
       <OutlinedInput
         id="outlined-adornment-password"
         type={showPassword ? "text" : "password"}
         value={statesObject[props.label]}
+        style={{width: "300px"}}
         onChange={(e) => {
           handleChange(e);
         }}

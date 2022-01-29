@@ -18,7 +18,6 @@ export default function Signup() {
   const { EMAIL_EMPTY_ERROR, PASSWORD_TOO_SHORT_ERROR, CONFIRM_MATCH_ERROR } = ERROR_MESSAGES_CONSTANTS;
   const { SIGN_UP_TITLE, HAVE_ACCOUNT_ALREADY_TEXT } = TEXT_CONSTANTS;
   const { SIGNUP_END_POINT } = USERS_END_POINTS_CONSTANTS;
-  const { INDEX_ROUTE } = FRONTEND_ROUTES_CONSTANTS;
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);

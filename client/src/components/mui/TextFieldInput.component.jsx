@@ -16,17 +16,12 @@ export default function TextFieldInput(props) {
   };
 
   return (
-    <FormControl
-      sx={{ m: 1, width: "60vw", maxWidth: "500px" }}
-      variant="outlined"
-    >
       <TextField
+        variant="outlined"
         label={props.label}
-        onChange={(e) => {
-          handleChange(e);
-        }}
+        onChange={(e) => { handleChange(e) }}
         value={statesObject.email}
+        style={{width: "300px"}}
       />
-    </FormControl>
   );
 }

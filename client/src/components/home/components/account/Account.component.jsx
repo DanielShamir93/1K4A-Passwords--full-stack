@@ -44,7 +44,7 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
         position: "unset",
         top: "0",
         left: "0",
-        transform: "translate(0, 0)"
+        transform: "translate(0,0)"
       });
       setPrivateKey("");
       setOutput("");
