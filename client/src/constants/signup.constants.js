@@ -1,6 +1,6 @@
 export const ERROR_MESSAGES_CONSTANTS = {
   EMAIL_EMPTY_ERROR: "Missing email",
-  PASSWORD_TOO_SHORT_ERROR: "Password must be at least 6 characters",
+  PASSWORD_TOO_SHORT_ERROR: "Password must be at least 5 characters",
   CONFIRM_MATCH_ERROR: "Confirm input must match the password"
  };
 

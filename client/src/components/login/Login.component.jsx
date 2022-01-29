@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import Box from "@material-ui/core/Box";
 import PasswordInput from "../../components/mui/PasswordInput.components";
 import TextFieldInput from "../../components/mui/TextFieldInput.component";
-import { useSelector } from "react-redux";
 import BasicButton from "../../components/mui/BasicButton.component";
-import { useDispatch } from "react-redux";
 import { loggedInUserAction } from "../../store/actions/actions";
 import Spinner from "../../components/spinner/Spinner.component";
-import "./login.styles.scss";
 import myApi from "../../api/Apis";
+import { USERS_END_POINTS } from "../../constants/httpRequests.constants";
+import { TEXT_CONSTANTS, ERROR_MESSAGES_CONSTANTS } from "../../constants/login.constants";
+import "./login.styles.scss";
 
 export default function Login() {
+  const { LOGIN_END_POINT } = USERS_END_POINTS;
+  const { EMAIL_EMPTY_ERROR, PASSWORD_TOO_SHORT_ERROR } = ERROR_MESSAGES_CONSTANTS;
+  const { LOGIN_TITLE } = TEXT_CONSTANTS;
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
   const navigate = useNavigate();
@@ -28,7 +32,7 @@ export default function Login() {
       setIsLoading(true);
       isValidInput();
 
-      const { data } = await myApi.post("users/login", {
+      const { data } = await myApi.post(LOGIN_END_POINT, {
         email: statesObject.email,
         password: statesObject.password
       });
@@ -45,16 +49,16 @@ export default function Login() {
 
   const isValidInput = () => {
     if (statesObject.email === "") {
-      throw new Error("Missing email");
-    } else if (statesObject.password.length < 6) {
-      throw new Error("Password must be at least 6 characters");
+      throw new Error(EMAIL_EMPTY_ERROR);
+    } else if (statesObject.password.length < 5) {
+      throw new Error(PASSWORD_TOO_SHORT_ERROR);
     }
   };
 
   return (
     <div className="Login">
       <div className="login-view">
-        <p className="login-title">Login</p>
+        <p className="login-title">{LOGIN_TITLE}</p>
         <p className="login-comment">{comment}</p>
         <div className="login-box">
           <div className="login-box-inputs">
