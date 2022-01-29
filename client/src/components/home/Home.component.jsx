@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { FcPlus, FcSearch } from 'react-icons/fc';
-import { HiMinusCircle } from 'react-icons/hi';
-import Account from './components/account/Account.component';
-import CreateAccount from './components/createAccount/CreateAccount.component';
-import Spinner from '../../components/spinner/Spinner.component';
-import { ACCOUNTS_END_POINTS, HTTP_METHODS } from '../../constants/httpRequests.constants';
-import myApi from '../../api/Apis';
-import './home.styles.scss';
-import './home.styles.mobile.scss';
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { FcPlus, FcSearch } from "react-icons/fc";
+import { HiMinusCircle } from "react-icons/hi";
+import Account from "./components/account/Account.component";
+import CreateAccount from "./components/createAccount/CreateAccount.component";
+import Spinner from "../../components/spinner/Spinner.component";
+import { ACCOUNTS_END_POINTS, HTTP_METHODS, } from "../../constants/httpRequests.constants";
+import myApi from "../../api/Apis";
+import "./home.styles.scss";
+import "./home.styles.mobile.scss";
 
 const Home = () => {
-  const { GET_ALL_END_POINT } = ACCOUNTS_END_POINTS;
+  const { GET_ALL_ACCOUNTS_END_POINT } = ACCOUNTS_END_POINTS;
   const { GET_METHOD } = HTTP_METHODS;
   const navigate = useNavigate();
   const [accounts, setAccounts] = useState([]);
@@ -39,7 +39,7 @@ const Home = () => {
           Authorization: `Bearer ${loggedInUser.token}`,
         },
       };
-      const { data } = await myApi(GET_ALL_END_POINT, config);
+      const { data } = await myApi(GET_ALL_ACCOUNTS_END_POINT, config);
 
       setAccounts(data.map((account) => ({ ...account })));
     } catch (err) {
@@ -54,9 +54,7 @@ const Home = () => {
 
   const renderAccounts = () => {
     return accounts
-      .filter((account) =>
-        account.accountName.toLowerCase().includes(filterAccounts.toLowerCase())
-      )
+      .filter((account) => account.accountName.toLowerCase().includes(filterAccounts.toLowerCase()))
       .map((account) => {
         return (
           <Account

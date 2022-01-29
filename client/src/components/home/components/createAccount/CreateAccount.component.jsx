@@ -1,19 +1,27 @@
-import "./create-account.styles.scss";
-import "./create-account.styles.mobile.scss";
 import { FcUnlock, FcLock, FcKey } from "react-icons/fc";
 import { useState, useEffect } from "react";
-import hash from "object-hash";
-import ToggleButtonsMultiple from "../../../../components/toggleButtonsMultiple/ToggleButtonsMultiple.component";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
+import { Password } from "keys-to-password";
+import ToggleButtonsMultiple from "../../../../components/toggleButtonsMultiple/ToggleButtonsMultiple.component";
 import myApi from "../../../../api/Apis";
-import { Password } from "keys-to-password"
+import { ACCOUNTS_END_POINTS, HTTP_METHODS } from "../../../../constants/httpRequests.constants";
+import { ERROR_MESSAGES_CONSTANTS, TEXT_CONSTANTS } from "../../../../constants/createAccount.constants";
+import "./create-account.styles.scss";
+import "./create-account.styles.mobile.scss";
 
-export default function CreateAccount({
-  toggleCreateAccountComponent,
-  setIsLoading,
-}) {
+export default function CreateAccount({ toggleCreateAccountComponent, setIsLoading }) {
+  const { UPDATE_ACCOUNT_END_POINT, CREATE_ACCOUNT_END_POINT } = ACCOUNTS_END_POINTS;
+  const { PUT_METHOD, POST_METHOD } = HTTP_METHODS;
+  const { ACCOUNT_AREA_TITLE,
+          PASSWORD_AREA_TITLE,
+          LENGTH_LABEL_TEXT,
+          GENERATE_BUTTON_TEXT,
+          SUBMIT_BUTTON_TEXT } = TEXT_CONSTANTS;
+  const { LENGTH_MUST_BE_POSITIVE_ERROR,
+          EMPTY_KEYBOARD_ERROR,
+          EMPTY_PRIVATE_KEY_ERROR,
+          EMPTY_ACCOUNT_NAME_ERROR } = ERROR_MESSAGES_CONSTANTS;
   const dispatch = useDispatch();
   const [output, setOutput] = useState("");
   const [accountName, setAccountName] = useState("");
@@ -39,11 +47,8 @@ export default function CreateAccount({
       loggedInUser: state.loggedInUser,
     };
   });
-  const navigate = useNavigate();
 
   useEffect(() => {
-    
-
     if (Object.keys(statesObject.editAccount).length > 0) {
       // In edit account mode
       setAccountName(statesObject.editAccount.accountName);
@@ -62,97 +67,11 @@ export default function CreateAccount({
         isSymbolsChecked: statesObject.editAccount.isPassHasSymbol,
       });
     }
-
     return () => {
-      dispatch(editAccountAction({}));
+      resetCreateAccountForm();
+      dispatch(editAccountAction());
     };
   }, [statesObject.editAccount, dispatch]);
-
-  const createAccount = async () => {
-    try {
-      if (isValidAccount) {
-        setIsLoading(true);
-        const currAccount = {
-          accountName,
-          accountSubname,
-          passAvoidChars,
-          passEndsWith,
-          passLength,
-          passMustContain,
-          passPattern,
-          passStartsWith,
-          publicKey,
-          isPassHasDigit: isChecked.isDigitsChecked,
-          isPassHasUppercase: isChecked.isUppercaseChecked,
-          isPassHasLowercase: isChecked.isLowercaseChecked,
-          isPassHasSymbol: isChecked.isSymbolsChecked,
-        };
-
-        for (let prop in currAccount) {
-          // Delete unused properties of account
-          if (currAccount[prop] === "") {
-            delete currAccount[prop];
-          }
-        }
-        
-        if (Object.keys(statesObject.editAccount).length > 0) {
-          // In edit account mode
-          const updates = Object.keys(currAccount);
-          const allowedUpdates = [
-            "accountName",
-            "accountSubname",
-            "isPassHasDigit",
-            "isPassHasLowercase",
-            "isPassHasSymbol",
-            "isPassHasUppercase",
-            "passAvoidChars",
-            "passEndsWith",
-            "passLength",
-            "keyboardMustContain",
-            "passPattern",
-            "passStartsWith",
-          ];
-
-          updates.forEach((update) => {
-            if (!allowedUpdates.includes(update)) {
-              delete currAccount[update]
-            }
-          });
-
-          const config = {
-            method: "put",
-            headers: {
-              Authorization: `Bearer ${statesObject.loggedInUser.token}`,
-            },
-            data: currAccount
-          };
-          
-          await myApi(`accounts/update/${statesObject.editAccount._id}`, config);
-        } else {
-          const config = {
-            method: "post",
-            headers: {
-              Authorization: `Bearer ${statesObject.loggedInUser.token}`,
-            },
-            data: currAccount,
-          };
-
-          await myApi("accounts/create", config);
-        }
-        dispatch(accountChangedRenderAction());
-        resetCreateAccountForm();
-        toggleCreateAccountComponent(false);
-      } else {
-        setOutput("Must Generate Password");
-      }
-    } catch (err) {
-      if (err.response.status === 401) {
-        // Authentication passed
-        navigate('/');
-      }
-      console.log(err.massage);
-    }
-  };
 
   const resetCreateAccountForm = () => {
     setOutput("");
@@ -175,6 +94,101 @@ export default function CreateAccount({
     });
   };
 
+  // Create new account or if in edit mode update it's values and save it to the database
+  const createOrEditAccount = async () => {
+    setIsLoading(true);
+    try {
+      if (isValidAccount) {
+        const currAccount = {
+          accountName,
+          accountSubname,
+          passAvoidChars,
+          passEndsWith,
+          passLength,
+          passMustContain,
+          passPattern,
+          passStartsWith,
+          publicKey,
+          isPassHasDigit: isChecked.isDigitsChecked,
+          isPassHasUppercase: isChecked.isUppercaseChecked,
+          isPassHasLowercase: isChecked.isLowercaseChecked,
+          isPassHasSymbol: isChecked.isSymbolsChecked,
+        };
+
+        for (let prop in currAccount) {
+          // Delete unused properties of account before upload to the database
+          if (currAccount[prop] === "") {
+            delete currAccount[prop];
+          }
+        }
+
+        if (Object.keys(statesObject.editAccount).length > 0) {
+          // In edit account mode
+          await editExistsAccount(currAccount);
+        } else {
+          // Creat new account
+          await createNewAccount(currAccount);
+        }
+        dispatch(accountChangedRenderAction());
+        toggleCreateAccountComponent(false);
+      } else {
+        setOutput("Must Generate Password");
+      }
+    } catch (err) {
+      console.log(err.massage);
+    }
+  };
+
+  const createNewAccount = async (currAccount) => {
+    const config = {
+      method: POST_METHOD,
+      headers: {
+        Authorization: `Bearer ${statesObject.loggedInUser.token}`,
+      },
+      data: currAccount,
+    };
+
+    await myApi(CREATE_ACCOUNT_END_POINT, config);
+  }
+
+  const editExistsAccount = async (currAccount) => {
+    const updates = Object.keys(currAccount);
+    const allowedUpdates = [
+      "accountName",
+      "accountSubname",
+      "isPassHasDigit",
+      "isPassHasLowercase",
+      "isPassHasSymbol",
+      "isPassHasUppercase",
+      "passAvoidChars",
+      "passEndsWith",
+      "passLength",
+      "keyboardMustContain",
+      "passPattern",
+      "passStartsWith",
+    ];
+
+    // Keep only the allow to edit values of the account
+    updates.forEach((update) => {
+      if (!allowedUpdates.includes(update)) {
+        delete currAccount[update];
+      }
+    });
+
+    const config = {
+      method: PUT_METHOD,
+      headers: {
+        Authorization: `Bearer ${statesObject.loggedInUser.token}`,
+      },
+      data: currAccount,
+    };
+
+    await myApi(
+      `${UPDATE_ACCOUNT_END_POINT}/${statesObject.editAccount._id}`,
+      config
+    );
+  };
+
   const outputPassword = () => {
     if (accountName.length > 0) {
       if (privateKey.length > 0) {
@@ -184,18 +198,18 @@ export default function CreateAccount({
           isChecked.isLowercaseChecked ||
           isChecked.isSymbolsChecked
         ) {
-          if (parseInt(passLength) > 0 && parseInt(passLength) < 41) {
+          if (+passLength > 0) {
             setIsValidAccount(true);
 
             const password = new Password(privateKey);
             const keyboardConfig = {
-              avoidChars: passAvoidChars,  
+              avoidChars: passAvoidChars,
               isContainDigits: isChecked.isDigitsChecked,
-              isContainUpperCase: isChecked.isUppercaseChecked, 
+              isContainUpperCase: isChecked.isUppercaseChecked,
               isContainLowerCase: isChecked.isLowercaseChecked,
               isContainSymbols: isChecked.isSymbolsChecked,
               mustContainChars: passMustContain,
-            }
+            };
 
             password.setKeyboard(keyboardConfig);
             setPublicKey(password.getPublicKey());
@@ -207,47 +221,49 @@ export default function CreateAccount({
               const generateConfig = {
                 passLength: +passLength,
                 passStartsWith: passStartsWith,
-                passEndsWidth: passEndsWith
-              }
+                passEndsWidth: passEndsWith,
+              };
 
               password.generate(generateConfig);
               setOutput(password.getPassword());
             }
           } else {
-            setOutput("Length: Between 1 To 40");
+            setOutput(LENGTH_MUST_BE_POSITIVE_ERROR);
             setIsValidAccount(false);
           }
         } else {
-          setOutput("Missing Characters In Keyboard");
+          setOutput(EMPTY_KEYBOARD_ERROR);
           setIsValidAccount(false);
         }
       } else {
-        setOutput("Missing: Private Key");
+        setOutput(EMPTY_PRIVATE_KEY_ERROR);
         setIsValidAccount(false);
       }
     } else {
-      setOutput("Missing: Account Name");
+      setOutput(EMPTY_ACCOUNT_NAME_ERROR);
       setIsValidAccount(false);
     }
   };
 
+  // Toggle type of characters in password checkboxes
   const toggleCheckboxes = (checkboxElement, statePropertyName) => {
     const cloneIsChecked = { ...isChecked };
     cloneIsChecked[statePropertyName] = checkboxElement.checked;
     setIsChecked(cloneIsChecked);
   };
 
+  // Validate that password length is a natural number
   const setLength = (lengthInputElement) => {
     if (isNaturalNumber(lengthInputElement.value)) {
       setPassLength(lengthInputElement.value);
     } else {
-      lengthInputElement.value = parseInt(lengthInputElement.value) || "";
+      lengthInputElement.value = +lengthInputElement.value || "";
       setPassLength(lengthInputElement.value);
     }
   };
 
   const isNaturalNumber = (string) => {
-    return /^\d+$(?![^\d])/.test(string);
+    return /^(?![0])\d+$(?![^\d])/.test(string);
   };
 
   return (
@@ -256,7 +272,7 @@ export default function CreateAccount({
         <form className="create-account-form">
           <div className="create-account-details">
             <fieldset className="account-details">
-              <legend>Account Settings</legend>
+              <legend>{ACCOUNT_AREA_TITLE}</legend>
               <div>
                 <input
                   type="text"
@@ -279,7 +295,7 @@ export default function CreateAccount({
               </div>
             </fieldset>
             <fieldset className="password-details">
-              <legend>Password Settings</legend>
+              <legend>{PASSWORD_AREA_TITLE}</legend>
               <div>
                 <ToggleButtonsMultiple
                   toggleCheckboxes={toggleCheckboxes}
@@ -287,7 +303,7 @@ export default function CreateAccount({
                 />
               </div>
               <div className="password-length-container">
-                <label htmlFor="password-length">Number OF Characters</label>
+                <label htmlFor="password-length">{LENGTH_LABEL_TEXT}</label>
                 <input
                   id="password-length"
                   type="text"
@@ -377,7 +393,7 @@ export default function CreateAccount({
                 type="button"
                 onClick={outputPassword}
               >
-                Generate
+                {GENERATE_BUTTON_TEXT}
               </button>
             </fieldset>
           </div>
@@ -394,10 +410,10 @@ export default function CreateAccount({
             <button
               className="submit-button"
               type="button"
-              onClick={createAccount}
+              onClick={createOrEditAccount}
               disabled={!isValidAccount || output.length === 0}
             >
-              Submit
+              {SUBMIT_BUTTON_TEXT}
             </button>
             {isValidAccount && output.length > 0 ? (
               <FcUnlock className="lock-icon" />

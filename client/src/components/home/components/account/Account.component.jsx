@@ -1,19 +1,20 @@
-import { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RiFileCopyLine } from 'react-icons/ri';
-import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
-import { FcUnlock, FcLock, FcKey } from 'react-icons/fc';
-import { useNavigate } from 'react-router-dom';
-import { accountChangedRenderAction, editAccountAction } from '../../../../store/actions/actions';
-import { Password } from 'keys-to-password';
-import myApi from '../../../../api/Apis';
-import './account.styles.scss';
-import './account.styles.mobile.scss';
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RiFileCopyLine } from "react-icons/ri";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { FcUnlock, FcLock, FcKey } from "react-icons/fc";
+import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
+import { Password } from "keys-to-password";
+import myApi from "../../../../api/Apis";
+import { ACCOUNTS_END_POINTS, HTTP_METHODS } from "../../../../constants/httpRequests.constants";
+import "./account.styles.scss";
+import "./account.styles.mobile.scss";
 
 export default function Account({ account, setIsLoading, toggleCreateAccountComponent }) {
-  const navigate = useNavigate();
+  const { DELETE_ACCOUNT_END_POINT } = ACCOUNTS_END_POINTS;
+  const { DELETE_METHOD } = HTTP_METHODS;
   const dispatch = useDispatch();
-  const toggleRef = useRef();
+  const toggleDisplayMoreRef = useRef();
   const [privateKey, setPrivateKey] = useState("");
   const [output, setOutput] = useState("");
   const [isMoreDisplayed, setIsMoreDisplayed] = useState(false);
@@ -21,42 +22,47 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
     return { loggedInUser: state.loggedInUser };
   });
 
-  const toggleDisplay = () => {
+  // Toggle for more options of the account
+  const toggleDisplayMore = () => {
     if (!isMoreDisplayed) {
-      toggleRef.current.style.display = "flex";
+      // Display more options
+      toggleDisplayMoreRef.current.style.display = "flex";
       setIsMoreDisplayed(true);
     } else {
-      toggleRef.current.style.display = "none";
+      // Hide more options and clean
+      toggleDisplayMoreRef.current.style.display = "none";
       setPrivateKey("");
       setOutput("");
       setIsMoreDisplayed(false);
     }
   };
 
+  // Retrieve the password outcome
   const getPassword = () => {
     if (privateKey.length > 0) {
-
+      // Key was assigned
       const password = new Password(privateKey, account.publicKey);
       const keyboardConfig = {
-          avoidChars: account.passAvoidChars,  
-          isContainDigits: account.isPassHasDigit,
-          isContainUpperCase: account.isPassHasUppercase, 
-          isContainLowerCase: account.isPassHasLowercase,
-          isContainSymbols: account.isPassHasSymbol,
-          mustContainChars: account.passMustContain,
-      }
+        avoidChars: account.passAvoidChars,
+        isContainDigits: account.isPassHasDigit,
+        isContainUpperCase: account.isPassHasUppercase,
+        isContainLowerCase: account.isPassHasLowercase,
+        isContainSymbols: account.isPassHasSymbol,
+        mustContainChars: account.keyboardMustContain,
+      };
       
       password.setKeyboard(keyboardConfig);
-      
       if (account.hasOwnProperty("passPattern")) {
+        // Account password generated via pattern 
         password.generateFromPattern(account.passPattern);
         setOutput(password.getPassword);
       } else {
+        // Account password generated via regular way 
         const generateConfig = {
           passLength: +account.passLength,
           passStartsWith: account.passStartsWith,
-          passEndsWidth: account.passEndsWith
-        }
+          passEndsWidth: account.passEndsWith,
+        };
         password.generate(generateConfig);
         setOutput(password.getPassword);
       }
@@ -65,43 +71,42 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
     }
   };
 
+  // Remove account from user's gallery
   const deleteAccount = async () => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-
       const config = {
-        method: "delete",
-        headers: { 
-          Authorization: `Bearer ${statesObject.loggedInUser.token}` 
+        method: DELETE_METHOD,
+        headers: {
+          Authorization: `Bearer ${statesObject.loggedInUser.token}`,
         },
-      }
+      };
 
-      await myApi(
-        `accounts/delete/${account._id}`,
-        config
-      );
+      await myApi(`${DELETE_ACCOUNT_END_POINT}/${account._id}`, config);
       dispatch(accountChangedRenderAction());
     } catch (err) {
       console.log(err.message);
     }
   };
 
+  // Change account's values
   const editAccount = () => {
     dispatch(editAccountAction(account));
     toggleCreateAccountComponent(true);
   };
 
+  // Copy outcome password to the clipboard
   const copyPassword = () => {
     navigator.clipboard.writeText(output);
   };
 
   return (
     <div className="account">
-      <div className="account-names" onClick={toggleDisplay}>
+      <div className="account-names" onClick={toggleDisplayMore}>
         <p className="account-name">{account.accountName}</p>
         <p className="account-subname">{account.accountSubname}</p>
       </div>
-      <div ref={toggleRef} className="account-more">
+      <div ref={toggleDisplayMoreRef} className="account-more">
         <div className="account-more-bar">
           <AiOutlineDelete
             className="delete-account-button"
