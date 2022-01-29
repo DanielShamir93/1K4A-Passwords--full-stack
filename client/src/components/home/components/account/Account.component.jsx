@@ -10,11 +10,12 @@ import { ACCOUNTS_END_POINTS_CONSTANTS, HTTP_METHODS_CONSTANTS } from "../../../
 import "./account.styles.scss";
 import "./account.styles.mobile.scss";
 
-export default function Account({ account, setIsLoading, toggleCreateAccountComponent }) {
+export default function Account({ account, setIsLoading, toggleCreateAccountComponent, isSomeAccountCentered, setIsSomeAccountCentered }) {
   const { DELETE_ACCOUNT_END_POINT } = ACCOUNTS_END_POINTS_CONSTANTS;
   const { DELETE_METHOD } = HTTP_METHODS_CONSTANTS;
   const dispatch = useDispatch();
   const toggleDisplayMoreRef = useRef();
+  const centerAccountRef = useRef();
   const [privateKey, setPrivateKey] = useState("");
   const [output, setOutput] = useState("");
   const [isMoreDisplayed, setIsMoreDisplayed] = useState(false);
@@ -24,16 +25,31 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
 
   // Toggle for more options of the account
   const toggleDisplayMore = () => {
+    
     if (!isMoreDisplayed) {
       // Display more options
       toggleDisplayMoreRef.current.style.display = "flex";
+      Object.assign(centerAccountRef.current.style, {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)"
+      });
       setIsMoreDisplayed(true);
+      setIsSomeAccountCentered(true);
     } else {
       // Hide more options and clean
       toggleDisplayMoreRef.current.style.display = "none";
+      Object.assign(centerAccountRef.current.style, {
+        position: "unset",
+        top: "0",
+        left: "0",
+        transform: "translate(0, 0)"
+      });
       setPrivateKey("");
       setOutput("");
       setIsMoreDisplayed(false);
+      setIsSomeAccountCentered(false);
     }
   };
 
@@ -101,8 +117,8 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
   };
 
   return (
-    <div className="account">
-      <div className="account-names" onClick={toggleDisplayMore}>
+    <div className="account" ref={centerAccountRef}>
+      <div className="account-names" onClick={(!isSomeAccountCentered || isMoreDisplayed) && toggleDisplayMore}>
         <p className="account-name">{account.accountName}</p>
         <p className="account-subname">{account.accountSubname}</p>
       </div>

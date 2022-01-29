@@ -388,6 +388,17 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
                 />
                 <FcKey className="private-key-icon" />
               </div>
+              <div className="confirm-private-key">
+                <input
+                  type="password"
+                  placeholder="Confirm"
+                  onChange={(e) => {
+                    // setPrivateKey(e.target.value);
+                    setOutput("");
+                  }}
+                  value={privateKey}
+                />
+              </div>
               <button
                 className="generate-button"
                 type="button"

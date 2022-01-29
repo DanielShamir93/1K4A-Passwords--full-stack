@@ -17,6 +17,7 @@ const Home = () => {
   const [isCreateAccountOpen, setIsCreateAccountOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [filterAccounts, setFilterAccounts] = useState("");
+  const [isSomeAccountCentered, setIsSomeAccountCentered] = useState(false);
   const { accountChangedRender, loggedInUser } = useSelector((state) => {
     return {
       accountChangedRender: state.accountChangedRender,
@@ -60,6 +61,8 @@ const Home = () => {
             account={account}
             setIsLoading={setIsLoading}
             toggleCreateAccountComponent={toggleCreateAccountComponent}
+            isSomeAccountCentered={isSomeAccountCentered}
+            setIsSomeAccountCentered={setIsSomeAccountCentered}
           />
         );
       });
