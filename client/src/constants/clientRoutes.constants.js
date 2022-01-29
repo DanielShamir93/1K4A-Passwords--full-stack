@@ -1,5 +1,5 @@
-const CLIENT_ROUTES = {
+const CLIENT_ROUTES_CONSTANTS = {
   LANDING_PAGE: "/"
 }
 
-export { CLIENT_ROUTES };
+export { CLIENT_ROUTES_CONSTANTS };

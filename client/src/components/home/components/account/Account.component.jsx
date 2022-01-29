@@ -6,13 +6,13 @@ import { FcUnlock, FcLock, FcKey } from "react-icons/fc";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
 import { Password } from "keys-to-password";
 import myApi from "../../../../api/Apis";
-import { ACCOUNTS_END_POINTS, HTTP_METHODS } from "../../../../constants/httpRequests.constants";
+import { ACCOUNTS_END_POINTS_CONSTANTS, HTTP_METHODS_CONSTANTS } from "../../../../constants/httpRequests.constants";
 import "./account.styles.scss";
 import "./account.styles.mobile.scss";
 
 export default function Account({ account, setIsLoading, toggleCreateAccountComponent }) {
-  const { DELETE_ACCOUNT_END_POINT } = ACCOUNTS_END_POINTS;
-  const { DELETE_METHOD } = HTTP_METHODS;
+  const { DELETE_ACCOUNT_END_POINT } = ACCOUNTS_END_POINTS_CONSTANTS;
+  const { DELETE_METHOD } = HTTP_METHODS_CONSTANTS;
   const dispatch = useDispatch();
   const toggleDisplayMoreRef = useRef();
   const [privateKey, setPrivateKey] = useState("");

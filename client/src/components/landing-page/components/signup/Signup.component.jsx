@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Box from "@material-ui/core/Box";
 import PasswordInput from "../../../../components/mui/PasswordInput.components";
@@ -10,17 +9,18 @@ import { loggedInUserAction } from "../../../../store/actions/actions";
 import Spinner from "../../../../components/spinner/Spinner.component";
 import myApi from "../../../../api/Apis";
 import { ERROR_MESSAGES_CONSTANTS, TEXT_CONSTANTS } from "../../../../constants/signup.constants";
-import { USERS_END_POINTS } from "../../../../constants/httpRequests.constants";
+import { USERS_END_POINTS_CONSTANTS } from "../../../../constants/httpRequests.constants";
+import { FRONTEND_ROUTES_CONSTANTS } from "../../../../constants/frontendRoutes.constants";
 import "./signup.styles.scss";
 import "./signup.styles.mobile.scss";
 
 export default function Signup() {
   const { EMAIL_EMPTY_ERROR, PASSWORD_TOO_SHORT_ERROR, CONFIRM_MATCH_ERROR } = ERROR_MESSAGES_CONSTANTS;
   const { SIGN_UP_TITLE, HAVE_ACCOUNT_ALREADY_TEXT } = TEXT_CONSTANTS;
-  const { SIGNUP_END_POINT } = USERS_END_POINTS;
+  const { SIGNUP_END_POINT } = USERS_END_POINTS_CONSTANTS;
+  const { INDEX_ROUTE } = FRONTEND_ROUTES_CONSTANTS;
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const statesObject = useSelector((state) => {
     return {
@@ -43,7 +43,6 @@ export default function Signup() {
       const token = data.token;
 
       dispatch(loggedInUserAction({ uid: user._id, email: user.email, token }));
-      navigate("/");
     } catch (err) {
       setComment(err.message);
       setIsLoading(false);

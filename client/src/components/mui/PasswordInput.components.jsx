@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -5,16 +7,11 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setPasswordAction,
-  setConfirmAction,
-} from "../../store/actions/actions";
+import { setPasswordAction, setConfirmAction } from "../../store/actions/actions";
 
 export default function PasswordInput(props) {
-  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
   const statesObject = useSelector((state) => {
     return {
       password: state.password,

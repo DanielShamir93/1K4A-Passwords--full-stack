@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { FcPlus, FcSearch } from "react-icons/fc";
 import { HiMinusCircle } from "react-icons/hi";
 import Account from "./components/account/Account.component";
 import CreateAccount from "./components/createAccount/CreateAccount.component";
 import Spinner from "../../components/spinner/Spinner.component";
-import { ACCOUNTS_END_POINTS, HTTP_METHODS, } from "../../constants/httpRequests.constants";
+import { ACCOUNTS_END_POINTS_CONSTANTS, HTTP_METHODS_CONSTANTS, } from "../../constants/httpRequests.constants";
 import myApi from "../../api/Apis";
 import "./home.styles.scss";
 import "./home.styles.mobile.scss";
 
 const Home = () => {
-  const { GET_ALL_ACCOUNTS_END_POINT } = ACCOUNTS_END_POINTS;
-  const { GET_METHOD } = HTTP_METHODS;
-  const navigate = useNavigate();
+  const { GET_ALL_ACCOUNTS_END_POINT } = ACCOUNTS_END_POINTS_CONSTANTS;
+  const { GET_METHOD } = HTTP_METHODS_CONSTANTS;
   const [accounts, setAccounts] = useState([]);
   const [isCreateAccountOpen, setIsCreateAccountOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +26,7 @@ const Home = () => {
 
   useEffect(() => {
     getAllAccounts();
-  }, [accountChangedRender, loggedInUser.uid, loggedInUser.token, navigate]);
+  }, [accountChangedRender, loggedInUser.uid, loggedInUser.token]);
 
   const getAllAccounts = async () => {
     setIsLoading(true);

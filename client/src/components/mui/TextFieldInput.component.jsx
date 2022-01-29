@@ -1,7 +1,6 @@
-import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
-import { useDispatch, useSelector } from "react-redux";
 import { setEmailAction } from "../../store/actions/actions";
 
 export default function TextFieldInput(props) {

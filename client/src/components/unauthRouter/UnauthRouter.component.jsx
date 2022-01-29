@@ -4,13 +4,16 @@ import Login from "../login/Login.component";
 import Navbar from "../navbar/Navbar.component";
 import About from "../about/About.component";
 import Tutorial from "../tutorial/Tutorial.component";
+import { FRONTEND_ROUTES_CONSTANTS } from "../../constants/frontendRoutes.constants";
 
 export default function UnauthRouter() {
+  const { INDEX_ROUTE, LOGIN_ROUTE, ABOUT_ROUTE, TUTORIAL_ROUTE } = FRONTEND_ROUTES_CONSTANTS;
+
   return (
     <Router>
       <Routes>
         <Route
-          path="*"
+          path={INDEX_ROUTE}
           element={
             <>
               <Navbar isAuth={false} />
@@ -19,7 +22,7 @@ export default function UnauthRouter() {
           }
         />
         <Route
-          path="/login"
+          path={LOGIN_ROUTE}
           element={
             <>
               <Navbar isAuth={false} />
@@ -28,7 +31,7 @@ export default function UnauthRouter() {
           }
         />
         <Route
-          path="/about"
+          path={ABOUT_ROUTE}
           element={
             <>
               <Navbar isAuth={false} />
@@ -37,7 +40,7 @@ export default function UnauthRouter() {
           }
         />
         <Route
-          path="/tutorial"
+          path={TUTORIAL_ROUTE}
           element={
             <>
               <Navbar isAuth={false} />

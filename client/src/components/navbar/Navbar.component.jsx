@@ -1,14 +1,17 @@
-import IconedButton from '../iconedButton/IconedButton.component';
-import { FiInfo, FiLogIn } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { AiOutlineQuestionCircle, AiOutlineHome } from 'react-icons/ai';
-import { loggedInUserAction } from '../../store/actions/actions';
-import myApi from '../../api/Apis';
-import './navbar.styles.scss';
-import './navbar.styles.mobile.scss';
+import IconedButton from "../iconedButton/IconedButton.component";
+import { FiInfo, FiLogIn } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { AiOutlineQuestionCircle, AiOutlineHome } from "react-icons/ai";
+import { loggedInUserAction } from "../../store/actions/actions";
+import myApi from "../../api/Apis";
+import { USERS_END_POINTS_CONSTANTS, HTTP_METHODS_CONSTANTS } from "../../constants/httpRequests.constants";
+import "./navbar.styles.scss";
+import "./navbar.styles.mobile.scss";
 
 export default function Navbar({ isAuth }) {
+  const { LOGOUT_END_POINT } = USERS_END_POINTS_CONSTANTS;
+  const { POST_METHOD } = HTTP_METHODS_CONSTANTS;
   const dispatch = useDispatch();
   const { loggedInUser } = useSelector((state) => {
     return {
@@ -20,12 +23,12 @@ export default function Navbar({ isAuth }) {
     if (isAuth) {
       try {
         const config = {
-          method: "post",
+          method: POST_METHOD,
           headers: {
             Authorization: `Bearer ${loggedInUser.token}`,
           },
         };
-        await myApi("users/logout", config);
+        await myApi(LOGOUT_END_POINT, config);
         dispatch(loggedInUserAction());
       } catch (err) {
         console.log(err.message);

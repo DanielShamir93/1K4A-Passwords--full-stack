@@ -1,8 +1,10 @@
 import { useRef } from "react";
+import { TEXT_CONSTANTS } from "../../constants/toggleCharacterTypes.constants";
 import "./toggle-buttons-multiple.styles.scss";
 import "./toggle-buttons-multiple.styles.mobile.scss";
 
-export default function ToggleButtonsMultiple({ isChecked, toggleCheckboxes }) {
+export default function ToggleCharacterTypes({ isChecked, toggleCheckboxes }) {
+  const { CHECK_CLASS, UNCHECK_CLASS } = TEXT_CONSTANTS;
   const digitsCheckboxRef = useRef();
   const uppercaseCheckboxRef = useRef();
   const lowercaseCheckboxRef = useRef();
@@ -10,12 +12,12 @@ export default function ToggleButtonsMultiple({ isChecked, toggleCheckboxes }) {
 
   const clickCheckbox = (checkbox, e) => {
     checkbox.current.click();
-    if (e.target.classList.contains("checked")) {
-      e.target.classList.remove("checked");
-      e.target.classList.add("unchecked");
+    if (e.target.classList.contains(CHECK_CLASS)) {
+      e.target.classList.remove(CHECK_CLASS);
+      e.target.classList.add(UNCHECK_CLASS);
     } else {
-      e.target.classList.remove("unchecked");
-      e.target.classList.add("checked");
+      e.target.classList.remove(UNCHECK_CLASS);
+      e.target.classList.add(CHECK_CLASS);
     }
   };
 

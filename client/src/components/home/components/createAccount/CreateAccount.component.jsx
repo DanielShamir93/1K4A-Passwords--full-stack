@@ -3,16 +3,16 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
 import { Password } from "keys-to-password";
-import ToggleButtonsMultiple from "../../../../components/toggleButtonsMultiple/ToggleButtonsMultiple.component";
+import ToggleCharacterTypes from "../../../../components/toggleCharacterTypes/ToggleCharacterTypes.component";
 import myApi from "../../../../api/Apis";
-import { ACCOUNTS_END_POINTS, HTTP_METHODS } from "../../../../constants/httpRequests.constants";
+import { ACCOUNTS_END_POINTS_CONSTANTS, HTTP_METHODS_CONSTANTS } from "../../../../constants/httpRequests.constants";
 import { ERROR_MESSAGES_CONSTANTS, TEXT_CONSTANTS } from "../../../../constants/createAccount.constants";
 import "./create-account.styles.scss";
 import "./create-account.styles.mobile.scss";
 
 export default function CreateAccount({ toggleCreateAccountComponent, setIsLoading }) {
-  const { UPDATE_ACCOUNT_END_POINT, CREATE_ACCOUNT_END_POINT } = ACCOUNTS_END_POINTS;
-  const { PUT_METHOD, POST_METHOD } = HTTP_METHODS;
+  const { UPDATE_ACCOUNT_END_POINT, CREATE_ACCOUNT_END_POINT } = ACCOUNTS_END_POINTS_CONSTANTS;
+  const { PUT_METHOD, POST_METHOD } = HTTP_METHODS_CONSTANTS;
   const { ACCOUNT_AREA_TITLE,
           PASSWORD_AREA_TITLE,
           LENGTH_LABEL_TEXT,
@@ -297,7 +297,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
             <fieldset className="password-details">
               <legend>{PASSWORD_AREA_TITLE}</legend>
               <div>
-                <ToggleButtonsMultiple
+                <ToggleCharacterTypes
                   toggleCheckboxes={toggleCheckboxes}
                   isChecked={isChecked}
                 />
