@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import AuthRouter from './components/authRouter/AuthRoute.component';
-import UnauthRouter from './components/unauthRouter/UnauthRouter.component';
-import { USERS_END_POINTS, HTTP_METHODS } from './constants/httpRequests.constants';
-import myApi from './api/Apis';
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import AuthRouter from "./components/authRouter/AuthRoute.component";
+import UnauthRouter from "./components/unauthRouter/UnauthRouter.component";
+import { USERS_END_POINTS, HTTP_METHODS } from "./constants/httpRequests.constants";
+import myApi from "./api/Apis";
 
 function App() {
   const { ME_END_POINT } = USERS_END_POINTS;
@@ -34,11 +34,7 @@ function App() {
     }
   };
 
-  return (
-    <div>
-      {isAuth ? <AuthRouter /> : <UnauthRouter />}
-    </div>
-  );
+  return <div>{isAuth ? <AuthRouter /> : <UnauthRouter />}</div>;
 }
 
 export default App;

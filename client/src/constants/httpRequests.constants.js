@@ -1,5 +1,6 @@
 const USERS_END_POINTS = {
-  ME_END_POINT: "users/me"
+  ME_END_POINT: "users/me",
+  SIGNUP_END_POINT: "users/signup"
 }
 
 const ACCOUNTS_END_POINTS = {
