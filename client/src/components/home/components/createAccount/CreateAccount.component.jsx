@@ -393,7 +393,6 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
                   type="password"
                   placeholder="Confirm"
                   onChange={(e) => {
-                    // setPrivateKey(e.target.value);
                     setOutput("");
                   }}
                   value={privateKey}
@@ -409,7 +408,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
             </fieldset>
           </div>
           <div>
-            <input
+            <textarea
               className="output"
               type="text"
               placeholder="Output"

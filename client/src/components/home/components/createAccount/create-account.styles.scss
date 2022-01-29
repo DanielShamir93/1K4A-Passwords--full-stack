@@ -3,7 +3,7 @@
   bottom: 0;
   left: 5vw;
   width: 95vw;
-  height: 90vh;
+  height: 93vh;
   display: flex;
   justify-content: center;
 
@@ -18,110 +18,129 @@
       }
     }
 
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0.5vmin black;
+    border-radius: 2vmin;
+
     .create-account-form {
-      height: 88vh;
+      height: 92vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
-      background: rgb(233, 208, 197);
+      background: #FAE9A4;
       padding: 2vmin;
       font-size: 3vmin;
-      border: 0.5vmin #b944445e solid;
-      width: 60vmin;
+      border: 0.3vmin #e4ca63 solid;
+      width: 65vmin;
       border-radius: 2vmin 2vmin 0 0;
+      box-shadow: 0 0 1vmin black;
 
-      .account-details {
-        border-radius: 2vmin 2vmin 0 0;
-        border: none;
-
-        input {
-          text-align: center;
-          font-size: 2vmin;
-          padding: 1vh 0;
-          margin: 0.5vmin;
+      .create-account-details {
+        
+        .account-details {
+          border-radius: 2vmin 2vmin 0 0;
           border: none;
-          box-shadow: 0 0 0.5vmin black;
-        }
-      }
-
-      .password-details {
-        border-radius: 0 0 2vmin 2vmin;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1vh;
-        border: none;
-
-        input {
-          font-size: 2vmin;
-          padding: 1vh 0;
-          border: none;
-          box-shadow: 0 0 0.5vmin black;
-        }
-
-        .password-length-container {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          width: 38.5vmin;
-
-          label {
-            font-size: 2vmin;
-            cursor: pointer;
-            color: #747474;
-          }
-
+  
           input {
             text-align: center;
-            width: 13.5vmin;
+            font-size: 2vmin;
+            padding: 1vh 0;
+            margin: 0.5vmin;
+            border: none;
+            box-shadow: 0 0 0.5vmin black;
           }
         }
-
-        .password-edges {
+  
+        .password-details {
+          border-radius: 0 0 2vmin 2vmin;
           display: flex;
-          width: 38.5vmin;
-          justify-content: space-between;
-
-          input {
-            width: 18.8vmin;
-          }
-        }
-
-        .private-key {
-          display: flex;
+          flex-direction: column;
           align-items: center;
-
-          input {
-            width: 35.5vmin;
-          }
-        }
-
-        .generate-button {
-          margin-top: 0.5vh;
-          padding: 0.5vmin 2vmin;
+          gap: 1vh;
           border: none;
-          cursor: pointer;
-          box-shadow: 0 0 0.2vmin black;
-          color: white;
-          background: #b94444;
-        }
+  
+          input {
+            font-size: 2vmin;
+            padding: 1vh 0;
+            border: none;
+            box-shadow: 0 0 0.5vmin black;
+            text-indent: 1vmin;
+          }
 
-        .generate-button:hover {
-          box-shadow: 0 0 0.5vmin black;
-        }
-
-        .generate-button:active {
-          opacity: 0.5;
+          #password-length {
+            text-indent: 0;
+          }
+  
+          .password-length-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 38.5vmin;
+  
+            label {
+              font-size: 2vmin;
+              cursor: pointer;
+              color: #747474;
+            }
+  
+            input {
+              text-align: center;
+              width: 13.5vmin;
+            }
+          }
+  
+          .password-edges {
+            display: flex;
+            width: 38.5vmin;
+            justify-content: space-between;
+  
+            input {
+              width: 18.8vmin;
+              text-indent: 1vmin;
+            }
+          }
+  
+          .private-key {
+            display: flex;
+            align-items: center;
+  
+            input {
+              width: 35.5vmin;
+              text-indent: 1vmin;
+            }
+          }
+  
+          .generate-button {
+            margin-top: 0.5vh;
+            padding: 0.5vmin 2vmin;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 0.2vmin black;
+            color: white;
+            background: #b94444;
+          }
+  
+          .generate-button:hover {
+            box-shadow: 0 0 0.5vmin black;
+          }
+  
+          .generate-button:active {
+            opacity: 0.5;
+          }
         }
       }
 
       .output {
-        font-size: 3.5vmin;
+        font-size: 2vmin;
         text-align: center;
         border: none;
-        width: 50vmin;
         box-shadow: 0 0 0.5vmin black;
+        resize: none;
+      }
+
+      .output::placeholder {
+        font-size: 4.5vmin;
       }
 
       .submit-container {
@@ -155,6 +174,17 @@
           font-size: 6vmin;
         }
       }
+    }
+
+    .create-account-form::after {
+      content: "";
+      position: absolute;
+      border: 1.5vmin dotted #b94444;
+      border-top: none;
+      border-bottom: none;
+      width: 1vmin;
+      height: 100%;
+      width: 85%;
     }
   }
 }
