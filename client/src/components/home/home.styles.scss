@@ -4,10 +4,12 @@
         margin-top: 10vh;
         display: flex;
         
-        .toolbar {
+        .left-toolbar {
             width: 5vw;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
             background: rgb(246, 242, 242);
             border-right: 0.5vmin rgba(0, 0, 0, 0.1) solid;
 
@@ -25,6 +27,10 @@
 
             .create-account-icon:active {
                 font-size: 6vmin;
+            }
+
+            .follow-me {
+                margin-bottom: 2vmin;
             }
         }
 

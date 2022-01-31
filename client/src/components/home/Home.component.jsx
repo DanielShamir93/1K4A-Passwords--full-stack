@@ -5,6 +5,7 @@ import { HiMinusCircle } from "react-icons/hi";
 import Account from "./components/account/Account.component";
 import CreateAccount from "./components/createAccount/CreateAccount.component";
 import Spinner from "../../components/spinner/Spinner.component";
+import FollowMe from "./components/followMe/FollowMe.component";
 import { ACCOUNTS_END_POINTS_CONSTANTS, HTTP_METHODS_CONSTANTS, } from "../../constants/httpRequests.constants";
 import myApi from "../../api/Apis";
 import "./home.styles.scss";
@@ -71,7 +72,7 @@ const Home = () => {
   return (
     <div className="Home">
       <div className="home-layout">
-        <div className="toolbar">
+        <div className="left-toolbar">
           {!isLoading && (
             <div>
               {isCreateAccountOpen ? (
@@ -91,6 +92,9 @@ const Home = () => {
               )}
             </div>
           )}
+          <div className="follow-me">
+            <FollowMe />
+          </div>
         </div>
         <div className="accounts-area">
           <div className="accounts-top-toolbar">
