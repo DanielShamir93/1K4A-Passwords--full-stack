@@ -29,7 +29,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
   const [passLength, setPassLength] = useState(12);
   const [passStartsWith, setPassStartsWith] = useState("");
   const [passEndsWith, setPassEndsWith] = useState("");
-  const [passMustContain, setPassMustContain] = useState("");
+  const [keyboardMustContain, setKeyboardMustContain] = useState("");
   const [passAvoidChars, setPassAvoidChars] = useState("");
   const [passPattern, setPassPattern] = useState("");
   const [privateKey, setPrivateKey] = useState("");
@@ -49,6 +49,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
   });
 
   useEffect(() => {
+    console.log(statesObject.editAccount)
     if (Object.keys(statesObject.editAccount).length > 0) {
       // In edit account mode
       setAccountName(statesObject.editAccount.accountName);
@@ -56,7 +57,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
       setPassLength(statesObject.editAccount.passLength);
       setPassStartsWith(statesObject.editAccount.passStartsWith || "");
       setPassEndsWith(statesObject.editAccount.passEndsWith || "");
-      setPassMustContain(statesObject.editAccount.passMustContain || "");
+      setKeyboardMustContain(statesObject.editAccount.keyboardMustContain || "");
       setPassAvoidChars(statesObject.editAccount.passAvoidChars || "");
       setPassPattern(statesObject.editAccount.passPattern || "");
       setPublicKey(statesObject.editAccount.publicKey);
@@ -80,7 +81,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
     setPassLength(12);
     setPassStartsWith("");
     setPassEndsWith("");
-    setPassMustContain("");
+    setKeyboardMustContain("");
     setPassAvoidChars("");
     setPassPattern("");
     setPrivateKey("");
@@ -105,7 +106,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
           passAvoidChars,
           passEndsWith,
           passLength,
-          passMustContain,
+          keyboardMustContain,
           passPattern,
           passStartsWith,
           publicKey,
@@ -208,7 +209,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
               isContainUpperCase: isChecked.isUppercaseChecked,
               isContainLowerCase: isChecked.isLowercaseChecked,
               isContainSymbols: isChecked.isSymbolsChecked,
-              mustContainChars: passMustContain,
+              mustContainChars: keyboardMustContain,
             };
 
             password.setKeyboard(keyboardConfig);
@@ -344,13 +345,12 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
               <div>
                 <input
                   type="text"
-                  disabled
-                  placeholder="Must Contain"
+                  placeholder="Add To Keyboard"
                   onChange={(e) => {
-                    setPassMustContain(e.target.value);
+                    setKeyboardMustContain(e.target.value);
                     setOutput("");
                   }}
-                  value={passMustContain}
+                  value={keyboardMustContain}
                 />
               </div>
               <div>

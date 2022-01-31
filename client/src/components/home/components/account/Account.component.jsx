@@ -25,7 +25,6 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
 
   // Toggle for more options of the account
   const toggleDisplayMore = () => {
-    
     if (!isMoreDisplayed) {
       // Display more options
       toggleDisplayMoreRef.current.style.display = "flex";
@@ -118,7 +117,7 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
 
   return (
     <div className="account" ref={centerAccountRef}>
-      <div className="account-names" onClick={(!isSomeAccountCentered || isMoreDisplayed) && toggleDisplayMore}>
+      <div className="account-names" onClick={(!isSomeAccountCentered || isMoreDisplayed) ? toggleDisplayMore : () => {}}>
         <p className="account-name">{account.accountName}</p>
         <p className="account-subname">{account.accountSubname}</p>
       </div>
