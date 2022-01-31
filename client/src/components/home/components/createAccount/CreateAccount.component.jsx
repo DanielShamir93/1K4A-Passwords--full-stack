@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
 import { Password } from "keys-to-password";
 import ToggleCharacterTypes from "../../../../components/toggleCharacterTypes/ToggleCharacterTypes.component";
+import AccountIcons from "./components/accountIcons/AccountIcons.component";
 import myApi from "../../../../api/Apis";
 import { ACCOUNTS_END_POINTS_CONSTANTS, HTTP_METHODS_CONSTANTS } from "../../../../constants/httpRequests.constants";
 import { ERROR_MESSAGES_CONSTANTS, TEXT_CONSTANTS } from "../../../../constants/createAccount.constants";
@@ -280,6 +281,9 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
           <div className="create-account-details">
             <fieldset className="account-details">
               <legend>{ACCOUNT_AREA_TITLE}</legend>
+              <div className="account-icon">
+                <AccountIcons />
+              </div>
               <div>
                 <input
                   type="text"
