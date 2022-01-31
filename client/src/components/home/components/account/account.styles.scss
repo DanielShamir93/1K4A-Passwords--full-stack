@@ -8,7 +8,7 @@
   border: 0.3vmin solid rgb(219, 201, 99);
   box-shadow: 0 0 0.5vmin black;
 
-  .account-names {
+  &-names {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,6 +23,10 @@
     .account-subname {
       font-size: 2vmin;
     }
+  }
+
+  &-names:hover .account-name {
+    font-weight: bold;
   }
 
   &-more {

@@ -2,7 +2,8 @@ export const ERROR_MESSAGES_CONSTANTS = {
   LENGTH_MUST_BE_POSITIVE_ERROR: "Length must be positive",
   EMPTY_KEYBOARD_ERROR: "Missing Characters In Keyboard",
   EMPTY_PRIVATE_KEY_ERROR: "Missing Private Key",
-  EMPTY_ACCOUNT_NAME_ERROR: "Missing: Account Name"
+  EMPTY_ACCOUNT_NAME_ERROR: "Missing: Account Name",
+  CONFIRM_NOT_MATCH_ERROR: "Confirm key doesn't match private key"
  };
 
  export const TEXT_CONSTANTS = {

@@ -98,6 +98,7 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
       };
 
       await myApi(`${DELETE_ACCOUNT_END_POINT}/${account._id}`, config);
+      setIsSomeAccountCentered(false);
       dispatch(accountChangedRenderAction());
     } catch (err) {
       console.log(err.message);

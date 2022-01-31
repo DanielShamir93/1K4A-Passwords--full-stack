@@ -21,7 +21,8 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
   const { LENGTH_MUST_BE_POSITIVE_ERROR,
           EMPTY_KEYBOARD_ERROR,
           EMPTY_PRIVATE_KEY_ERROR,
-          EMPTY_ACCOUNT_NAME_ERROR } = ERROR_MESSAGES_CONSTANTS;
+          EMPTY_ACCOUNT_NAME_ERROR,
+          CONFIRM_NOT_MATCH_ERROR } = ERROR_MESSAGES_CONSTANTS;
   const dispatch = useDispatch();
   const [output, setOutput] = useState("");
   const [accountName, setAccountName] = useState("");
@@ -33,6 +34,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
   const [passAvoidChars, setPassAvoidChars] = useState("");
   const [passPattern, setPassPattern] = useState("");
   const [privateKey, setPrivateKey] = useState("");
+  const [confirmPrivateKey, setConfirmPrivateKey] = useState("");
   const [publicKey, setPublicKey] = useState("");
   const [isValidAccount, setIsValidAccount] = useState(false);
   const [isChecked, setIsChecked] = useState({
@@ -49,7 +51,6 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
   });
 
   useEffect(() => {
-    console.log(statesObject.editAccount)
     if (Object.keys(statesObject.editAccount).length > 0) {
       // In edit account mode
       setAccountName(statesObject.editAccount.accountName);
@@ -200,33 +201,38 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
           isChecked.isSymbolsChecked
         ) {
           if (+passLength > 0) {
-            setIsValidAccount(true);
+            if (privateKey === confirmPrivateKey) {
+              setIsValidAccount(true);
 
-            const password = new Password(privateKey);
-            const keyboardConfig = {
-              avoidChars: passAvoidChars,
-              isContainDigits: isChecked.isDigitsChecked,
-              isContainUpperCase: isChecked.isUppercaseChecked,
-              isContainLowerCase: isChecked.isLowercaseChecked,
-              isContainSymbols: isChecked.isSymbolsChecked,
-              mustContainChars: keyboardMustContain,
-            };
-
-            password.setKeyboard(keyboardConfig);
-            setPublicKey(password.getPublicKey());
-
-            if (passPattern.length > 0) {
-              password.generateFromPattern(passPattern);
-              setOutput(password.getPassword);
-            } else {
-              const generateConfig = {
-                passLength: +passLength,
-                passStartsWith: passStartsWith,
-                passEndsWidth: passEndsWith,
+              const password = new Password(privateKey);
+              const keyboardConfig = {
+                avoidChars: passAvoidChars,
+                isContainDigits: isChecked.isDigitsChecked,
+                isContainUpperCase: isChecked.isUppercaseChecked,
+                isContainLowerCase: isChecked.isLowercaseChecked,
+                isContainSymbols: isChecked.isSymbolsChecked,
+                mustContainChars: keyboardMustContain,
               };
 
-              password.generate(generateConfig);
-              setOutput(password.getPassword());
+              password.setKeyboard(keyboardConfig);
+              setPublicKey(password.getPublicKey());
+
+              if (passPattern.length > 0) {
+                password.generateFromPattern(passPattern);
+                setOutput(password.getPassword);
+              } else {
+                const generateConfig = {
+                  passLength: +passLength,
+                  passStartsWith: passStartsWith,
+                  passEndsWidth: passEndsWith,
+                };
+
+                password.generate(generateConfig);
+                setOutput(password.getPassword());
+              }
+            } else {
+              setOutput(CONFIRM_NOT_MATCH_ERROR);
+              setIsValidAccount(false);
             }
           } else {
             setOutput(LENGTH_MUST_BE_POSITIVE_ERROR);
@@ -391,11 +397,12 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
               <div className="confirm-private-key">
                 <input
                   type="password"
-                  placeholder="Confirm"
+                  placeholder="Confirm Key"
                   onChange={(e) => {
+                    setConfirmPrivateKey(e.target.value);
                     setOutput("");
                   }}
-                  value={privateKey}
+                  value={confirmPrivateKey}
                 />
               </div>
               <button
