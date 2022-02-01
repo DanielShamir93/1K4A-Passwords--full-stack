@@ -5,11 +5,10 @@
         display: flex;
         
         .left-toolbar {
+            position: relative;
             width: 5vw;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             background: rgb(246, 242, 242);
             border-right: 0.5vmin rgba(0, 0, 0, 0.1) solid;
 
@@ -30,7 +29,8 @@
             }
 
             .follow-me {
-                margin-bottom: 2vmin;
+                position : absolute;
+                bottom: 2vmin;
             }
         }
 
