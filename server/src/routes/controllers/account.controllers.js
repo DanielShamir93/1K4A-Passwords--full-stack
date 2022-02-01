@@ -55,6 +55,7 @@ const updateAccount = async (req, res) => {
       "keyboardMustContain",
       "passPattern",
       "passStartsWith",
+      "accountIconStyle"
     ];
 
     const isValidOperation = updates.every((update) =>

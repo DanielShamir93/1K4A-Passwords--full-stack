@@ -173,6 +173,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
       "keyboardMustContain",
       "passPattern",
       "passStartsWith",
+      "accountIconStyle"
     ];
 
     // Keep only the allow to edit values of the account
