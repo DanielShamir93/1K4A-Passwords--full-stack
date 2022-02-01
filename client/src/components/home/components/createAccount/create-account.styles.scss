@@ -52,13 +52,14 @@
           }
         }
 
-        .display-icons-button {
+        .toggle-icons-button {
           font-size: 4vmin;
           position: absolute;
           right: 13vmin;
           top: 3vmin;
           color: #B94444;
           cursor: pointer;
+          z-index: 10000;
         }
   
         .password-details {
@@ -195,6 +196,7 @@
       height: 100%;
       width: 85%;
       pointer-events: none;
+      z-index: 10000;
     }
   }
 }

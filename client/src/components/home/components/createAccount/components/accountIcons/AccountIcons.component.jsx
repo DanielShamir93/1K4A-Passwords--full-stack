@@ -31,7 +31,7 @@ export default function AccountIcons() {
 
   return (
     <div className="Account-icons">
-      <h3 className="account-icons-title">Account Icon</h3>
+      <h4 className="account-icons-title">Account Icon</h4>
       {renderIconsSet(genericIcons)}
       {renderIconsSet(paymentIcons)}
     </div>

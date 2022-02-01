@@ -6,7 +6,7 @@
   background: #FAE9A4;
   height: 92vmin;
   width: 65vmin;
-  z-index: 10000;
+  z-index: 1000;
   padding: 1vmin;
   display: flex;
   flex-direction: column;
@@ -15,6 +15,11 @@
 
   .account-icons-title {
     padding: 2vmin;
+    text-decoration: underline;
+  }
+
+  .account-icons-name {
+    cursor: pointer;
   }
   
   .account-icons-box {
@@ -22,13 +27,18 @@
     display: flex;
     flex-direction: column;
     display: flex;
-    width: 62vmin;
+    width: 50vmin;
     
     .account-gallery {
+      padding: 2vmin 0;
       display: flex;
       flex-flow: row wrap;
       justify-content: center;
       gap: 1vmin;
+
+      .account-icon {
+        cursor: pointer;
+      }
     }
 
   }

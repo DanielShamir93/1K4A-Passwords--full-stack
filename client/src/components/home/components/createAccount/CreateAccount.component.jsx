@@ -284,7 +284,11 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
             <fieldset className="account-details">
               <legend>{ACCOUNT_AREA_TITLE}</legend>
               <div className="account-icons-container">
-                <MdAccountBox className="display-icons-button"/>
+                <MdAccountBox 
+                  className="toggle-icons-button"
+                  style={isIconsDisplay && {color: "black"}}
+                  onClick={() => {setIsIconsDisplay(!isIconsDisplay)}}
+                />
                 {isIconsDisplay && <AccountIcons />}
               </div>  
               <div>
