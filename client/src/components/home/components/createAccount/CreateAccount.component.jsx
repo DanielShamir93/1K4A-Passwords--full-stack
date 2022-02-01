@@ -294,6 +294,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
                 /> :
                 <MdAccountCircle 
                   className="toggle-icons-button"
+                  style={{color: "green"}}
                   onClick={() => {setIsIconsDisplay(!isIconsDisplay)}}
                 />}
                 {isIconsDisplay && 

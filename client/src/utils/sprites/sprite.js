@@ -1,7 +1,7 @@
 const spritesObject = {
   genericIcons: {
     name: "Generic",
-    src: "http://www.kreviii.com/i/sp/iLite-64x.png",
+    src: "https://i.ibb.co/Qk0LpLK/generic-sprite.png",
     width: "64px",
     height: "64px",
     iconsPosition: [
@@ -85,12 +85,12 @@ const spritesObject = {
   },
   paymentIcons: {
     name: "Payment",
-    src: "http://www.kreviii.com/i/sp/payment-options-small.png",
+    src: "https://i.ibb.co/1KDGhTW/payment-sprite.png",
     width: "82px",
     height: "50px",
     iconsPosition: [
       "0 0",
-      "-160px 0",
+      "-100px 0",
       "-320px 0",
       "-480px 0",
       "-640px 0",

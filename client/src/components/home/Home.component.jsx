@@ -68,8 +68,6 @@ const Home = () => {
         );
       });
   };
-  
-  console.log(accounts)
 
   return (
     <div className="Home">

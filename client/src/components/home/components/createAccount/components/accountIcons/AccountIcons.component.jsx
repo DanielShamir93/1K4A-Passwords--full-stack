@@ -1,4 +1,4 @@
-import spritesObject from "../../../../../../utils/sprite/sprite";
+import spritesObject from "../../../../../../utils/sprites/sprite";
 import "./accountIcons.styles.scss";
 
 export default function AccountIcons({ setAccountIconStyle }) {

@@ -118,6 +118,7 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
 
   return (
     <div className="account" ref={centerAccountRef}>
+      <figure className="account-icon" style={account.accountIconStyle}></figure>
       <div className="account-names" onClick={(!isSomeAccountCentered || isMoreDisplayed) ? toggleDisplayMore : () => {}}>
         <p className="account-name">{account.accountName}</p>
         <p className="account-subname">{account.accountSubname}</p>
