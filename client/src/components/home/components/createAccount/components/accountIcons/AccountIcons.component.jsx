@@ -2,7 +2,7 @@ import spritesObject from "../../../../../../utils/sprites/sprite";
 import "./accountIcons.styles.scss";
 
 export default function AccountIcons({ setAccountIconStyle }) {
-  const { genericIcons, sitesIcons } = spritesObject;
+  const { genericIcons, sitesIcons, creditCardsIcons } = spritesObject;
 
   const renderIconsSet = (iconsSet) => {
     return (
@@ -35,6 +35,7 @@ export default function AccountIcons({ setAccountIconStyle }) {
       <h4 className="account-icons-title">Account Icon</h4>
       {renderIconsSet(genericIcons)}
       {renderIconsSet(sitesIcons)}
+      {renderIconsSet(creditCardsIcons)}
     </div>
   );
 }

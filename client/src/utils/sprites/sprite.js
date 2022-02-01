@@ -84,7 +84,7 @@ const spritesObject = {
     ],
   },
   sitesIcons: {
-    name: "sites",
+    name: "Sites",
     src: "https://i.ibb.co/ZHTWk9q/spritesheet-1.png",
     width: "64px",
     height: "64px",
@@ -142,6 +142,39 @@ const spritesObject = {
       "-523px -79px",
     ],
   },
+  creditCardsIcons: {
+    name: "Credit cards",
+    src: "https://i.ibb.co/kgZ0MNz/spritesheet.png",
+    width: "64px",
+    height: "64px",
+    iconsPosition: [
+      "-5px -5px",
+      "-79px -5px",
+      "-153px -5px",
+      "-227px -5px",
+      "-5px -79px",
+      "-79px -79px",
+      "-153px -79px",
+      "-227px -79px",
+      "-5px -153px",
+      "-79px -153px",
+      "-153px -153px",
+      "-227px -153px",
+      "-5px -227px",
+      "-79px -227px",
+      "-153px -227px",
+      "-227px -227px",
+      "-301px -5px",
+      "-301px -79px",
+      "-301px -153px",
+      "-301px -227px",
+      "-5px -301px",
+      "-79px -301px",
+      "-153px -301px",
+      "-227px -301px",
+    ]
+  }
+  
 
 };
 
