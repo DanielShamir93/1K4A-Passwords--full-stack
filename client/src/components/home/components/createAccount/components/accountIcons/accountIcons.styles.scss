@@ -1,6 +1,36 @@
 .Account-icons {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #FAE9A4;
+  height: 92vmin;
+  width: 65vmin;
+  z-index: 10000;
+  padding: 1vmin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
   .account-icons-box {
     display: flex;
-    flex-flow: row wrap;
+    flex-direction: column;
+    background: pink;
+    height: 85vmin;
+    overflow-y: auto;
+    display: flex;
+    width: 62vmin;
+
+    .account-icons-name {
+      text-decoration: underline;
+      line-height: 6vmin;
+    }
+    
+    .account-gallery {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      gap: 1vmin;
+    }
+
   }
 }
