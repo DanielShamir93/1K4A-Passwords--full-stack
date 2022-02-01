@@ -2,38 +2,38 @@ import spritesObject from "../../../../../../utils/sprite/sprite";
 import "./accountIcons.styles.scss";
 
 export default function AccountIcons() {
-  const renderGenericIcons = () => {
-    const { genericIcons } = spritesObject;
+  const { genericIcons, paymentIcons } = spritesObject;
+
+  const renderIconsSet = (icons) => {
     return (
-      <div className="account-icons-box">
-        <h4 className="account-icons-name">{genericIcons.name}</h4>
+      <details className="account-icons-box">
+        <summary className="account-icons-name">{icons.name}</summary>
         <div className="account-gallery">
-        {genericIcons.iconsPosition.map((iconPosition) => {
-          return (
-            <figure
-              className="account-icon"
-              key={iconPosition}
-              style={{
-                backgroundImage: `url(${genericIcons.src})`,
-                backgroundPosition: iconPosition,
-                width: genericIcons.width,
-                height: genericIcons.height,
-              }}
-              onClick={() => {}}
-            ></figure>
-          );
-        })}
-      </div>
-      </div>
-      
-      
+          {icons.iconsPosition.map((iconPosition) => {
+            return (
+              <figure
+                className="account-icon"
+                key={iconPosition}
+                style={{
+                  backgroundImage: `url(${icons.src})`,
+                  backgroundPosition: iconPosition,
+                  width: icons.width,
+                  height: icons.height,
+                }}
+                onClick={() => {}}
+              ></figure>
+            );
+          })}
+        </div>
+      </details>
     );
   };
 
   return (
     <div className="Account-icons">
-      <h3>Account Icon</h3>
-      {renderGenericIcons()}
+      <h3 className="account-icons-title">Account Icon</h3>
+      {renderIconsSet(genericIcons)}
+      {renderIconsSet(paymentIcons)}
     </div>
   );
 }

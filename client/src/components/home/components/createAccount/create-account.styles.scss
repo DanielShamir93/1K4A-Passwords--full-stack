@@ -51,6 +51,15 @@
             box-shadow: 0 0 0.5vmin black;
           }
         }
+
+        .display-icons-button {
+          font-size: 4vmin;
+          position: absolute;
+          right: 13vmin;
+          top: 3vmin;
+          color: #B94444;
+          cursor: pointer;
+        }
   
         .password-details {
           border-radius: 0 0 2vmin 2vmin;

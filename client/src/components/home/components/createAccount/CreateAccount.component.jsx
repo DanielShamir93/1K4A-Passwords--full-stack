@@ -1,6 +1,7 @@
 import { FcUnlock, FcLock, FcKey } from "react-icons/fc";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { MdAccountBox } from "react-icons/md";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
 import { Password } from "keys-to-password";
 import ToggleCharacterTypes from "../../../../components/toggleCharacterTypes/ToggleCharacterTypes.component";
@@ -38,6 +39,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
   const [confirmPrivateKey, setConfirmPrivateKey] = useState("");
   const [publicKey, setPublicKey] = useState("");
   const [isValidAccount, setIsValidAccount] = useState(false);
+  const [isIconsDisplay, setIsIconsDisplay] = useState(false);
   const [isChecked, setIsChecked] = useState({
     isDigitsChecked: true,
     isUppercaseChecked: true,
@@ -281,9 +283,10 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
           <div className="create-account-details">
             <fieldset className="account-details">
               <legend>{ACCOUNT_AREA_TITLE}</legend>
-              <div className="account-icon">
-                <AccountIcons />
-              </div>
+              <div className="account-icons-container">
+                <MdAccountBox className="display-icons-button"/>
+                {isIconsDisplay && <AccountIcons />}
+              </div>  
               <div>
                 <input
                   type="text"
