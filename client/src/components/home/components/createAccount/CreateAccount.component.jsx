@@ -1,7 +1,7 @@
 import { FcUnlock, FcLock, FcKey } from "react-icons/fc";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MdAccountBox } from "react-icons/md";
+import { MdAccountCircle, MdNoAccounts } from "react-icons/md";
 import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
 import { Password } from "keys-to-password";
 import ToggleCharacterTypes from "../../../../components/toggleCharacterTypes/ToggleCharacterTypes.component";
@@ -40,6 +40,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
   const [publicKey, setPublicKey] = useState("");
   const [isValidAccount, setIsValidAccount] = useState(false);
   const [isIconsDisplay, setIsIconsDisplay] = useState(false);
+  const [accountIconStyle, setAccountIconStyle] = useState({});
   const [isChecked, setIsChecked] = useState({
     isDigitsChecked: true,
     isUppercaseChecked: true,
@@ -118,6 +119,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
           isPassHasUppercase: isChecked.isUppercaseChecked,
           isPassHasLowercase: isChecked.isLowercaseChecked,
           isPassHasSymbol: isChecked.isSymbolsChecked,
+          accountIconStyle
         };
 
         for (let prop in currAccount) {
@@ -284,12 +286,20 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
             <fieldset className="account-details">
               <legend>{ACCOUNT_AREA_TITLE}</legend>
               <div className="account-icons-container">
-                <MdAccountBox 
+                {
+                  Object.keys(accountIconStyle).length === 0 ?
+                  <MdNoAccounts 
                   className="toggle-icons-button"
-                  style={isIconsDisplay && {color: "black"}}
                   onClick={() => {setIsIconsDisplay(!isIconsDisplay)}}
-                />
-                {isIconsDisplay && <AccountIcons />}
+                /> :
+                <MdAccountCircle 
+                  className="toggle-icons-button"
+                  onClick={() => {setIsIconsDisplay(!isIconsDisplay)}}
+                />}
+                {isIconsDisplay && 
+                  <AccountIcons 
+                    setAccountIconStyle={setAccountIconStyle}
+                />}
               </div>  
               <div>
                 <input

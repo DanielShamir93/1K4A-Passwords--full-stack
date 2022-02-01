@@ -1,26 +1,27 @@
 import spritesObject from "../../../../../../utils/sprite/sprite";
 import "./accountIcons.styles.scss";
 
-export default function AccountIcons() {
+export default function AccountIcons({ setAccountIconStyle }) {
   const { genericIcons, paymentIcons } = spritesObject;
 
-  const renderIconsSet = (icons) => {
+  const renderIconsSet = (iconsSet) => {
     return (
       <details className="account-icons-box">
-        <summary className="account-icons-name">{icons.name}</summary>
+        <summary className="account-icons-name">{iconsSet.name}</summary>
         <div className="account-gallery">
-          {icons.iconsPosition.map((iconPosition) => {
+          {iconsSet.iconsPosition.map((iconPosition) => {
+            const iconStyle = {
+              backgroundImage: `url(${iconsSet.src})`,
+              backgroundPosition: iconPosition,
+              width: iconsSet.width,
+              height: iconsSet.height,
+            }
             return (
               <figure
                 className="account-icon"
                 key={iconPosition}
-                style={{
-                  backgroundImage: `url(${icons.src})`,
-                  backgroundPosition: iconPosition,
-                  width: icons.width,
-                  height: icons.height,
-                }}
-                onClick={() => {}}
+                style={iconStyle}
+                onClick={() => {setAccountIconStyle(iconStyle)}}
               ></figure>
             );
           })}

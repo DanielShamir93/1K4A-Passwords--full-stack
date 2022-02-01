@@ -53,11 +53,10 @@
         }
 
         .toggle-icons-button {
-          font-size: 4vmin;
+          font-size: 5vmin;
           position: absolute;
-          right: 13vmin;
-          top: 3vmin;
-          color: #B94444;
+          right: 4vmin;
+          top: 4vmin;
           cursor: pointer;
           z-index: 10000;
         }
@@ -194,7 +193,7 @@
       border-bottom: none;
       width: 1vmin;
       height: 100%;
-      width: 85%;
+      width: 92%;
       pointer-events: none;
       z-index: 10000;
     }

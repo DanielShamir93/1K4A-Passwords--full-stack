@@ -47,6 +47,12 @@ const accountSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  accountIconStyle: {
+    backgroundImage: String,
+    backgroundPosition: String,
+    width: String,
+    height: String,
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
