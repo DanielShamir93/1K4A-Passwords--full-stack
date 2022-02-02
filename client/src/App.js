@@ -1,40 +1,44 @@
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import AuthRouter from "./components/authRouter/AuthRoute.component";
 import UnauthRouter from "./components/unauthRouter/UnauthRouter.component";
-import { USERS_END_POINTS_CONSTANTS, HTTP_METHODS_CONSTANTS } from "./constants/httpRequests.constants";
+import {
+  USERS_END_POINTS_CONSTANTS,
+  HTTP_METHODS_CONSTANTS,
+} from "./constants/httpRequests.constants";
 import myApi from "./api/Apis";
 
 function App() {
-  const { ME_END_POINT } = USERS_END_POINTS_CONSTANTS;
-  const { GET_METHOD } = HTTP_METHODS_CONSTANTS;
-  let [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
   const { loggedInUser } = useSelector((state) => {
     return { loggedInUser: state.loggedInUser };
   });
 
+  const { ME_END_POINT } = USERS_END_POINTS_CONSTANTS;
+  const { GET_METHOD } = HTTP_METHODS_CONSTANTS;
+
+  const ME_END_POINT_CONFIG = {
+    method: GET_METHOD,
+    headers: {
+      Authorization: `Bearer ${loggedInUser.token}`,
+    },
+  };
+
   useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        await myApi(ME_END_POINT, ME_END_POINT_CONFIG);
+        setIsAuth(true);
+      } catch (err) {
+        localStorage.removeItem("persist:root");
+        setIsAuth(false);
+        console.log(err.message);
+      }
+    };
     checkAuth();
   }, [loggedInUser]);
 
-  const checkAuth = async () => {
-    const config = {
-      method: GET_METHOD,
-      headers: {
-        Authorization: `Bearer ${loggedInUser.token}`,
-      },
-    };
-    try {
-      await myApi(ME_END_POINT, config);
-      setIsAuth(true);
-    } catch (err) {
-      localStorage.removeItem("persist:root");
-      setIsAuth(false);
-      console.log(err.message);
-    }
-  };
-
-  return <div>{isAuth ? <AuthRouter /> : <UnauthRouter />}</div>;
+  return <>{isAuth ? <AuthRouter /> : <UnauthRouter />}</>;
 }
 
 export default App;

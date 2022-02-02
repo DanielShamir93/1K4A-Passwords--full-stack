@@ -2,26 +2,49 @@ import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RiFileCopyLine } from "react-icons/ri";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { ACTIONS_TYPES, useAccountContext, useAccountDispatchContext } from "../../context/home.context";
 import { FcUnlock, FcLock, FcKey } from "react-icons/fc";
-import { accountChangedRenderAction, editAccountAction } from "../../../../store/actions/actions";
+import {
+  accountChangedRenderAction,
+  editAccountAction,
+} from "../../../../store/actions/actions";
 import { Password } from "keys-to-password";
 import myApi from "../../../../api/Apis";
-import { ACCOUNTS_END_POINTS_CONSTANTS, HTTP_METHODS_CONSTANTS } from "../../../../constants/httpRequests.constants";
+import {
+  ACCOUNTS_END_POINTS_CONSTANTS,
+  HTTP_METHODS_CONSTANTS,
+} from "../../../../constants/httpRequests.constants";
 import "./account.styles.scss";
 import "./account.styles.mobile.scss";
 
-export default function Account({ account, setIsLoading, toggleCreateAccountComponent, isSomeAccountCentered, setIsSomeAccountCentered }) {
-  const { DELETE_ACCOUNT_END_POINT } = ACCOUNTS_END_POINTS_CONSTANTS;
-  const { DELETE_METHOD } = HTTP_METHODS_CONSTANTS;
-  const dispatch = useDispatch();
+export default function Account({ account, setIsLoading }) {
   const toggleDisplayMoreRef = useRef();
   const centerAccountRef = useRef();
   const [privateKey, setPrivateKey] = useState("");
   const [output, setOutput] = useState("");
   const [isMoreDisplayed, setIsMoreDisplayed] = useState(false);
+
   const statesObject = useSelector((state) => {
     return { loggedInUser: state.loggedInUser };
   });
+
+  const dispatch = useDispatch();
+
+  const dispatchContext = useAccountDispatchContext();
+  const { centered, open } = useAccountContext();
+
+  const toggleCreateAccount = () => {
+    dispatchContext({ type: ACTIONS_TYPES.OPEN, payload: !open });
+  };
+
+  const closeCentered = () =>
+    dispatchContext({ type: ACTIONS_TYPES.CENTERED, payload: false });
+
+  const openCentered = () =>
+    dispatchContext({ type: ACTIONS_TYPES.CENTERED, payload: true });
+
+  const { DELETE_ACCOUNT_END_POINT } = ACCOUNTS_END_POINTS_CONSTANTS;
+  const { DELETE_METHOD } = HTTP_METHODS_CONSTANTS;
 
   // Toggle for more options of the account
   const toggleDisplayMore = () => {
@@ -32,10 +55,10 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
         position: "absolute",
         top: "50%",
         left: "50%",
-        transform: "translate(-50%, -50%)"
+        transform: "translate(-50%, -50%)",
       });
       setIsMoreDisplayed(true);
-      setIsSomeAccountCentered(true);
+      openCentered();
     } else {
       // Hide more options and clean
       toggleDisplayMoreRef.current.style.display = "none";
@@ -43,12 +66,12 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
         position: "unset",
         top: "0",
         left: "0",
-        transform: "translate(0,0)"
+        transform: "translate(0,0)",
       });
       setPrivateKey("");
       setOutput("");
       setIsMoreDisplayed(false);
-      setIsSomeAccountCentered(false);
+      closeCentered();
     }
   };
 
@@ -65,14 +88,14 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
         isContainSymbols: account.isPassHasSymbol,
         mustContainChars: account.keyboardMustContain,
       };
-      
+
       password.setKeyboard(keyboardConfig);
       if (account.hasOwnProperty("passPattern")) {
-        // Account password generated via pattern 
+        // Account password generated via pattern
         password.generateFromPattern(account.passPattern);
         setOutput(password.getPassword);
       } else {
-        // Account password generated via regular way 
+        // Account password generated via regular way
         const generateConfig = {
           passLength: +account.passLength,
           passStartsWith: account.passStartsWith,
@@ -98,7 +121,7 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
       };
 
       await myApi(`${DELETE_ACCOUNT_END_POINT}/${account._id}`, config);
-      setIsSomeAccountCentered(false);
+      closeCentered();
       dispatch(accountChangedRenderAction());
     } catch (err) {
       console.log(err.message);
@@ -108,7 +131,7 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
   // Change account's values
   const editAccount = () => {
     dispatch(editAccountAction(account));
-    toggleCreateAccountComponent(true);
+    toggleCreateAccount();
   };
 
   // Copy outcome password to the clipboard
@@ -118,8 +141,14 @@ export default function Account({ account, setIsLoading, toggleCreateAccountComp
 
   return (
     <div className="account" ref={centerAccountRef}>
-      <figure className="account-icon" style={account.accountIconStyle}></figure>
-      <div className="account-names" onClick={(!isSomeAccountCentered || isMoreDisplayed) ? toggleDisplayMore : () => {}}>
+      <figure
+        className="account-icon"
+        style={account.accountIconStyle}
+      ></figure>
+      <div
+        className="account-names"
+        onClick={!centered || isMoreDisplayed ? toggleDisplayMore : () => {}}
+      >
         <p className="account-name">{account.accountName}</p>
         <p className="account-subname">{account.accountSubname}</p>
       </div>
