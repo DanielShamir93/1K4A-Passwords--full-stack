@@ -68,6 +68,14 @@ userSchema.methods.generateAuthToken = async function () {
   const token = jwt.sign({ _id: user._id.toString() }, "private-key", {expiresIn: "1h"});
 
   user.tokens = user.tokens.concat({ token });
+
+  const signedInDate = new Date().toLocaleString("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "numeric",
+  });
+
+  user.signedInDate = signedInDate;
   await user.save();
 
   return token;

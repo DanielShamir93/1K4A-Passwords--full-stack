@@ -63,8 +63,7 @@ const addUser = async (req, res) => {
       month: "2-digit",
       day: "numeric",
     });
-    const signedInDate = createdDate;
-    const user = new User({ email, password, createdDate, signedInDate });
+    const user = new User({ email, password, createdDate });
     const token = await user.generateAuthToken();
     user.save();
     res.status(200).send({ user, token });

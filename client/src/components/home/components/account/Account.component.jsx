@@ -53,9 +53,10 @@ export default function Account({ account, setIsLoading }) {
       toggleDisplayMoreRef.current.style.display = "flex";
       Object.assign(centerAccountRef.current.style, {
         position: "absolute",
-        top: "50%",
+        top: "40%",
         left: "50%",
         transform: "translate(-50%, -50%)",
+        zIndex: 1000
       });
       setIsMoreDisplayed(true);
       openCentered();
@@ -67,6 +68,7 @@ export default function Account({ account, setIsLoading }) {
         top: "0",
         left: "0",
         transform: "translate(0,0)",
+        zIndex: 0
       });
       setPrivateKey("");
       setOutput("");

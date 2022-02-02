@@ -12,7 +12,7 @@ import { ERROR_MESSAGES_CONSTANTS, TEXT_CONSTANTS } from "../../../../constants/
 import "./create-account.styles.scss";
 import "./create-account.styles.mobile.scss";
 
-export default function CreateAccount({ toggleCreateAccountComponent, setIsLoading }) {
+export default function CreateAccount({ toggleCreateAccount , setIsLoading }) {
   const { UPDATE_ACCOUNT_END_POINT, CREATE_ACCOUNT_END_POINT } = ACCOUNTS_END_POINTS_CONSTANTS;
   const { PUT_METHOD, POST_METHOD } = HTTP_METHODS_CONSTANTS;
   const { ACCOUNT_AREA_TITLE,
@@ -137,7 +137,7 @@ export default function CreateAccount({ toggleCreateAccountComponent, setIsLoadi
           await createNewAccount(currAccount);
         }
         dispatch(accountChangedRenderAction());
-        toggleCreateAccountComponent(false);
+        toggleCreateAccount(false);
       } else {
         setOutput("Must Generate Password");
       }

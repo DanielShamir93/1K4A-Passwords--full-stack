@@ -1,17 +1,13 @@
 import { useState } from "react";
+import { FcSearch } from "react-icons/fc";
+import { useAccountContext } from "./context/home.context";
 import CreateAccount from "./components/createAccount/CreateAccount.component";
 import Spinner from "../../components/spinner/Spinner.component";
 import FollowMe from "./components/followMe/FollowMe.component";
 import AccountsList from "./components/accountsList";
-import {
-  ACTIONS_TYPES,
-  useAccountContext,
-  useAccountDispatchContext,
-} from "./context/home.context";
-import "./home.styles.scss";
 import useHomeServices from "../../services/home/home.services";
+import "./home.styles.scss";
 import "./home.styles.mobile.scss";
-import { FcSearch } from "react-icons/fc";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +45,7 @@ const Home = () => {
       </div>
       {open && (
         <CreateAccount
-          toggleCreateAccountComponent={toggleCreateAccount}
+          toggleCreateAccount={toggleCreateAccount}
           isLoading={isLoading}
           setIsLoading={setIsLoading}
         />

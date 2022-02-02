@@ -32,7 +32,7 @@ const deleteAccount = async (req, res) => {
 
 const getAllAccounts = async (req, res) => {
   try {
-    const accounts = await Account.find({ owner: req.user._id });
+    const accounts = await Account.find({ owner: req.user._id }).sort([['accountName', 1]]);
     res.send(accounts);
   } catch (err) {
     res.status(500).send();

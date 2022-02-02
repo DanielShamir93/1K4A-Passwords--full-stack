@@ -3,6 +3,7 @@
   left: 50%;
   top: 30vh;
   transform: translate(-50%);
+  z-index: 1000000;
 
   .spinner-container {
     background: rgba(255, 255, 255, 0.5);
