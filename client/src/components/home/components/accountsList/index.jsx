@@ -11,7 +11,7 @@ import Account from "../account/Account.component";
 export default function AccountsList({ setIsLoading }) {
   const [accounts, setAccounts] = useState([]);
 
-  const { filterInput } = useAccountContext();
+  const { filterAccounts } = useAccountContext();
 
   const { accountChangedRender, loggedInUser } = useSelector((state) => {
     return {
@@ -50,7 +50,7 @@ export default function AccountsList({ setIsLoading }) {
   };
 
   const filterAccountsCB = (account) =>
-    account.accountName.toLowerCase().includes(filterInput.toLowerCase());
+    account.accountName.toLowerCase().includes(filterAccounts.toLowerCase());
 
   const mapAccountsCB = (account) => (
     <Account key={account._id} account={account} setIsLoading={setIsLoading} />

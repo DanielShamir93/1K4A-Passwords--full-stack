@@ -9,9 +9,9 @@ import {
 
 const useHomeServices = () => {
   const dispatchContext = useAccountDispatchContext();
-  const { open } = useAccountContext();
+  const { isCreatedAccountOpen } = useAccountContext();
 
-  const CreateAccountIcon = open ? (
+  const CreateAccountButton = isCreatedAccountOpen ? (
     <HiMinusCircle
       className="create-account-icon"
       onClick={toggleCreateAccount}
@@ -20,15 +20,15 @@ const useHomeServices = () => {
     <FcPlus className="create-account-icon" onClick={toggleCreateAccount} />
   );
 
-  function handleInput({ target: { value } }) {
-    dispatchContext({ type: ACTIONS_TYPES.FILTER_INPUT, payload: value });
+  function handleAccountsFilterInput({ target: { value } }) {
+    dispatchContext({ type: ACTIONS_TYPES.FILTER_ACCOUNTS_ACTION, payload: value });
   }
 
   function toggleCreateAccount() {
-    dispatchContext({ type: ACTIONS_TYPES.OPEN, payload: !open });
+    dispatchContext({ type: ACTIONS_TYPES.IS_CREATE_ACCOUNT_OPEN_ACTION, payload: !isCreatedAccountOpen });
   }
 
-  return { CreateAccountIcon, handleInput, toggleCreateAccount };
+  return { CreateAccountButton, handleAccountsFilterInput, toggleCreateAccount };
 };
 
 export default useHomeServices;

@@ -11,16 +11,18 @@ import "./home.styles.mobile.scss";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { filterInput, open } = useAccountContext();
+  const { filterAccounts, isCreatedAccountOpen } = useAccountContext();
 
-  const { CreateAccountIcon, toggleCreateAccount, handleInput } =
+  const { CreateAccountButton, toggleCreateAccount, handleAccountsFilterInput } =
     useHomeServices();
+
+    console.log()
 
   return (
     <div className="Home">
       <div className="home-layout">
         <div className="left-toolbar">
-          {!isLoading && CreateAccountIcon}
+          {!isLoading && CreateAccountButton}
           <div className="follow-me">
             <FollowMe />
           </div>
@@ -32,8 +34,8 @@ const Home = () => {
                 className="search-account-input"
                 type="text"
                 placeholder="Search"
-                onChange={handleInput}
-                value={filterInput}
+                onChange={handleAccountsFilterInput}
+                value={filterAccounts}
               />
               <FcSearch className="search-account-react-icon" />
             </div>
@@ -43,7 +45,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {open && (
+      {isCreatedAccountOpen && (
         <CreateAccount
           toggleCreateAccount={toggleCreateAccount}
           isLoading={isLoading}

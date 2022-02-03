@@ -49,7 +49,7 @@ userSchema.virtual("accounts", {
   ref: "Account",
   localField: "_id",
   foreignField: "owner"
-})
+});
 
 userSchema.methods.toJSON = function () {
     const user = this;

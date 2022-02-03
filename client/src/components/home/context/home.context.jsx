@@ -1,26 +1,26 @@
 import React, { useReducer, useContext } from "react";
 
 const INITIAL_STATE = {
-  centered: false,
-  open: false,
-  filterInput: "",
+  isSomeAccountCentered: false,
+  isCreatedAccountOpen: false,
+  filterAccounts: "",
 };
 
 export const ACTIONS_TYPES = {
-  CENTERED: "CENTERED",
-  OPEN: "OPEN",
-  FILTER_INPUT: "FILTER_INPUT",
+  IS_SOME_ACCOUNT_CENTERED_ACTION: "IS_SOME_ACCOUNT_CENTERED_ACTION",
+  IS_CREATE_ACCOUNT_OPEN_ACTION: "IS_CREATE_ACCOUNT_OPEN_ACTION",
+  FILTER_ACCOUNTS_ACTION: "FILTER_ACCOUNTS_ACTION",
 };
 
 const accountReduce = (state, action) => {
-  const { CENTERED, OPEN, FILTER_INPUT } = ACTIONS_TYPES;
+  const { IS_SOME_ACCOUNT_CENTERED_ACTION, IS_CREATE_ACCOUNT_OPEN_ACTION, FILTER_ACCOUNTS_ACTION } = ACTIONS_TYPES;
   switch (action.type) {
-    case CENTERED:
-      return { ...state, centered: action.payload };
-    case OPEN:
-      return { ...state, open: action.payload };
-    case FILTER_INPUT:
-      return { ...state, filterInput: action.payload };
+    case IS_SOME_ACCOUNT_CENTERED_ACTION:
+      return { ...state, isSomeAccountCentered: action.payload };
+    case IS_CREATE_ACCOUNT_OPEN_ACTION:
+      return { ...state, isCreatedAccountOpen: action.payload };
+    case FILTER_ACCOUNTS_ACTION:
+      return { ...state, filterAccounts: action.payload };
     default:
       return state;
   }

@@ -31,17 +31,17 @@ export default function Account({ account, setIsLoading }) {
   const dispatch = useDispatch();
 
   const dispatchContext = useAccountDispatchContext();
-  const { centered, open } = useAccountContext();
+  const { isSomeAccountCentered, isCreatedAccountOpen } = useAccountContext();
 
   const toggleCreateAccount = () => {
-    dispatchContext({ type: ACTIONS_TYPES.OPEN, payload: !open });
+    dispatchContext({ type: ACTIONS_TYPES.IS_CREATE_ACCOUNT_OPEN_ACTION, payload: !isCreatedAccountOpen });
   };
 
   const closeCentered = () =>
-    dispatchContext({ type: ACTIONS_TYPES.CENTERED, payload: false });
+    dispatchContext({ type: ACTIONS_TYPES.IS_SOME_ACCOUNT_CENTERED_ACTION, payload: false });
 
   const openCentered = () =>
-    dispatchContext({ type: ACTIONS_TYPES.CENTERED, payload: true });
+    dispatchContext({ type: ACTIONS_TYPES.IS_SOME_ACCOUNT_CENTERED_ACTION, payload: true });
 
   const { DELETE_ACCOUNT_END_POINT } = ACCOUNTS_END_POINTS_CONSTANTS;
   const { DELETE_METHOD } = HTTP_METHODS_CONSTANTS;
@@ -149,7 +149,7 @@ export default function Account({ account, setIsLoading }) {
       ></figure>
       <div
         className="account-names"
-        onClick={!centered || isMoreDisplayed ? toggleDisplayMore : () => {}}
+        onClick={!isSomeAccountCentered || isMoreDisplayed ? toggleDisplayMore : () => {}}
       >
         <p className="account-name">{account.accountName}</p>
         <p className="account-subname">{account.accountSubname}</p>
