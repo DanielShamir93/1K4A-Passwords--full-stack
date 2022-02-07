@@ -171,7 +171,6 @@ export default function Account({ account, setIsLoading }) {
           </label>
           <input
             className="private-key-input"
-            id="private-key-input"
             type="password"
             placeholder="Private Key"
             onChange={(e) => {

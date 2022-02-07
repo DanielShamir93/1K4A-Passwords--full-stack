@@ -37,11 +37,10 @@ export default function PasswordInput(props) {
 
   return (
     <FormControl>
-      <InputLabel htmlFor="outlined-adornment-password" variant="outlined">
+      <InputLabel variant="outlined">
         {props.label}
       </InputLabel>
       <OutlinedInput
-        id="outlined-adornment-password"
         type={showPassword ? "text" : "password"}
         value={statesObject[props.label]}
         style={{width: "300px"}}
