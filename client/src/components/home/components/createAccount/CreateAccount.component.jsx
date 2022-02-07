@@ -303,8 +303,9 @@ export default function CreateAccount({ toggleCreateAccount , setIsLoading }) {
                     setAccountIconStyle={setAccountIconStyle}
                 />}
               </div>  
-              <div>
+              <div className="account-details-input">
                 <input
+                  
                   type="text"
                   placeholder="Name"
                   onChange={(e) => {
@@ -313,7 +314,7 @@ export default function CreateAccount({ toggleCreateAccount , setIsLoading }) {
                   value={accountName}
                 />
               </div>
-              <div>
+              <div className="account-details-input">
                 <input
                   type="text"
                   placeholder="Subname"

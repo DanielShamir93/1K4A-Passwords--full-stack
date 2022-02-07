@@ -2,7 +2,7 @@
   .CreateAccount {
     left: 0;
     width: 100vw;
-    height: 70vh;
+    height: 73vh;
     margin-bottom: 20vh;
 
     .create-account-background {
@@ -12,70 +12,80 @@
 
       @keyframes create-account-animation {
         to {
-          transform: translateY(0vh);
+          transform: translateY(-5vh);
         }
       }
 
       .create-account-form {
-        height: 60vh;
-        width: 80vmin;
+        height: 68vh;
+        width: 90vmin;
 
-        .account-details {
-          legend {
-            font-size: 5vmin;
+        .create-account-details {
+          .account-details {
+            legend {
+              font-size: 5vmin;
+            }
+
+            .account-details-input {
+              input {
+                font-size: 3vmin;
+              }
+            }
           }
 
-          input {
-            font-size: 3vmin;
-          }
-        }
-
-        .password-details {
-          legend {
-            font-size: 5vmin;
+          .toggle-icons-button {
+            font-size: 8vmin;
+            right: 5vmin;
+            top: 2vmin;
           }
 
-          input {
-            font-size: 3vmin;
-          }
+          .password-details {
+            legend {
+              font-size: 5vmin;
+            }
 
-          .password-length-container {
-            width: 57vmin;
-
-            label {
+            input {
               font-size: 3vmin;
             }
 
-            input {
-              width: 18vmin;
-            }
-          }
+            .password-length-container {
+              width: 57vmin;
 
-          .password-edges {
-            width: 57vmin;
+              label {
+                font-size: 3vmin;
+              }
 
-            input {
-              width: 27.5vmin;
-            }
-          }
-
-          .private-key {
-            display: flex;
-            align-items: center;
-
-            input {
-              width: 51.4vmin;
+              input {
+                width: 18vmin;
+              }
             }
 
-            .private-key-icon {
-              font-size: 6vmin;
+            .password-edges {
+              width: 57vmin;
+
+              input {
+                width: 27.5vmin;
+              }
             }
-          }
 
-          .generate-button {
-            margin-top: 0;
+            .private-key {
+              display: flex;
+              align-items: center;
 
-            font-size: 4vmin;
+              input {
+                width: 51.4vmin;
+              }
+
+              .private-key-icon {
+                font-size: 6vmin;
+              }
+            }
+
+            .generate-button {
+              margin-top: 0;
+
+              font-size: 4vmin;
+            }
           }
         }
 
@@ -100,6 +110,9 @@
             font-size: 8vmin;
           }
         }
+      }
+      .create-account-form::after {
+        height: 108%;
       }
     }
   }
