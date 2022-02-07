@@ -8,6 +8,7 @@
   border-radius: 2vmin;
   border: 0.3vmin solid rgb(219, 201, 99);
   box-shadow: 0 0 0.5vmin black;
+  min-height: 200px;
 
   &-names {
     display: flex;
@@ -15,7 +16,6 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    min-height: 70px;
 
     .account-name {
       font-size: 40px;

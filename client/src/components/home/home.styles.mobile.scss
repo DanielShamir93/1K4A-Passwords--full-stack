@@ -1,37 +1,62 @@
 @media (max-width: 768px) {
+  .Home {
+    margin-top: 0;
 
-    .Home { 
-        margin-top: 0;
+    .home-layout {
+      display: flex;
+      flex-direction: column-reverse;
 
-        .home-layout {
-            
-            display: flex;
-            flex-direction: column-reverse;
-            
-            .left-toolbar {
-                align-items: center;
-                width: 100vw;
-                height: 20vh;
-                justify-content: flex-start;
-                border-top: 0.5vmin rgba(0, 0, 0, 0.1) solid;
-                z-index: 100;
+      .left-toolbar {
+        align-items: center;
+        width: 100vw;
+        height: 20vh;
+        justify-content: flex-start;
+        border-top: 0.5vmin rgba(0, 0, 0, 0.1) solid;
+        z-index: 100;
 
-                .create-account-icon {
-                    margin-top: 12vmin;
-                    margin-left: 5vmin;
-                    padding-top: 0;
-                    font-size: 20vmin;
-                }
-
-                .create-account-icon:active {
-                    font-size: 20vmin;
-                }
-            }
-            
-            .accounts-gallery {
-                height: 70vh;
-                width: 100vw;
-            }
+        .create-account-icon {
+          margin-top: 12vmin;
+          margin-left: 5vmin;
+          padding-top: 0;
+          font-size: 20vmin;
         }
+
+        .create-account-icon:active {
+          font-size: 20vmin;
+        }
+
+        .follow-me {
+            position: absolute;
+            bottom: 5vmin;
+            right: 5vmin;
+        }
+      }
+
+      .accounts-area {
+        width: 100vw;
+  
+        .accounts-top-toolbar {
+  
+          .search-account {
+  
+            &-input {
+              width: 50vmin;
+              font-size: 5vmin;
+            }
+  
+            &-react-icon {
+              font-size: 5vmin;
+            }
+          }
+        }
+  
+        .accounts-gallery {
+          padding: 2vmin;
+          flex-wrap: wrap;
+          gap: 1.5vmin;
+          height: 62vh;
+        }
+      }
     }
+  }
 }

@@ -95,7 +95,7 @@ export default function Account({ account, setIsLoading }) {
       if (account.hasOwnProperty("passPattern")) {
         // Account password generated via pattern
         password.generateFromPattern(account.passPattern);
-        setOutput(password.getPassword);
+        setOutput(password.getPassword());
       } else {
         // Account password generated via regular way
         const generateConfig = {
@@ -104,7 +104,7 @@ export default function Account({ account, setIsLoading }) {
           passEndsWidth: account.passEndsWith,
         };
         password.generate(generateConfig);
-        setOutput(password.getPassword);
+        setOutput(password.getPassword());
       }
     } else {
       setOutput("Missing Private Key");
@@ -183,7 +183,7 @@ export default function Account({ account, setIsLoading }) {
         {privateKey.length > 0 ? (
           <FcUnlock className="get-password-button" onClick={getPassword} />
         ) : (
-          <FcLock className="get-password-button" onClick={getPassword} />
+          <FcLock className="get-password-button" />
         )}
         <div className="output">
           <input

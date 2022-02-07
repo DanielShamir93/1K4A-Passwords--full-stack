@@ -16,8 +16,6 @@ const Home = () => {
   const { CreateAccountButton, toggleCreateAccount, handleAccountsFilterInput } =
     useHomeServices();
 
-    console.log()
-
   return (
     <div className="Home">
       <div className="home-layout">

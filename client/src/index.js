@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
-
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -14,7 +13,6 @@ const App = React.lazy(() => import("./App"));
 
 ReactDOM.render(
   <React.StrictMode>
-    
     <BrowserRouter>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
