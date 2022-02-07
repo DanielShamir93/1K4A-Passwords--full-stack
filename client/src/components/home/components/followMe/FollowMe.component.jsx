@@ -1,4 +1,5 @@
 import "./followMe.styles.scss";
+import "./followMe.styles.mobile.scss";
 
 export default function FollowMe() {
 
