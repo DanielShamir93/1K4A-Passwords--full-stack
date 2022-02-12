@@ -1,4 +1,4 @@
 export const TEXT_CONSTANTS = {
  TEXT_TITLE: "Welcome To One Key For All Passwords",
- TEXT_CONTENT: "Creating and recovering passwords without keeping the passwords in any database."
+ TEXT_CONTENT: "Generate and recover passwords without saving the passwords in any database while remembering only one password (private-key) for all your accounts."
 };
