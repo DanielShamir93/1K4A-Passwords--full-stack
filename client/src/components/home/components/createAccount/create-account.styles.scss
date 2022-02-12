@@ -50,6 +50,7 @@
             margin: 0.5vmin;
             border: none;
             box-shadow: 0 0 0.5vmin black;
+            width: 40vmin;
           }
         }
 
@@ -76,6 +77,7 @@
             border: none;
             box-shadow: 0 0 0.5vmin black;
             text-indent: 1vmin;
+            width: 40vmin;
           }
 
           #password-length {
@@ -86,7 +88,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            width: 38.5vmin;
+            width: 40vmin;
   
             label {
               font-size: 2vmin;
@@ -102,11 +104,11 @@
   
           .password-edges {
             display: flex;
-            width: 38.5vmin;
+            width: 40vmin;
             justify-content: space-between;
   
             input {
-              width: 18.8vmin;
+              width: 19.5vmin;
               text-indent: 1vmin;
             }
           }
@@ -116,7 +118,7 @@
             align-items: center;
   
             input {
-              width: 35.5vmin;
+              width: 37vmin;
               text-indent: 1vmin;
             }
           }
@@ -142,7 +144,8 @@
       }
 
       .output {
-        font-size: 2vmin;
+        font-size: 3vmin;
+        width: 50vmin;
         text-align: center;
         border: none;
         box-shadow: 0 0 0.5vmin black;
@@ -150,7 +153,7 @@
       }
 
       .output::placeholder {
-        font-size: 4.5vmin;
+        font-size: 3vmin;
       }
 
       .submit-container {

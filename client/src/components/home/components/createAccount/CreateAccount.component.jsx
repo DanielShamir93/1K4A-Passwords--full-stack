@@ -381,6 +381,7 @@ export default function CreateAccount({ toggleCreateAccount , setIsLoading }) {
                     setOutput("");
                   }}
                   value={keyboardMustContain}
+                  disabled={passPattern.length > 0}
                 />
               </div>
               <div>
@@ -439,7 +440,7 @@ export default function CreateAccount({ toggleCreateAccount , setIsLoading }) {
             </fieldset>
           </div>
           <div>
-            <textarea
+            <input
               className="output"
               type="text"
               placeholder="Output"
