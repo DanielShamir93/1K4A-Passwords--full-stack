@@ -1,4 +1,4 @@
-# <img src="https://i.ibb.co/YPsD1Yt/title-logo.png" width="40"> 1K4A-Passwords (One Key For All Passwords)
+# <img src="https://i.ibb.co/YPsD1Yt/title-logo.png" width="40"> One Key For All Passwords (1K4A-Passwords)
 
 ### An app for creating and recovering passwords without saving the passwords in any database, allows the user to generate and recover all his passwords from one private key.
 
@@ -37,14 +37,14 @@ Over the years we have all signed up for many sites and a large percentage of th
 [<img src="https://i.ibb.co/LPfBxgW/NPM.png" alt="NPM" width="100">](https://www.npmjs.com/package/keys-to-password) | [<img src="https://i.ibb.co/ZKNx1W9/Yarn.png" alt="Yarn" width="100">](https://yarnpkg.com/package/keys-to-password) |
 --- | --- |
 
-- Create my own Chrome extension to complete UX: [1K4A-Passwords--chrome-extension repo](https://github.com/DanielShamir93/1K4A-Password--chrome-extension)
+- Create my own Chrome extension to extend UX: [1K4A-Passwords--chrome-extension repo](https://github.com/DanielShamir93/1K4A-Password--chrome-extension)
 
-<img src="https://i.ibb.co/6rk85xy/Chrome.png" alt="Chrome" width="48" height="48"> |
+[<img src="https://i.ibb.co/6rk85xy/Chrome.png" alt="Chrome" width="48" height="48">](https://chrome.google.com/webstore/detail/1k4a-passwords/kaloibjeeplgfdpcdpnbocpglblfeapj?hl=en) |
 --- |
 
 - Build server with authentication via JWT.
 - Use MongoDB atlas as database via Mongoose.
-- Deploy client and server from one repo by Heroku.
+- Deploy client and server from one repo to Heroku.
 - Creating CSS sprite.
 
 ## :technologist: Languages
