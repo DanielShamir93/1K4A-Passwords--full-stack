@@ -1,4 +1,5 @@
 .Home {
+
   .home-layout {
     margin-top: 10vh;
     display: flex;
@@ -80,6 +81,7 @@
         flex-wrap: wrap;
         gap: 2vmin;
         height: 82vh;
+        overflow: auto;
       }
     }
   }
