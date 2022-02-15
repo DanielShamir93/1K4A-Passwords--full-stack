@@ -1,5 +1,6 @@
 @media (max-width: 768px) {
   .account {
+    
     .account-names {
       display: flex;
       flex-direction: column;
@@ -14,6 +15,53 @@
 
       .account-subname {
         font-size: 3vmin;
+      }
+    }
+
+    &-more {
+      margin-top: 2vmin;
+      padding: 3vmin;
+      height: 50vmin;
+  
+      &-bar {
+  
+        .delete-account-button,
+        .edit-account-button {
+          border: none;
+          font-size: 7vmin;
+        }
+      }
+  
+      .private-key {
+        display: flex;
+        align-items: center;
+  
+        &-icon {
+          font-size: 8vmin;
+        }
+  
+        &-input {
+          font-size: 6vmin;
+          width: 60vmin;
+        }
+      }
+  
+      .get-password-button {
+        font-size: 10vmin;
+      }
+  
+      .output {
+        display: flex;
+        align-items: center;
+  
+        &-input {
+          font-size: 6vmin;
+          width: 60vmin;
+        }
+  
+        .copy-button {
+          font-size: 8vmin;
+        }
       }
     }
   }
