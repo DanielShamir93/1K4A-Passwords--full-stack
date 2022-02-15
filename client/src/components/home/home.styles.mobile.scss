@@ -39,8 +39,8 @@
           .search-account {
   
             &-input {
-              width: 50vmin;
-              font-size: 5vmin;
+              width: 80vmin;
+              font-size: 8vmin;
             }
   
             &-react-icon {
@@ -53,7 +53,7 @@
           padding: 2vmin;
           flex-wrap: wrap;
           gap: 1.5vmin;
-          height: 62vh;
+          height: 100%;
         }
       }
     }
