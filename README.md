@@ -32,14 +32,14 @@ Over the years we have all signed up for many sites and a large percentage of th
 
 ## Skills acquired during this project 
 
-- Create my own npm package: [keys-to-password repo](https://github.com/DanielShamir93/keys-to-password-npm-package)
+- Create my own npm package: [keys-to-password repository](https://github.com/DanielShamir93/keys-to-password-npm-package)
 
 [<img src="https://i.ibb.co/LPfBxgW/NPM.png" alt="NPM" width="100">](https://www.npmjs.com/package/keys-to-password) | [<img src="https://i.ibb.co/ZKNx1W9/Yarn.png" alt="Yarn" width="100">](https://yarnpkg.com/package/keys-to-password) |
 --- | --- |
 
-- Create my own Chrome extension to extend UX: [1K4A-Passwords--chrome-extension repo](https://github.com/DanielShamir93/1K4A-Password--chrome-extension)
+- Create my own Chrome extension to extend UX: [1K4A-Passwords--chrome-extension repository](https://github.com/DanielShamir93/1K4A-Password--chrome-extension)
 
-[<img src="https://i.ibb.co/6rk85xy/Chrome.png" alt="Chrome" width="48" height="48">](https://chrome.google.com/webstore/detail/1k4a-passwords/kaloibjeeplgfdpcdpnbocpglblfeapj?hl=en) |
+[<img src="https://i.ibb.co/6rk85xy/Chrome.png" alt="Chrome" width="48" height="48">](https://chrome.google.com/webstore/detail/1k4a-passwords/kcdjadkakjpbpfdagdohnmpocpbkjhff?utm_source=googleads&utm_medium=adgroup5&utm_campaign=adgroup5&utm_id=adgroup5&gclid=CjwKCAiAsNKQBhAPEiwAB-I5zfF6aR0UwWw4bwtbaASssgkxIn43RX7PhxZCkzU__7kPKvOH59QSqRoCjPkQAvD_BwE) |
 --- |
 
 - Build server with authentication via JWT.
