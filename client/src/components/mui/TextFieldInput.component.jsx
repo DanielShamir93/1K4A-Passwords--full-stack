@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import { setEmailAction } from "../../store/actions/actions";
 

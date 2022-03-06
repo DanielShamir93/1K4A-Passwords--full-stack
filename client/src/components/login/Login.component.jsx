@@ -27,15 +27,14 @@ export default function Login() {
 
   const login = async () => {
     setIsLoading(true);
-    isValidInput();
     try {
+      isValidInput();
       const { data } = await myApi.post(LOGIN_END_POINT, {
         email: statesObject.email,
         password: statesObject.password
       });
       const user = data.user;
       const token = data.token;
-      
       dispatch(loggedInUserAction({ uid: user._id, email: user.email, token }));
     } catch (err) {
       setComment(err.message);

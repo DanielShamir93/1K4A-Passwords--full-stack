@@ -305,7 +305,6 @@ export default function CreateAccount({ toggleCreateAccount , setIsLoading }) {
               </div>  
               <div className="account-details-input">
                 <input
-                  
                   type="text"
                   placeholder="Name"
                   onChange={(e) => {
