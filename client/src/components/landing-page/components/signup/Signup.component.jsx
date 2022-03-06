@@ -59,7 +59,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="Signup">
+    <form className="Signup" autocomplete="off">
       <div className="signup-view">
         <p className="signup-title">{SIGN_UP_TITLE}</p>
         <div className="signup-box">
@@ -95,6 +95,6 @@ export default function Signup() {
         </div>
       </div>
       {isLoading && <Spinner />}
-    </div>
+    </form>
   );
 }
