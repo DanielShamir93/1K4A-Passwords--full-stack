@@ -67,7 +67,7 @@ export default function Login() {
               }}
             >
               <div className="email">
-                <TextFieldInput label="email" />
+                <TextFieldInput label="email"/>
               </div>
               <div className="password">
                 <PasswordInput label="password" />

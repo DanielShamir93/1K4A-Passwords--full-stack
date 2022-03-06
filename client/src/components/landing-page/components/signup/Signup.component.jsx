@@ -75,7 +75,7 @@ export default function Signup() {
             >
               <p className="signup-comment">{comment}</p>
               <div className="email">
-                <TextFieldInput label="email" />
+                <TextFieldInput label="email" autoFocus />
               </div>
               <div className="password">
                 <PasswordInput label="password" />

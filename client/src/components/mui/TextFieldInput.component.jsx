@@ -16,6 +16,7 @@ export default function TextFieldInput(props) {
 
   return (
       <TextField
+        autoFocus
         variant="outlined"
         label={props.label}
         onChange={(e) => { handleChange(e) }}
