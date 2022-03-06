@@ -52,7 +52,7 @@ export default function Login() {
   };
 
   return (
-    <div className="Login">
+    <form className="Login" autocomplete="off">
       <div className="login-view">
         <p className="login-title">{LOGIN_TITLE}</p>
         <p className="login-comment">{comment}</p>
@@ -79,6 +79,6 @@ export default function Login() {
         </div>
       </div>
       {isLoading && <Spinner />}
-    </div>
+    </form>
   );
 }
